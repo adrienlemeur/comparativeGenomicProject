@@ -26,7 +26,7 @@ def reciprocite(AversB, BversA):
 # Sortie : liste des gènes communs pour tous les A-B
 # Moyen : recherche de clique
 
-def main(liste de taille 21):
+def core_genome(liste de taille 21):
   sortie = TRUE
   
   return(sortie)
