@@ -32,7 +32,6 @@ def fasta_parser(multi_fasta, genome_name)
 	return(genome_dict)
 
 
-
 #input : 2 multifasta files names and 2 genome names
 def genome_comparison(genome_1, name_1, genome_2, name_2):
 	dict_genome_1 = fasta_parser(genome_1, name_1)
