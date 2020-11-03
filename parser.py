@@ -6,9 +6,13 @@
     Date last modified: 03/10/2020
     Python Version: 3.0
 '''
+
 import sys
 
 #__________ARGS__________ARGS__________ARGS__________ARGS__________ARGS__________ARGS
+
+#input : multi_fasta file and a genome name
+#returns : a 2 level dictionnary -> genome_dict -> genome_dict[genome_name] {gene_name : DNA sequence}
 
 def fasta_parser(multi_fasta, genome_name)
 	genome_dict = {}
