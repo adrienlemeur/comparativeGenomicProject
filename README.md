@@ -2,6 +2,7 @@
 Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_AMI2B/tree/main/core_genome_Ecoli
 
 # Première étape : récupération des fichiers
+Script bash
 
 # Seconde étape : Python
 Deux fonctions :
