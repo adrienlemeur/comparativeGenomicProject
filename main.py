@@ -20,13 +20,13 @@ def reciprocite(AversB, BversA):
   sortie = TRUE
   
   return(sortie)
-  
-  # Core genome
-  # Entrée : liste des gènes "réciproques" pour le couple A-B, pour A-B parmi les 27 génomes
-  # Sortie : liste des gènes communs pour tous les A-B
-  # Moyen : recherche de clique
-  
-  def main(liste de taille 21):
+
+# Core genome
+# Entrée : liste des gènes "réciproques" pour le couple A-B, pour A-B parmi les 27 génomes
+# Sortie : liste des gènes communs pour tous les A-B
+# Moyen : recherche de clique
+
+def main(liste de taille 21):
   sortie = TRUE
   
   return(sortie)
