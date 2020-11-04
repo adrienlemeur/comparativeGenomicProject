@@ -50,7 +50,8 @@ fi
 
 
 # Dossier de sortie des alignements
-if [ ! -f Blast_output ];then
+if [ ! -f Blast_output ]
+then
 	mkdir -p Blast_output
 fi
 
