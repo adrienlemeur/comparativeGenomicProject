@@ -48,6 +48,20 @@ then
 	done
 fi
 
+# Les sorties .txt de la boucle ci-dessous sont de la forme :
+<<COMMENT
+# BLASTP 2.10.1+
+# Query: Eco4_1
+# Database: Blast_db/Escherichia_coli_536
+# Fields: query id, subject id, % identity, alignment length, mismatches, gap opens, q. start, s. start, s. end, evalue, bit score, query length, subject length, gaps
+# 4 hits found
+Eco4_1	Eco1_1244	25.714	35	26	0	25	68	102	3.0	25.4	169	418	0
+Eco4_1	Eco1_4087	26.829	41	23	1	25	259	292	3.8	25.0	169	477	7
+Eco4_1	Eco1_775	27.273	99	54	2	70	84	165	7.2	23.9	169	410	18
+Eco4_1	Eco1_4557	32.143	28	19	0	101	9	36	9.9	22.3	169	64	0
+# BLAST processed 1 queries
+COMMENT
+
 
 # Dossier de sortie des alignements
 if [ ! -f Blast_output ]
