@@ -83,7 +83,7 @@ do
 	echo $B
 	echo $output_name
 	
-	./ncbi-blast-2.10.1+/bin/blastp -query $A -db $(basename $B) -out Blast_output/$output_name -outfmt '7 qseqid sseqid pident length mismatch gapopen qstart qen sstart send evalue bitscore qlen slen gaps'
+	./ncbi-blast-2.10.1+/bin/blastp -query $A -db $(basename $B) -out Blast_output/$output_name -max_target_seqs 1 -outfmt '7 qseqid sseqid pident length mismatch gapopen qstart qen sstart send evalue bitscore qlen slen gaps'
 	done
 done
 
