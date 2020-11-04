@@ -24,7 +24,7 @@ except :
 #input : multi_fasta file and a genome name
 #output : a 2 level dictionnary -> genome_dict -> genome_dict[genome_name] {gene_name : DNA sequence}
 
-def fasta_parser(multi_fasta, genome_name)
+def fasta_parser(multi_fasta, genome_name) :
 	genome_dict = {}
 	genome_dict[genome_name] = {}
 
