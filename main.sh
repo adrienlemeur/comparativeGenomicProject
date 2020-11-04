@@ -41,8 +41,7 @@ then
 	  mkdir -p Blast_db
 	fi
 
-	for A in prot/*.fa
-	do
+	for A in prot/*.fa; do
 		./ncbi-blast-2.10.1+/bin/makeblastdb -in $A -dbtype "prot" -out Blast_db/$(basename $A ".fa")
 	done
 fi
@@ -55,7 +54,7 @@ fi
 
 # Réalisation des 21*21 alignements
 for A in prot/*.fa;do
-	for B in Blast_db/*.pdb;do
+	for B in Blast_db/*.pdb; do
 
 	output_name= echo $(basename $A ".fa")_$(basename $B ".fa")
 
