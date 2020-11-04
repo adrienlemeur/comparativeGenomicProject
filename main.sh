@@ -77,7 +77,7 @@ do
 	# A est un fichier de type nom.fa
 	# B est un fichier nom.pdb
 	
-	output_name= $(basename $A)_$(basename $B).txt
+	output_name= $(basename $A)_$(basename $B).bl
 
 	echo $A
 	echo $B
@@ -88,7 +88,7 @@ do
 done
 
 # Fin de cette partie : 21x21 fichiers txt
-# On peut directement récupérer les fichiers créées par Anna Lopes :$
+# On peut directement récupérer les fichiers créées par Anne Lopes :$
 wget -O blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8
 gunzip blast_outputs.tar.gz # on dézippe
 tar -xvf blast_outputs.tar # on dé-tar
