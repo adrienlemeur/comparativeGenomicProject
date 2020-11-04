@@ -22,7 +22,6 @@ done
 # s'il faut télécharger les données, on les télécharge et on crée les 21 bases de données (pour les 21 génomes)
 if [ $starting = 'TRUE' ]
 then
-	echo $starting
 
 	# On se place dans le répertoire du projet qui contient uniquement prot.tar
 	tar -xvf prot.tar # dézippage
@@ -78,9 +77,6 @@ do
 	# B est un fichier nom.pdb
 	
 	output_name= $(basename $A)_$(basename $B).bl
-
-	echo $A
-	echo $B
 	echo $output_name
 	
 	./ncbi-blast-2.10.1+/bin/blastp -query $A -db $(basename $B) -out Blast_output/$output_name -max_target_seqs 1 -outfmt '7 qseqid sseqid pident length mismatch gapopen qstart qen sstart send evalue bitscore qlen slen gaps'
