@@ -34,14 +34,14 @@ then
 	rm ncbi-blast-2.10.1+-x64-linux.tar
 
 	chmod +x ncbi-blast-2.10.1+/bin # droit d'utilisation sur toutes les fonctions
-
-
-	# Création des 27 bases de données
+	
+	# Création du répertoire des bases de données, si ce n'est pas déjà fait
 	if [ ! -f Blast_db ]
 	then
 	  mkdir -p Blast_db
 	fi
-
+	
+	# Création des 27 bases de données
 	for A in prot/*.fa
 	do
 		./ncbi-blast-2.10.1+/bin/makeblastdb -in $A -dbtype "prot" -out Blast_db/$(basename $A ".fa")
