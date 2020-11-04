@@ -5,11 +5,10 @@
 # Récupération et organisation des données
 #------------------------------------------
 
-
-
 #le flag --nostart permet de ne pas retélécharger les fichiers à chaque fois
 starting='TRUE'
 
+# on parcourt le dossier et si on rencontre un document, il n'y a plus besoin de faire le téléchargement, donc starting='FALSE'
 while [ ! $# -eq 0 ]
 do
 	case "$1" in
@@ -20,6 +19,7 @@ do
 	shift
 done
 
+# s'il faut télécharger les données, on les télécharge et on crée les 21 bases de données (pour les 21 génomes)
 if [ $starting = 'TRUE' ]
 then
 	echo $starting
