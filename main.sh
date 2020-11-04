@@ -88,14 +88,22 @@ do
 done
 
 # Fin de cette partie : 21x21 fichiers txt
+# On peut directement récupérer les fichiers créées par Anna Lopes :$
+wget -O blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8
+gunzip blast_outputs.tar.gz # on dézippe
+tar -xvf blast_outputs.tar # on dé-tar
 
 #------------------------------------------
 # Traitement des données
 #------------------------------------------
 
+# Première étape : détermination des bests hits pour chaque fichier dans blast_outputs
 
 
 
+
+
+# Seconde étape : détermination du core génome
 
 
 
