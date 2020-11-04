@@ -37,11 +37,13 @@ then
 
 
 	# Création des 27 bases de données
-	if [ ! -f Blast_db ];then
+	if [ ! -f Blast_db ]
+	then
 	  mkdir -p Blast_db
 	fi
 
-	for A in prot/*.fa; do
+	for A in prot/*.fa
+	do
 		./ncbi-blast-2.10.1+/bin/makeblastdb -in $A -dbtype "prot" -out Blast_db/$(basename $A ".fa")
 	done
 fi
@@ -53,15 +55,19 @@ if [ ! -f Blast_output ];then
 fi
 
 # Réalisation des 21*21 alignements
-for A in prot/*.fa;do
-	for B in Blast_db/*.pdb; do
-
-	output_name= echo $(basename $A ".fa")_$(basename $B ".fa")
+for A in prot/*.fa
+do
+	for B in Blast_db/*.pdb
+	do
+	# A est un fichier de type nom.fa
+	# B est un fichier nom.pdb
+	
+	output_name= echo $(basename $A)_$(basename $B).txt
 
 	echo $A
 	echo $B
 	
-	./ncbi-blast-2.10.1+/bin/blastp -query $A -db $B -out Blast_output/$(basename $A ".fa")_$(basename $B ".pdb") -outfmt '7 qseqid sseqid pident length mismatch gapopen qstart qen sstart send evalue bitscore qlen slen gaps'
+	./ncbi-blast-2.10.1+/bin/blastp -query $A -db $(basename $B) -out Blast_output/$output_name -outfmt '7 qseqid sseqid pident length mismatch gapopen qstart qen sstart send evalue bitscore qlen slen gaps'
 	done
 done
 
