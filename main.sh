@@ -109,8 +109,8 @@ do
 		nomB=$(basename $A)
 		
 		# reconstruction des noms de fichiers contenant les best hits
-		file1=$nomA-vs-$nomB.txt # .txt des best it de A sur B
-		file2=$nomB-vs-$nomA.txt # .txt des best it de B sur A
+		file1=$nomA-vs-$nomB.txt # .txt des best hits de A sur B
+		file2=$nomB-vs-$nomA.txt # .txt des best hits de B sur A
 		
 		# détermination des réciproques et l'enregistrement du fichier de sortie se fait tout seul
 		# nom de sortie : genomeA_genomeB.txt
