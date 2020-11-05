@@ -120,6 +120,7 @@ do
 		
 		# détermination des réciproques et l'enregistrement du fichier de sortie se fait tout seul
 		# nom de sortie : genomeA_genomeB.txt
+		# pour l'explication de la syntaxe : https://github.com/IARCbioinfo/R-tricks
 		./reciprocity.R file1 file2
 done
 
