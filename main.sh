@@ -100,6 +100,12 @@ tar -xvf blast_outputs.tar # on dé-tar
 
 # Deuxième étape : détermination des best hits réciproques
 
+# Création du répertoire des sorties de réciprocité, si ce n'est pas déjà fait
+if [ ! -f reciprocity ]
+then
+ 	mkdir -p reciprocity
+fi
+
 for A in prot/*.fa
 do
 	for B in prot/*.fa
