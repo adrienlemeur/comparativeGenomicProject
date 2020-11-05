@@ -43,7 +43,7 @@ then
 	# Création des 27 bases de données
 	for A in prot/*.fa
 	do
-		./ncbi-blast-2.10.1+/bin/makeblastdb -in $A -dbtype "prot" -out Blast_db/$(basename $A ".fa")
+		./ncbi-blast-2.10.1+/bin/makeblastdb -in $A -dbtype prot -out $A
 	done
 fi
 
@@ -71,18 +71,18 @@ fi
 # Réalisation des 21*21 alignements
 for A in prot/*.fa
 do
-	for B in Blast_db/*.pdb
+	for B in prot/*.fa
 	do
-	# A est un fichier de type nom.fa
-	# B est un fichier nom.pdb
 	
-	output_name= $(basename $A)_$(basename $B).bl
+	output_name=$(basename $A ".fa")_$(basename $B ".fa").bl
 	echo $output_name
-	
-	./ncbi-blast-2.10.1+/bin/blastp -query $A -db $(basename $B) -out Blast_output/$output_name -max_target_seqs 1 -outfmt '7 qseqid sseqid pident length mismatch gapopen qstart qen sstart send evalue bitscore qlen slen gaps'
+	if [  $A != $B ]
+		then
+			./ncbi-blast-2.10.1+/bin/blastp -query $A -db $B -out Blast_output/$output_name -max_target_seqs 1 -outfmt '7 qseqid sseqid pident length mismatch gapopen qstart qen sstart send evalue bitscore qlen slen gaps'
+		fi
 	done
 done
-
+exit
 # Fin de cette partie : 21x21 fichiers txt
 # On peut directement récupérer les fichiers créées par Anne Lopes :$
 wget -O blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8
