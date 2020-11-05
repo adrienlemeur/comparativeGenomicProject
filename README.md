@@ -4,13 +4,14 @@ Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_A
 # Première étape : récupération des fichiers
 Script bash
 
-# Seconde étape : Python
-Deux fonctions :
-- parseur -> liste des best hits de A dans B
+# Seconde étape : parsing (bash)
+- parseur -> récupérer les best hits et seuiller pour éliminer ceux qui dont insuffisants
+
+# Troisième étape : réciprocité (R)
 - reciprocité -> liste des orthologues
 
-# Troisième étape : Identification du core génome
-Méthode : Recherche de clique
+# Troisième étape : Identification du core génome (Python)
+- Méthode : Recherche de clique
 
 
 # Choses à faire
