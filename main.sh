@@ -84,6 +84,8 @@ for bl in Blast_output/*.bl
 do
 	grep "^[^#;]" $bl > $(basename $bl ".bl").txt
 done
+#love one liners tho
+#grep "^[^#;]" Blast_output/*.bl > metagenomic_table.txt
 
 # Fin de cette partie : 21x21 fichiers txt
 # On peut directement récupérer les fichiers créées par Anne Lopes :$
