@@ -5,7 +5,7 @@ Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_A
 - script bash
 
 ## Seconde étape : parsing (bash)
-- parseur → récupérer les best hits et seuiller pour éliminer ceux qui dont insuffisants
+- parseur → récupérer les best hits et seuiller pour éliminer ceux qui sont insuffisants
 
 ## Troisième étape : réciprocité (R)
 - reciprocité → liste des orthologues
