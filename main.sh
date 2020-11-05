@@ -82,7 +82,11 @@ do
 		fi
 	done
 done
+
+grep "^[^#;]" Blast_output/*.bl > metagenomic_table.txt
 exit
+
+
 # Fin de cette partie : 21x21 fichiers txt
 # On peut directement récupérer les fichiers créées par Anne Lopes :$
 wget -O blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8
