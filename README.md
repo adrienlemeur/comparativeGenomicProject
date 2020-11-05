@@ -2,7 +2,7 @@
 Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_AMI2B/tree/main/core_genome_Ecoli
 
 ## Première étape : récupération des fichiers
-Script bash
+- script bash
 
 ## Seconde étape : parsing (bash)
 - parseur → récupérer les best hits et seuiller pour éliminer ceux qui dont insuffisants
