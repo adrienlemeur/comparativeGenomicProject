@@ -10,7 +10,7 @@ Script bash
 ## Troisième étape : réciprocité (R)
 - reciprocité → liste des orthologues
 
-## Troisième étape : Identification du core génome (Python)
+## Quatrième étape : Identification du core génome (Python)
 - Méthode : Recherche de clique
 
 
