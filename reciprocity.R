@@ -38,8 +38,8 @@ A_B = full_join(A_to_B, B_to_A, by = colA)
 A_B = filter(A_B, colB1 == colB2 & !is.na(colB1))
 
 ## Renommage et enregistrement
-titre = strsplit(commandArgs(TRUE)[1], "_")[[1]] ###### à modifier selon la structure du nom de A_to_B
-titre = paste("./", titre[1], titre[2], ".txt", sep ="")
+titre = strsplit(commandArgs(TRUE)[1], "-vs-")[[1]] # les noms des fichiers d'entrée étaient A-vs-B.txt et B-vs-A.txt
+titre = paste("./reciprocity/", titre[1], "_", titre[2], sep ="") # nom de sortie : A_B.txt
 write.table(A_B, titre, sep="\t") # enregistrement de la table en .txt
 cat(A_B) # resultat dans bash
 
