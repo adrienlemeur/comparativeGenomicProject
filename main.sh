@@ -70,9 +70,9 @@ for A in prot/*.fa
 do
 	for B in prot/*.fa
 	do
-	
-	output_name=$(basename $A ".fa")_$(basename $B ".fa").bl
+	output_name=$(basename $A ".fa")_$(basename $B ".fa").bl ############# Audrey : pourquoi on laisse les .fa si on les retire avec le basename ?
 	echo $output_name
+	############# Audrey : on peut faire un alignement du génome sur lui-même, pas besoin du if ?
 	if [  $A != $B ]
 		then
 			./ncbi-blast-2.10.1+/bin/blastp -query $A -db $B -out Blast_output/$output_name -max_target_seqs 1 -outfmt '7 qseqid sseqid pident length mismatch gapopen qstart qen sstart send evalue bitscore qlen slen gaps'
@@ -94,13 +94,30 @@ tar -xvf blast_outputs.tar # on dé-tar
 # Traitement des données
 #------------------------------------------
 
-# Première étape : détermination des bests hits pour chaque fichier dans blast_outputs
+# Première étape : détermination des best hits pour chaque fichier dans blast_outputs
 
 
 
+# Deuxième étape : détermination des best hits réciproques
 
+for A in prot/*.fa
+do
+	for B in prot/*.fa
+	do
+		# récupération des noms de base
+		nomA=$(basename $A)
+		nomB=$(basename $A)
+		
+		# reconstruction des noms de fichiers contenant les best hits
+		file1=$nomA-vs-$nomB.txt # .txt des best it de A sur B
+		file2=$nomB-vs-$nomA.txt # .txt des best it de B sur A
+		
+		# détermination des réciproques et l'enregistrement du fichier de sortie se fait tout seul
+		# nom de sortie : genomeA_genomeB.txt
+		./reciprocity.R file1 file2
+done
 
-# Seconde étape : détermination du core génome
+# Troisième étape : détermination du core génome
 
 
 
