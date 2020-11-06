@@ -2,7 +2,7 @@
 '''
     File name: super_pair_finder.py
     Author: Adrien Le Meur
-    Date created: 0-/10/2020
+    Date created: 06/10/2020
     Date last modified: 06/10/2020
     Python Version: 3.0
 '''
