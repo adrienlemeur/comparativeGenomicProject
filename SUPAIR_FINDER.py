@@ -26,23 +26,20 @@ except :
 with open(genomic_table) as gt:
 	lines = gt.readlines()
 
-dict_1 = {}
-dict_2 = {}
-
-for i in lines:
-	i = i.strip().split("\t")
-
-	dict_1[i[0]] = i[1]
-	dict_2[i[1]] = i[0]
-
-del lines
-
-print("Le pire est derrière moi")
+dict = {}
 
 os.system("rm "+outputname)
-
 with open(outputname, 'a') as po:
-	for j in dict_1:
-		if dict_1[j] in dict_2:
-			if j == dict_2[dict_1[j]]:
-				po.write(j+"\t"+dict_1[j]+"\n")
+	for i in lines:
+		i = i.strip().split("\t")
+
+		if i[0] in dict:
+			if i[1] == dict[i[0]]:
+				po.write(i[0]+"\t"+i[1]+"\n")
+		dict[i[1]] = i[0]
+
+# B -> A
+# A -> B
+# A -> C
+# C -> A
+# A -> B
