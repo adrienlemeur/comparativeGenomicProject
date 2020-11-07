@@ -33,13 +33,15 @@ with open(outputname, 'a') as po:
 	for i in lines:
 		i = i.strip().split("\t")
 
-		if i[0] in dict:
-			if i[1] == dict[i[0]]:
-				po.write(i[0]+"\t"+i[1]+"\n")
-		dict[i[1]] = i[0]
+		if i[1] in dict:
+			if i[0] == dict[i[1]]:
+				po.write(i[0]+"\t"+i[1]+"\t"+dict[i[1]]+"\n")
 
-# B -> A
-# A -> B
-# A -> C
-# C -> A
-# A -> B
+		dict[i[0]] = i[1]
+
+# A -> A1
+# B -> B1
+# C -> C1
+# D -> D1
+# E -> A1
+# A1 -> A
