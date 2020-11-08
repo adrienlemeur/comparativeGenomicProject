@@ -21,7 +21,7 @@ B_to_A_file = commandArgs(TRUE)[2] # chaînes de caractères
 A_to_B = read.table(A_to_B_file, header = TRUE) # premier ficher : best hits de A sur B
 colnames(A_to_B) = c("colA", "colB1")
 B_to_A = read.table(B_to_A, header = TRUE) # second fichier : best hits de B sur A
-colnames(A_to_B) = c("colB2", "colA")
+colnames(B_to_A) = c("colB2", "colA")
 
 ## On réalise une jointure des deux fichiers par la colonne correspondant à A
 # https://dplyr.tidyverse.org/reference/join.html
