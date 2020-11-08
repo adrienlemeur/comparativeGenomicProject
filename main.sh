@@ -92,7 +92,7 @@ do
 done
 
 # Fin de cette partie : 21x21 fichiers txt
-# On peut directement récupérer les fichiers créées par Anne Lopes :$
+# On peut directement récupérer les fichiers créées par Anne Lopes :
 wget -O blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8
 gunzip blast_outputs.tar.gz # on dézippe
 tar -xvf blast_outputs.tar # on dé-tar
@@ -146,7 +146,7 @@ done
 
 #ressort un fichier texte où chaque ligne correspond à une paire d'orthologue séparés par une tabulation
 #note : supprime les autres infos mais ça peut s'arranger facilement
-#re-note : tout les génomes sont concaténés
+#re-note : tous les génomes sont concaténés
 
 
 # Troisième étape : détermination du core génome
