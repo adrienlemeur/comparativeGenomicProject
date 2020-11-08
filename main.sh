@@ -20,7 +20,10 @@ do
 done
 
 # s'il faut télécharger les données, on les télécharge et on crée les 21 bases de données (pour les 21 génomes)
-if [ $starting = 'TRUE' ]
+if [ $starting = 'TRUE' ] 
+# ATTENTION NE MARCHE PLUS (LA VERSION DE BLAST A ETE MODIFIEE), J'AI REFAIT L'IMPORT DES FICHIERS POUR QUE TOUT SOIT AUTOMATIQUE 
+# CA NE CHANGE RIEN, MAIS NE PERDEZ PAS DE TEMPS A RECODER CA, CEST FAIT -> JE PUSH DEMAIN MATIN 
+# ADRIEN
 then
 
 	# On se place dans le répertoire du projet qui contient uniquement prot.tar
