@@ -74,21 +74,16 @@ do
 	for B in prot/*.fa
 	do
 	output_name=$(basename $A ".fa")_$(basename $B ".fa").bl ############# Audrey : pourquoi on laisse les .fa si on les retire avec le basename ?
+								 ############# Adrien : c'est lea synthaxe de basename, ça permet au contraire de retirer le ".fa"
 	echo $output_name
 	############# Audrey : on peut faire un alignement du génome sur lui-même, pas besoin du if ?
+	############# Adrien : ça prend + de temps et ça apporte pas d'information (on veut trouver des ortologues entre les génomes, pas à l'intérieur)
 	if [  $A != $B ]
 		then
 			./ncbi-blast-2.10.1+/bin/blastp -query $A -db $B -out Blast_output/$output_name -max_target_seqs 1 -outfmt '7 qseqid sseqid pident length mismatch gapopen qstart qen sstart send evalue bitscore qlen slen gaps'
 		fi
 	done
 done
-
-for bl in Blast_output/*.bl
-do
-	grep "^[^#;]" $bl > $(basename $bl ".bl").txt
-done
-#love one liners tho
-#grep "^[^#;]" Blast_output/*.bl > metagenomic_table.txt
 
 # Fin de cette partie : 21x21 fichiers txt
 # On peut directement récupérer les fichiers créées par Anne Lopes :$
@@ -101,15 +96,24 @@ tar -xvf blast_outputs.tar # on dé-tar
 #------------------------------------------
 
 # Première étape : détermination des best hits pour chaque fichier dans blast_outputs
-
+# Fait, -max_target_seq 1 permet de ne garder que le meilleur hit
 
 
 # Deuxième étape : détermination des best hits réciproques
+
+#Autre solution pour la méthode d'Audrey avec R et le merge
+for bl in Blast_output/*.bl
+do
+	grep "^[^#;]" $bl > $(basename $bl ".bl").txt
+done
+
+
 
 # Création du répertoire des sorties de réciprocité, si ce n'est pas déjà fait
 if [ ! -f reciprocity ]
 then
  	mkdir -p reciprocity
+	#mkdir -p suffit, j'ai pas eu d'erreur sans le if
 fi
 
 for A in prot/*.fa
@@ -129,6 +133,15 @@ do
 		# pour l'explication de la syntaxe : https://github.com/IARCbioinfo/R-tricks
 		./reciprocity.R file1 file2 >> A_B.txt #pour qu'il concatène
 done
+
+#solution alternative pour la réciprocité :
+#grep "^[^#;]" Blast_output/*.bl > metagenomic_table.txt
+#python3 SUPAIR_FINDER.py -i metagenomic_table.txt
+
+#ressort un fichier texte où chaque ligne correspond à une paire d'orthologue séparés par une tabulation
+#note : supprime les autres infos mais ça peut s'arranger facilement
+#re-note : tout les génomes sont concaténés
+
 
 # Troisième étape : détermination du core génome
 
