@@ -57,8 +57,8 @@ colnames(A_B) = c("colA", "colB")
 write.table(A_B, path, sep="\t") # enregistrement de la table en .txt dans le dossier reciprocity, avec le nom A_B.txt
 
 ## Renommage des contenus par anticipation de l'étape suivante (core génome)
-A_B$colA = paste(nom_A,A_B$colA,sep=".")
-A_B$colA = paste(nom_B,A_B$colB,sep=".")
+A_B$colA = paste(nom_A, A_B$colA, sep=".") # genomeA.geneXXX
+A_B$colB = paste(nom_B, A_B$colB, sep=".") # genomeB.geneXXX
 
 ## Affichage dans bash
 cat(A_B) # sauvegarder via > A_B.txt
