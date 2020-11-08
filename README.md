@@ -18,6 +18,11 @@ Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_A
 (second degré) Suggestion de battle : On met un time.time au début et à la fin des deux méthodes, on les fait tourner sur le même jeu de données, et on regarde le temps qu'elles prennent ! Si il y a un écart de moins de 5 % du meilleur temps entre les 2 méthodes, on dit qu'elles sont équivalentes et on les accepte toutes les deux. On pourra alors valider ou non le slogan du supair finder. La méthode dplyr est plus modeste, elle n'a pas de slogan x)
 
 Allé, chaud ! Mais faut un jeu de donné suffisamment grand pour qu'on puisse vraiment comparer
+GO ! J'ai mis dans le dossier benchmark un script R qui génère trois jeux de donnée, deux pour toi et un pour moi 👀 👀 👀
+Résultat SUPER_FINDER™ : 3s2 pour le jeu de donnée de 13 milions de lignes
+
++ s'il y a moins de 5% de différence, on prend ma méthode qui n'utilise pas de library :p
+
 
 ## Quatrième étape : Identification du core génome (Python)
 - Méthode : Recherche de clique
