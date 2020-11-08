@@ -68,16 +68,22 @@ clear
 
 echo RUNNING NOW THE ALIGNEMENT'\n\n'
 
+#------------------------------------------
 # Réalisation des 21*21 alignements
+#------------------------------------------
+
 for A in prot/*.fa
 do
 	for B in prot/*.fa
 	do
-	output_name=$(basename $A ".fa")_$(basename $B ".fa").bl ############# Audrey : pourquoi on laisse les .fa si on les retire avec le basename ?
-								 ############# Adrien : c'est lea synthaxe de basename, ça permet au contraire de retirer le ".fa"
+	output_name=$(basename $A ".fa")_$(basename $B ".fa").bl
 	echo $output_name
 	############# Audrey : on peut faire un alignement du génome sur lui-même, pas besoin du if ?
 	############# Adrien : ça prend + de temps et ça apporte pas d'information (on veut trouver des ortologues entre les génomes, pas à l'intérieur)
+	############# Audrey : mais il peut y avoir des orthologues au sein du même génome ?
+	#############          Genre dans A, genex et geney sont orthologues, puis dans B : geneb best hit de genex et dans C,
+	#############          genec best hist de geney ? Je ne sais pas si c'est possible...
+	
 	if [  $A != $B ]
 		then
 			./ncbi-blast-2.10.1+/bin/blastp -query $A -db $B -out Blast_output/$output_name -max_target_seqs 1 -outfmt '7 qseqid sseqid pident length mismatch gapopen qstart qen sstart send evalue bitscore qlen slen gaps'
