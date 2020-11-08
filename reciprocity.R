@@ -7,7 +7,11 @@ installed = installed[,1]
 if (!is.element("dplyr", installed)){
   install.packages("dplyr")
 }
+if (!is.element("stringr", installed)){
+  install.packages("stringr")
+}
 library(dplyr)
+library(stringr)
 
 ## On considère A et B deux génomes
 # Le génome A a été aligné sur le génome B
@@ -16,8 +20,8 @@ library(dplyr)
 # Ils sont donnés en entrée dans ce code
 # Code bash : ./reciprocity A_to_B.txt B_to_A.txt
 
-A_to_B_file = commandArgs(TRUE)[1] # chaînes de caractères
-B_to_A_file = commandArgs(TRUE)[2] # chaînes de caractères
+A_to_B_file = commandArgs(TRUE)[1] # chaînes de caractères correspondant au nom du tableau des best hits de A dans B
+B_to_A_file = commandArgs(TRUE)[2] # chaînes de caractères correspondant au nom du tableau des best hits de B dans A
 A_to_B = read.table(A_to_B_file, header = TRUE) # premier ficher : best hits de A sur B
 colnames(A_to_B) = c("colA", "colB1")
 B_to_A = read.table(B_to_A, header = TRUE) # second fichier : best hits de B sur A
@@ -36,10 +40,31 @@ A_B = full_join(A_to_B, B_to_A, by = colA)
 # B.gene_b1  A.gene_a  NA           -> to remove
 # Dans A_B, on filtre (conserve) les lignes telles que les colonnes B1 et B2 soient égales
 A_B = filter(A_B, colB1 == colB2 & !is.na(colB1))
+A_B = A_B %>% select(colA, colB1) # on conserve ces deux colonnes
 
-## Renommage et enregistrement
+## Extraction des noms des génomes
 titre = strsplit(commandArgs(TRUE)[1], "-vs-")[[1]] # les noms des fichiers d'entrée étaient A-vs-B.txt et B-vs-A.txt
+# titre[1] correspond au nom du génome A et titre[2] correspond au nom du génome B.txt
 titre = paste("./reciprocity/", titre[1], "_", titre[2], sep ="") # nom de sortie : A_B.txt
+nom_A = titre[1]
+nom_B = strsplit(titre[2], ".txt")[[1]][1] # séparation du nom du génome B et du .txt, conservation du nom du génome B
+
+## Enregistrement de la table sans faire de modification supplémentaire
+colnames(A_B) = c("colA", "colB")
 write.table(A_B, titre, sep="\t") # enregistrement de la table en .txt
-cat(A_B) # resultat dans bash
+
+## Renommage des contenus par anticipation de l'étape suivante (core génome)
+A_B$colA = paste(nom_A,A_B$colA,sep=".")
+A_B$colA = paste(nom_B,A_B$colB,sep=".")
+
+## Affichage dans bash
+cat(A_B) # sauvegarder via > A_B.txt
+
+## Le résultat doit avoir la forme de :
+# genomeA.gene1 genomeB.gene1
+# genomeA.gene3 genomeB.gene7
+# genomeA.gene4 genomeB.gene2
+# genomeA.gene5 genomeB.gene5
+
+
 
