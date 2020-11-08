@@ -12,10 +12,8 @@ Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_A
 
 #### Deux idées pour la réciprocité :
 1) *reciprocity.R* : Utilisation de dplyr dans R pour faire une jointure, puis comparaison des valeurs pour chaque ligne
-2) METHODE ALTERNATIVE : *SUPAIR_FINDER.py* :
-- CAT de toutes les tables de best hits
-- OPTIMISE : Besoin de lire une seule fois la table (détail dans le code), 1 million de lignes (avec juste les noms de gène) en quelques secondes
-  → est-ce que c'est mieux que la méthode d'Audrey ? Je pense que oui
+2) METHODE ALTERNATIVE : *SUPAIR_FINDER.py* (en commentaire avec la ligne bash pour le cat dans le main.sh) :
+- Maintenant optimisé (!) : Parcours une seule fois la table et identifie les couples réciproque grâce à un système de "pointeurs" (détail dans le code), 1 million de lignes (avec juste les noms de gène) en quelque secondes / est-ce que c'est mieux que la méthode d'Audrey ? Je pense que oui
 
 ## Quatrième étape : Identification du core génome (Python)
 - Méthode : Recherche de clique
