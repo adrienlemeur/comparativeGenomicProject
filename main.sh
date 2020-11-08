@@ -64,13 +64,12 @@ Eco4_1	Eco1_4557	32.143	28	19	0	101	9	36	9.9	22.3	169	64	0
 # BLAST processed 1 queries
 COMMENT
 
-clear
-
-echo RUNNING NOW THE ALIGNEMENT'\n\n'
-
 #------------------------------------------
 # Réalisation des 21*21 alignements
 #------------------------------------------
+
+clear
+echo RUNNING NOW THE ALIGNEMENT'\n\n'
 
 for A in prot/*.fa
 do
