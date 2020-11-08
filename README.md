@@ -10,16 +10,17 @@ Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_A
 ## Troisième étape : réciprocité (R)
 - reciprocité → liste des orthologues
 
-## Idée d'algo pour la réciprocité :
+#### Deux idées pour la réciprocité :
+1) *reciprocity.R* : Utilisation de dplyr dans R pour faire une jointure, puis comparaison des valeurs pour chaque ligne
+2) *SUPAIR_FINDER.py* : 
 - CAT de toutes les tables de best hits
-- Premier passage -> toutes la première colonne (gène query) en clef de dictionnaire et la deuxième colonne (best hit) en valeurs
+- Premier passage → toutes la première colonne (gène query) en clef de dictionnaire et la deuxième colonne (best hit) en valeurs
 - On parcours toute la colonne 2, pour chaque valeur on regarde si la value associée à la clef est la même que la colonne 1 (si elle existe)
-  -> parcours 3 fois la grande table
-  -> est-ce que c'est mieux que la méthode d'Audrey?
+  → parcours 3 fois la grande table
+  → est-ce que c'est mieux que la méthode d'Audrey ? REPONSE : C'est une alternative :)
 
 ## Quatrième étape : Identification du core génome (Python)
 - Méthode : Recherche de clique
-
 
 ### Choses à faire
 - rédiger le plan
