@@ -22,8 +22,8 @@ Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_A
 
 GO ! J'ai mis dans le dossier benchmark un script R qui génère trois jeux de donnée, deux pour toi et un pour moi 👀
 
-la génération de dataset est seedée. Le \_dataset Adrien (13 milions de lignes) correspond aux deux autres concaténés et mélangés (2 * 750k lignes). 
-Toutes les lignes sont des orthologues (750k paires d'orthologues, chacune dans un fichier différent pour toi, tout mélangé pour moi)
+la génération de dataset est seedée. Le \_dataset Adrien (13 milions de lignes) correspond aux deux autres concaténés et mélangés (2 * 7.5m lignes). 
+Toutes les lignes sont des orthologues (7.5m de paires d'orthologues, chacune dans un fichier différent pour toi, tout mélangé pour moi)
 
 Résultat SUPER_FINDER™ : 3s
 s'il y a moins de 5% de différence, on prend ma méthode qui n'utilise pas de library :p
