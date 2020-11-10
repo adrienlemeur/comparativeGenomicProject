@@ -20,22 +20,18 @@ do
 done
 
 # s'il faut télécharger les données, on les télécharge et on crée les 21 bases de données (pour les 21 génomes)
-if [ $starting = 'TRUE' ] 
-# ATTENTION NE MARCHE PLUS (LA VERSION DE BLAST A ETE MODIFIEE), J'AI REFAIT L'IMPORT DES FICHIERS POUR QUE TOUT SOIT AUTOMATIQUE 
-# CA NE CHANGE RIEN, MAIS NE PERDEZ PAS DE TEMPS A RECODER CA, CEST FAIT -> JE PUSH DEMAIN MATIN 
-# ADRIEN
+if [ $starting = 'TRUE' ]
 then
 
 	# On se place dans le répertoire du projet qui contient uniquement prot.tar
 	tar -xvf prot.tar # dézippage
 
 	# Téléchargement de l'outil blast
-	wget -O ncbi-blast-2.10.1+-x64-linux.tar.gz ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.10.1+-x64-linux.tar.gz
-	gunzip ncbi-blast-2.10.1+-x64-linux.tar.gz # on dézippe
-	tar -xvf ncbi-blast-2.10.1+-x64-linux.tar # on dé-tar
-	rm ncbi-blast-2.10.1+-x64-linux.tar
+	wget -O ncbi-blast-2.11.0+-x64-linux.tar.gz ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.11.0+-x64-linux.tar.gz
+	tar -xzvf ncbi-blast-2.11.0+-x64-linux.tar.gz # on détar
+	rm ncbi-blast-2.11.0+-x64-linux.tar.gz
 
-	chmod +x ncbi-blast-2.10.1+/bin # droit d'utilisation sur toutes les fonctions
+	chmod +x ncbi-blast-2.11.0+/bin # droit d'utilisation sur toutes les fonctions
 	
 	# Création du répertoire des bases de données, si ce n'est pas déjà fait
 	if [ ! -f Blast_db ]
@@ -46,7 +42,7 @@ then
 	# Création des 27 bases de données
 	for A in prot/*.fa
 	do
-		./ncbi-blast-2.10.1+/bin/makeblastdb -in $A -dbtype prot -out $A
+		./ncbi-blast-2.11.0+/bin/makeblastdb -in $A -dbtype prot -out $A
 	done
 fi
 
@@ -111,15 +107,15 @@ for A in prot/*.fa
 do
 	for B in prot/*.fa
 	do
-		# récupération des noms de base
+		#récupération des noms de base
 		nomA=$(basename $A)
 		nomB=$(basename $A)
 		
-		# reconstruction des noms de fichiers contenant les best hits
+		#reconstruction des noms de fichiers contenant les best hits
 		file1=$nomA-vs-$nomB.txt # .txt des best hits de A sur B
 		file2=$nomB-vs-$nomA.txt # .txt des best hits de B sur A
 		
-		# détermination des réciproques et l'enregistrement du fichier de sortie se fait tout seul		
+		#détermination des réciproques et l'enregistrement du fichier de sortie se fait tout seul		
 		grep "^[^#;]" Blast_output/*.bl > metagenomic_table.txt
 		python3 SUPAIR_FINDER.py -i metagenomic_table.txt
 		
@@ -127,19 +123,3 @@ do
 		#note : supprime les autres infos mais ça peut s'arranger facilement
 		#re-note : tous les génomes sont concaténés
 done
-
-# Troisième étape : détermination du core génome
-
-
-
-
-
-#------------------------------------------
-# Résultats
-#------------------------------------------
-
-
-
-
-
-
