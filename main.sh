@@ -48,7 +48,7 @@ if [ $starting = 'TRUE' ];then
 	# Réalisation des 21*21 blasts
 	#------------------------------------------
 
-	mkdir -p Blast_output
+	mkdir -p blast_outputs
 
 	clear
 	echo RUNNING NOW THE ALIGNEMENT'\n\n'
@@ -61,7 +61,7 @@ if [ $starting = 'TRUE' ];then
 			output_name=$(basename $A ".fa")_$(basename $B ".fa").bl
 			echo $output_name
 
-			./ncbi-blast-2.11.0+/bin/blastp -query $A -db $B -out Blast_output/$output_name -max_target_seqs 1 -outfmt '7 qseqid sseqid pident length mismatch gapopen qstart qen sstart send evalue bitscore qlen slen gaps'
+			./ncbi-blast-2.11.0+/bin/blastp -query $A -db $B -out blast_outputs/$output_name -max_target_seqs 1 -outfmt '7 qseqid sseqid pident length mismatch gapopen qstart qen sstart send evalue bitscore qlen slen gaps'
 		done
 	done
 fi
@@ -99,12 +99,12 @@ while read A; do
 		####### OPTIMISABLE #######
 
 		#grep : concatène les deux fichiers et ne garde que les lignes qui ne commencent pas par #
-		cat Blast_output/$file1 Blast_output/$file2 | grep "^[^#;]" > "Blast_output/"$A"_against_"$B".bl.list"
+		cat blast_outputs/$file1 blast_outputs/$file2 | grep "^[^#;]" > "blast_outputs/"$A"_against_"$B".bl.list"
 
 		#Fichier de sortie : Table d'orthologue, chaque ligne correspond à une paire de gènes orthologues
 
 		#supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
-		python3 supairFinder.py -i Blast_output/$A"_against_"$B.bl.list -o reciprocity/$file1
+		python3 supairFinder_old.py -i "blast_outputs/"$A"_against_"$B".bl.list" -o reciprocity/$file1
 
 	done < strain_names.txt
 done < strain_names.txt
