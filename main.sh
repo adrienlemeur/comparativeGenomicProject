@@ -105,15 +105,15 @@ do
 	do
 		#récupération des noms de base
 		nomA=$(basename $A)
-		nomB=$(basename $A)
+		nomB=$(basename $B)
 		
 		#reconstruction des noms de fichiers contenant les best hits
-		file1=$nomA-vs-$nomB.txt # .txt des best hits de A sur B
-		file2=$nomB-vs-$nomA.txt # .txt des best hits de B sur A
+		file1=$nomA"-vs-"$nomB".bl" # .txt des hits de A sur B
+		file2=$nomB"-vs-"$nomA".bl" # .txt des hits de B sur A
 		
-		#détermination des réciproques et l'enregistrement du fichier de sortie se fait tout seul		
-		grep "^[^#;]" Blast_output/*.bl > metagenomic_table.txt
-		python3 supairFinder.py -i metagenomic_table.txt
+		#détermination des réciproques et l'enregistrement du fichier de sortie se fait tout seul
+		grep "^[^#;]" Blast_output/file1 Blast_output/file2 > metagenomic_table.txt ############# changer nom sortie
+		python3 supairFinder.py -i metagenomic_table.txt ############# changer nom sortie
 		
 		#ressort un fichier texte où chaque ligne correspond à une paire d'orthologue séparés par une tabulation
 		#note : supprime les autres infos mais ça peut s'arranger facilement
