@@ -1,2 +1,0 @@
-[u'GeneA', u'GeneB', u'GeneC']
-[u'GeneD', u'GeneE', u'GeneF']
