@@ -1,5 +1,5 @@
 # Projet de Génomique Comparée
-Groupe 10 : Adrien LE MEUR, Audrey ONFROY, Leila OUTEMZABET
+Groupe 10 : Leila OUTEMZABET, Adrien LE MEUR, Audrey ONFROY
 Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_AMI2B/tree/main/core_genome_Ecoli
 
 ## Boucle principale (bash)
