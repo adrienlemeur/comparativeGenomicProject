@@ -16,7 +16,7 @@ Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_A
 - e-value > Xe
 - coverage > Xc
 - autre-param > Xp
-=> Phase de paramétrage qui doit être ajustée à la fin, en regardant l'impact du changement des paramètres sur la taille du core génome
+- => Phase de paramétrage qui doit être ajustée à la fin, en regardant l'impact du changement des paramètres sur la taille du core génome
 
 **Entrée** : alignement du génome A sur le génome B et de B sur A
 
