@@ -11,7 +11,12 @@ Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_A
 - idenfication du core génome parmi les BHR
 
 ## Première étape : parsing (......py)
-**Objectif** : récupérer les best hits et seuiller pour éliminer ceux qui sont insuffisants
+**Objectif** : récupérer les best hits et seuiller pour éliminer ceux qui sont insuffisants :
+- gène avec la meilleur e-value
+- e-value > Xe
+- coverage > Xc
+- autre-param > Xp
+=> Phase de paramétrage qui doit être ajustée à la fin, en regardant l'impact du changement des paramètres sur la taille du core génome
 
 **Entrée** : alignement du génome A sur le génome B et de B sur A
 
