@@ -1,0 +1,3 @@
+E-coli_536.Eco1_1	E-coli_55989.Eco2_1
+E-coli_536.Eco1_2	E-coli_55989.Eco2_2
+E-coli_60.Eco1_1	        E-coli_55989.Eco2_2

@@ -21,3 +21,4 @@ for clq in nx.clique.find_cliques(G): #la fonction find_cliques permet de renvoy
 	f.write("\n")
 	
 f.close()
+
