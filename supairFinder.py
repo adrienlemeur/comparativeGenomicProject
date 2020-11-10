@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 '''
-    File name: SUPAIR_FINDER.py
+    File name: supairFinder.py
     Author: Adrien Le Meur
     Date created: 06/10/2020
     Date last modified: 08/10/2020
