@@ -19,10 +19,13 @@ while [ ! $# -eq 0 ];do
 	shift
 done
 
-#Pour l'identification des orthologues & des gènes du core génome, nous avons utilisé les dossiers d'alignement fournis
-#Nous avons néanmoins réalisé l'étape de téléchargement et d'alignement
-#Ces étapes prennent beaucoup de temps, elles peuvent être zappées avec le flag --nostart pour démarrer l'analyse directement
-
+#########
+#
+#	Pour l'identification des orthologues & des gènes du core génome, nous avons utilisé les fichiers de sortie de blast fournis
+#	Nous avons néanmoins réalisé l'étape de téléchargement et d'alignement
+#	Ces étapes prennent beaucoup de temps, elles peuvent être évitées avec le flag --nostart pour démarrer l'analyse directement
+#
+#########
 if [ $starting = 'TRUE' ];then
 
 	#fichier contenant les multifastas de chaque gène
@@ -42,8 +45,10 @@ if [ $starting = 'TRUE' ];then
 
 
 	#------------------------------------------
-	# Réalisation des 21*21 alignements
+	# Réalisation des 21*21 blasts
 	#------------------------------------------
+
+	mkdir -p Blast_output
 
 	clear
 	echo RUNNING NOW THE ALIGNEMENT'\n\n'
@@ -57,23 +62,25 @@ if [ $starting = 'TRUE' ];then
 			echo $output_name
 
 			./ncbi-blast-2.11.0+/bin/blastp -query $A -db $B -out Blast_output/$output_name -max_target_seqs 1 -outfmt '7 qseqid sseqid pident length mismatch gapopen qstart qen sstart send evalue bitscore qlen slen gaps'
+		done
 	done
-done
+fi
 
-exit
+
 
 #------------------------------------------
 # OU BIEN : Récupération des alignements déjà faits
 #------------------------------------------
 
+#Sorties de blasts fournies
 wget -O blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8
-tar -xzvf blast_outputs.tar # on dé-tar
+# à extraire à la main.....
+#	tar -xzvf blast_outputs.tar.gz
+
 
 #------------------------------------------
 # Traitement des données
 #------------------------------------------
-
-
 
 # Première étape : détermination des best hits pour chaque fichier dans blast_outputs
 # Deuxième étape : détermination des best hits réciproques
@@ -82,22 +89,22 @@ tar -xzvf blast_outputs.tar # on dé-tar
 # Répertoire de sortie de réciprocité
 mkdir -p reciprocity
 
-for A in prot/*.fa;do
-	for B in prot/*.fa;do
-
-		nomA=$(basename $A ".fa"); nomB=$(basename $B ".fa");
+while read A; do
+	while read B; do
 
 		#reconstruction des noms de fichiers contenant les alignements (dans Blast_output)
-		file1=$nomA"-vs-"$nomB".bl" # Recherche des gènes de A sur B
-		file2=$nomB"-vs-"$nomA".bl" # Recherche des gènes de A sur B
+		file1=$A"-vs-"$B".bl" # Blast des gènes de A sur B
+		file2=$B"-vs-"$A".bl" # Blast des gènes de B sur A
+
+		####### OPTIMISABLE #######
 
 		#grep : concatène les deux fichiers et ne garde que les lignes qui ne commencent pas par #
-		grep "^[^#;]" Blast_output/$file1 Blast_output/$file2 > temp_table.txt
+		cat Blast_output/$file1 Blast_output/$file2 | grep "^[^#;]" > "Blast_output/"$A"_against_"$B".bl.list"
 
 		#Fichier de sortie : Table d'orthologue, chaque ligne correspond à une paire de gènes orthologues
 
 		#supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
-		python3 supairFinder.py -i temp_table.txt -o output.txt
+		python3 supairFinder.py -i Blast_output/$A"_against_"$B.bl.list -o reciprocity/$file1
 
-	done
-done
+	done < strain_names.txt
+done < strain_names.txt
