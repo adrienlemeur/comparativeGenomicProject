@@ -71,23 +71,12 @@ COMMENT
 clear
 echo RUNNING NOW THE ALIGNEMENT'\n\n'
 
-for A in prot/*.fa
-do
-	for B in prot/*.fa
-	do
-	output_name=$(basename $A ".fa")_$(basename $B ".fa").bl
-	echo $output_name
-	############# Audrey : on peut faire un alignement du génome sur lui-même, pas besoin du if ?
-	############# Adrien : ça prend + de temps et ça apporte pas d'information (on veut trouver des ortologues entre les génomes, pas à l'intérieur)
-	############# Audrey : mais il peut y avoir des orthologues au sein du même génome ?
-	#############          Genre dans A, genex et geney sont orthologues, puis dans B : geneb best hit de genex et dans C,
-	#############          genec best hist de geney ? Je ne sais pas si c'est possible...
+for A in prot/*.fa;do
+	for B in prot/*.fa;do
+		output_name=$(basename $A ".fa")_$(basename $B ".fa").bl
+		echo $output_name
 	
-	if [  $A != $B ]
-		then
-			./ncbi-blast-2.10.1+/bin/blastp -query $A -db $B -out Blast_output/$output_name -max_target_seqs 1 -outfmt '7 qseqid sseqid pident length mismatch gapopen qstart qen sstart send evalue bitscore qlen slen gaps'
-		fi
-	done
+		./ncbi-blast-2.10.1+/bin/blastp -query $A -db $B -out Blast_output/$output_name -max_target_seqs 1 -outfmt '7 qseqid sseqid pident length mismatch gapopen qstart qen sstart send evalue bitscore qlen slen gaps'
 done
 
 # Fin de cette partie : 21x21 fichiers txt
@@ -112,13 +101,10 @@ do
 	grep "^[^#;]" $bl > $(basename $bl ".bl").txt
 done
 
-
-
 # Création du répertoire des sorties de réciprocité, si ce n'est pas déjà fait
 if [ ! -f reciprocity ]
 then
  	mkdir -p reciprocity
-	#mkdir -p suffit, j'ai pas eu d'erreur sans le if
 fi
 
 for A in prot/*.fa
@@ -133,20 +119,14 @@ do
 		file1=$nomA-vs-$nomB.txt # .txt des best hits de A sur B
 		file2=$nomB-vs-$nomA.txt # .txt des best hits de B sur A
 		
-		# détermination des réciproques et l'enregistrement du fichier de sortie se fait tout seul
-		# nom de sortie : genomeA_genomeB.txt
-		# pour l'explication de la syntaxe : https://github.com/IARCbioinfo/R-tricks
-		./reciprocity.R file1 file2 >> A_B.txt #pour qu'il concatène
+		# détermination des réciproques et l'enregistrement du fichier de sortie se fait tout seul		
+		grep "^[^#;]" Blast_output/*.bl > metagenomic_table.txt
+		python3 SUPAIR_FINDER.py -i metagenomic_table.txt
+		
+		#ressort un fichier texte où chaque ligne correspond à une paire d'orthologue séparés par une tabulation
+		#note : supprime les autres infos mais ça peut s'arranger facilement
+		#re-note : tous les génomes sont concaténés
 done
-
-#solution alternative pour la réciprocité :
-#grep "^[^#;]" Blast_output/*.bl > metagenomic_table.txt
-#python3 SUPAIR_FINDER.py -i metagenomic_table.txt
-
-#ressort un fichier texte où chaque ligne correspond à une paire d'orthologue séparés par une tabulation
-#note : supprime les autres infos mais ça peut s'arranger facilement
-#re-note : tous les génomes sont concaténés
-
 
 # Troisième étape : détermination du core génome
 
@@ -157,3 +137,9 @@ done
 #------------------------------------------
 # Résultats
 #------------------------------------------
+
+
+
+
+
+
