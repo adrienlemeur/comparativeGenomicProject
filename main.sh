@@ -76,7 +76,11 @@ for A in prot/*.fa;do
 done
 
 # Fin de cette partie : 21x21 fichiers txt
-# On peut directement récupérer les fichiers créées par Anne Lopes :
+
+#------------------------------------------
+# OU BIEN : Récupération des alignements déjà faits
+#------------------------------------------
+
 wget -O blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8
 gunzip blast_outputs.tar.gz # on dézippe
 tar -xvf blast_outputs.tar # on dé-tar
@@ -86,16 +90,8 @@ tar -xvf blast_outputs.tar # on dé-tar
 #------------------------------------------
 
 # Première étape : détermination des best hits pour chaque fichier dans blast_outputs
-# Fait, -max_target_seq 1 permet de ne garder que le meilleur hit
-
-
 # Deuxième étape : détermination des best hits réciproques
-
-#Autre solution pour la méthode d'Audrey avec R et le merge
-for bl in Blast_output/*.bl
-do
-	grep "^[^#;]" $bl > $(basename $bl ".bl").txt
-done
+# => Les deux étapes sont faites par supairFinder.py
 
 # Création du répertoire des sorties de réciprocité, si ce n'est pas déjà fait
 if [ ! -f reciprocity ]
@@ -117,9 +113,17 @@ do
 		
 		#détermination des réciproques et l'enregistrement du fichier de sortie se fait tout seul		
 		grep "^[^#;]" Blast_output/*.bl > metagenomic_table.txt
-		python3 SUPAIR_FINDER.py -i metagenomic_table.txt
+		python3 supairFinder.py -i metagenomic_table.txt
 		
 		#ressort un fichier texte où chaque ligne correspond à une paire d'orthologue séparés par une tabulation
 		#note : supprime les autres infos mais ça peut s'arranger facilement
 		#re-note : tous les génomes sont concaténés
 done
+
+# Troisième étape : détermination du core génome
+
+
+
+
+
+
