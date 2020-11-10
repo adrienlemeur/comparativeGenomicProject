@@ -5,6 +5,7 @@
 # Récupération et organisation des données
 #------------------------------------------
 
+<<COMMENT
 #le flag --nostart permet de ne pas retélécharger les fichiers à chaque fois
 starting='TRUE'
 
@@ -69,6 +70,8 @@ for A in prot/*.fa;do
 	
 		./ncbi-blast-2.11.0+/bin/blastp -query $A -db $B -out Blast_output/$output_name -max_target_seqs 1 -outfmt '7 qseqid sseqid pident length mismatch gapopen qstart qen sstart send evalue bitscore qlen slen gaps'
 done
+
+COMMENT
 
 # Fin de cette partie : 21x21 fichiers txt
 
