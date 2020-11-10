@@ -99,15 +99,13 @@ then
  	mkdir -p reciprocity
 fi
 
-for A in prot/*.fa
-do
-	for B in prot/*.fa
-	do
-		#récupération des noms de base
-		nomA=$(basename $A)
-		nomB=$(basename $B)
+for A in prot/*.fa;do
+	for B in prot/*.fa;do
+		#récupération des noms de base dans le dossier "prot"
+		nomA=$(basename $A ".fa")
+		nomB=$(basename $B ".fa")
 		
-		#reconstruction des noms de fichiers contenant les best hits
+		#reconstruction des noms de fichiers contenant les alignements (dans Blast_output)
 		file1=$nomA"-vs-"$nomB".bl" # .txt des hits de A sur B
 		file2=$nomB"-vs-"$nomA".bl" # .txt des hits de B sur A
 		
@@ -118,6 +116,7 @@ do
 		#ressort un fichier texte où chaque ligne correspond à une paire d'orthologue séparés par une tabulation
 		#note : supprime les autres infos mais ça peut s'arranger facilement
 		#re-note : tous les génomes sont concaténés
+	done
 done
 
 # Troisième étape : détermination du core génome
