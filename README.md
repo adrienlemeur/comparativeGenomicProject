@@ -42,4 +42,6 @@ Deux idées possibles pour la réciprocité :
 
 **Entrée** : liste bets hits réciproques pour tous les 110 binômes de génome
 
-**Sortie** : liste des génome.gène dans chaque clique
+**Sortie** : liste des gènes dans chaque clique
+
+**Post-traitement** : récupérer uniquement les cliques de taille 21, pour qu'elles représentent le core génome et pas le pan
