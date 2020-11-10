@@ -9,8 +9,7 @@
 starting='TRUE'
 
 # on parcourt le dossier et si on rencontre un document, il n'y a plus besoin de faire le téléchargement, donc starting='FALSE'
-while [ ! $# -eq 0 ]
-do
+while [ ! $# -eq 0 ];do
 	case "$1" in
 		--nostart)
 			starting='FALSE'
@@ -20,9 +19,7 @@ do
 done
 
 # s'il faut télécharger les données, on les télécharge et on crée les 21 bases de données (pour les 21 génomes)
-if [ $starting = 'TRUE' ]
-then
-
+if [ $starting = 'TRUE' ];then
 	# On se place dans le répertoire du projet qui contient uniquement prot.tar
 	tar -xvf prot.tar # dézippage
 
@@ -34,14 +31,12 @@ then
 	chmod +x ncbi-blast-2.11.0+/bin # droit d'utilisation sur toutes les fonctions
 	
 	# Création du répertoire des bases de données, si ce n'est pas déjà fait
-	if [ ! -f Blast_db ]
-	then
+	if [ ! -f Blast_db ];then
 	  mkdir -p Blast_db
 	fi
 	
 	# Création des 27 bases de données
-	for A in prot/*.fa
-	do
+	for A in prot/*.fa;do
 		./ncbi-blast-2.11.0+/bin/makeblastdb -in $A -dbtype prot -out $A
 	done
 fi
@@ -94,8 +89,7 @@ tar -xvf blast_outputs.tar # on dé-tar
 # => Les deux étapes sont faites par supairFinder.py
 
 # Création du répertoire des sorties de réciprocité, si ce n'est pas déjà fait
-if [ ! -f reciprocity ]
-then
+if [ ! -f reciprocity ];then
  	mkdir -p reciprocity
 fi
 
