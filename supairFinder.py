@@ -12,6 +12,9 @@ import sys, os
 
 try:
 	genomic_table = sys.argv[sys.argv.index("-i")+1]
+	seuil_id = sys.argv[sys.argv.index("--seuil_identite")+1]
+	seuil_cov = sys.argv[sys.argv.index("--seuil_coverage")+1]
+	seuil_eval = sys.argv[sys.argv.index("--seuil_evalue")+1]
 except :
 	sys.exit()
 
@@ -20,6 +23,7 @@ try:
 except :
 	outputname = "putative_orthologues.txt"
 
+seuils = [seuil_id, seuil_cov, -seuil_eval] # on met un - pour que toutes les comparaisons soient des >
 
 #__________MAIN__________MAIN__________MAIN__________MAIN__________MAIN__________MAIN
 
@@ -36,6 +40,7 @@ with open(outputname, 'a') as po:
 		if(line[0] != "#"):
 			i = i.strip().split("\t")
 			#i[0] = nom du gène query / i[1] = nom du meilleur hit
+			
 			#Dictionnaire = table de hash
 			#Deux éléments : une clef (unique) et une valeur associée (peut être n'importe quoi, même un dictionnaire)
 			#Quand on entre la clef, on accède directement à la valeur associée (complexité moyenne : 1) au lieu de parcourir l'ensemble de la table !
@@ -45,14 +50,21 @@ with open(outputname, 'a') as po:
 			#Si i[1] est une clef du dictionnaire (c'est à dire qu'on a déjà rencontré notre best-hit avant)
 			if i[1] in dict:
 				#Alors on lit le best-hit de notre best-hit. Si la valeur est égale à celle de notre query, bingo ! C'est réciproque !
-				if i[0] == dict[i[1]]:
-					#on écrit le couple de gènes query / best-hit à la suite de notre doc résultat
-					po.write(i[0]+"\t"+i[1]+"\n")
+				if i[0] == dict[i[1]][0]:
+					# vérification des seuils du couple
+					membre1 = dict[i[1]][1:3] # liste avec le % d'identite, la couverture et - la e-value
+					membre2 = dict[i[0]][1:3]
+					# on teste tous les seuils : membrex > seuils est une liste de trois booléens
+					# pour que les trois seuils soient validés, il faut 3 TRUE, donc la moyenne des TRUE (1) vaut 1
+					if (mean(membre1 > seuils)) && (mean(membre2 > seuils)) :
+						#on écrit le couple de gènes query / best-hit à la suite de notre doc résultat
+						po.write(i[0]+"\t"+i[1]+"\n")
+			
 			#On créé une nouvelle entrée dans notre dictionnaire, avec la query comme clef et le best-hit comme value
 			#sélectionne la première ligne
-			if i[0] not in dict:
-				dict[i[0]] = i[1]
-			
+			if i[0] not in dict :
+				dict[i[0]] = [i[1], i[2], i[3], -i[9]]
+
 # Petit exemple pour essayer de faire l'algo à la main, c'est plus simple pour comprendre
 # A -> A1
 # B -> B1
