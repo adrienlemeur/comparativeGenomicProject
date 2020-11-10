@@ -5,11 +5,11 @@
 # Récupération et organisation des données
 #------------------------------------------
 
-<<COMMENT
-#le flag --nostart permet de ne pas retélécharger les fichiers à chaque fois
 starting='TRUE'
 
-# on parcourt le dossier et si on rencontre un document, il n'y a plus besoin de faire le téléchargement, donc starting='FALSE'
+#le flag -- nostart : permet de passer outre l'étape de téléchargement des documents / créations des bases de données / blast locaux
+
+#si le premier argument est --nostart, n'importe pas les documents
 while [ ! $# -eq 0 ];do
 	case "$1" in
 		--nostart)
@@ -19,107 +19,85 @@ while [ ! $# -eq 0 ];do
 	shift
 done
 
-# s'il faut télécharger les données, on les télécharge et on crée les 21 bases de données (pour les 21 génomes)
-if [ $starting = 'TRUE' ];then
-	# On se place dans le répertoire du projet qui contient uniquement prot.tar
-	tar -xvf prot.tar # dézippage
+#Pour l'identification des orthologues & des gènes du core génome, nous avons utilisé les dossiers d'alignement fournis
+#Nous avons néanmoins réalisé l'étape de téléchargement et d'alignement
+#Ces étapes prennent beaucoup de temps, elles peuvent être zappées avec le flag --nostart pour démarrer l'analyse directement
 
-	# Téléchargement de l'outil blast
+if [ $starting = 'TRUE' ];then
+
+	#fichier contenant les multifastas de chaque gène
+	tar -xzvf prot/prot.tar.gz
+
+	# Téléchargement des outils blast locaux
 	wget -O ncbi-blast-2.11.0+-x64-linux.tar.gz ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.11.0+-x64-linux.tar.gz
-	tar -xzvf ncbi-blast-2.11.0+-x64-linux.tar.gz # on détar
+	tar -xzvf ncbi-blast-2.11.0+-x64-linux.tar.gz
 	rm ncbi-blast-2.11.0+-x64-linux.tar.gz
 
 	chmod +x ncbi-blast-2.11.0+/bin # droit d'utilisation sur toutes les fonctions
-	
-	# Création du répertoire des bases de données, si ce n'est pas déjà fait
-	if [ ! -f Blast_db ];then
-	  mkdir -p Blast_db
-	fi
 	
 	# Création des 21 bases de données
 	for A in prot/*.fa;do
 		./ncbi-blast-2.11.0+/bin/makeblastdb -in $A -dbtype prot -out $A
 	done
-fi
 
-# Les sorties .txt de la boucle ci-dessous sont de la forme :
-<<COMMENT
-# BLASTP 2.10.1+
-# Query: Eco4_1
-# Database: Blast_db/Escherichia_coli_536
-# Fields: query id, subject id, % identity, alignment length, mismatches, gap opens, q. start, s. start, s. end, evalue, bit score, query length, subject length, gaps
-# 4 hits found
-Eco4_1	Eco1_1244	25.714	35	26	0	25	68	102	3.0	25.4	169	418	0
-Eco4_1	Eco1_4087	26.829	41	23	1	25	259	292	3.8	25.0	169	477	7
-Eco4_1	Eco1_775	27.273	99	54	2	70	84	165	7.2	23.9	169	410	18
-Eco4_1	Eco1_4557	32.143	28	19	0	101	9	36	9.9	22.3	169	64	0
-# BLAST processed 1 queries
-COMMENT
 
-#------------------------------------------
-# Réalisation des 21*21 alignements
-#------------------------------------------
+	#------------------------------------------
+	# Réalisation des 21*21 alignements
+	#------------------------------------------
 
-clear
-echo RUNNING NOW THE ALIGNEMENT'\n\n'
+	clear
+	echo RUNNING NOW THE ALIGNEMENT'\n\n'
 
-for A in prot/*.fa;do
-	for B in prot/*.fa;do
-		output_name=$(basename $A ".fa")_$(basename $B ".fa").bl
-		echo $output_name
-	
-		./ncbi-blast-2.11.0+/bin/blastp -query $A -db $B -out Blast_output/$output_name -max_target_seqs 1 -outfmt '7 qseqid sseqid pident length mismatch gapopen qstart qen sstart send evalue bitscore qlen slen gaps'
+	#blast de chaque gène contre chaque database
+		#query : $A
+		#database : $B
+	for A in prot/*.fa;do
+		for B in prot/*.fa;do
+			output_name=$(basename $A ".fa")_$(basename $B ".fa").bl
+			echo $output_name
+
+			./ncbi-blast-2.11.0+/bin/blastp -query $A -db $B -out Blast_output/$output_name -max_target_seqs 1 -outfmt '7 qseqid sseqid pident length mismatch gapopen qstart qen sstart send evalue bitscore qlen slen gaps'
+	done
 done
 
-COMMENT
-
-# Fin de cette partie : 21x21 fichiers txt
+exit
 
 #------------------------------------------
 # OU BIEN : Récupération des alignements déjà faits
 #------------------------------------------
 
 wget -O blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8
-gunzip blast_outputs.tar.gz # on dézippe
-tar -xvf blast_outputs.tar # on dé-tar
+tar -xzvf blast_outputs.tar # on dé-tar
 
 #------------------------------------------
 # Traitement des données
 #------------------------------------------
 
+
+
 # Première étape : détermination des best hits pour chaque fichier dans blast_outputs
 # Deuxième étape : détermination des best hits réciproques
 # => Les deux étapes sont faites par supairFinder.py
 
-# Création du répertoire des sorties de réciprocité, si ce n'est pas déjà fait
-if [ ! -f reciprocity ];then
- 	mkdir -p reciprocity
-fi
+# Répertoire de sortie de réciprocité
+mkdir -p reciprocity
 
 for A in prot/*.fa;do
 	for B in prot/*.fa;do
-		#récupération des noms de base dans le dossier "prot"
-		nomA=$(basename $A ".fa")
-		nomB=$(basename $B ".fa")
-		
+
+		nomA=$(basename $A ".fa"); nomB=$(basename $B ".fa");
+
 		#reconstruction des noms de fichiers contenant les alignements (dans Blast_output)
-		file1=$nomA"-vs-"$nomB".bl" # .txt des hits de A sur B
-		file2=$nomB"-vs-"$nomA".bl" # .txt des hits de B sur A
-		
-		#détermination des réciproques et l'enregistrement du fichier de sortie se fait tout seul
-		grep "^[^#;]" Blast_output/file1 Blast_output/file2 > metagenomic_table.txt ############# changer nom sortie
-		python3 supairFinder.py -i metagenomic_table.txt -o output.txt ############# changer nom sortie
-		
-		#ressort un fichier texte où chaque ligne correspond à une paire d'orthologue séparés par une tabulation
-		#note : supprime les autres infos mais ça peut s'arranger facilement
-		#re-note : tous les génomes sont concaténés
+		file1=$nomA"-vs-"$nomB".bl" # Recherche des gènes de A sur B
+		file2=$nomB"-vs-"$nomA".bl" # Recherche des gènes de A sur B
+
+		#grep : concatène les deux fichiers et ne garde que les lignes qui ne commencent pas par #
+		grep "^[^#;]" Blast_output/$file1 Blast_output/$file2 > temp_table.txt
+
+		#Fichier de sortie : Table d'orthologue, chaque ligne correspond à une paire de gènes orthologues
+
+		#supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
+		python3 supairFinder.py -i temp_table.txt -o output.txt
+
 	done
 done
-
-# Troisième étape : détermination du core génome
-
-
-
-
-
-
