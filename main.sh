@@ -36,7 +36,7 @@ if [ $starting = 'TRUE' ];then
 	  mkdir -p Blast_db
 	fi
 	
-	# Création des 27 bases de données
+	# Création des 21 bases de données
 	for A in prot/*.fa;do
 		./ncbi-blast-2.11.0+/bin/makeblastdb -in $A -dbtype prot -out $A
 	done
