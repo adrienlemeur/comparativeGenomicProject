@@ -11,13 +11,19 @@ Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_A
 
 ## Première étape : parsing (supairFinder.py)
 Objectif : récupérer les best hits et seuiller pour éliminer ceux qui sont insuffisants
+
 Entrée : alignement du génome A sur le génome B et de B sur A
+
 Sortie (intermédiaire) : première ligne de chaque résultat (meilleur e-value)
+
 
 ## Deuxième étape : réciprocité (supairFinder.py)
 Objectif : liste des orthologues
+
 Entrée (intermédiaire) : paires de best hits
+
 Sortie : liste des best hits réciproques
+
 
 Deux idées possibles pour la réciprocité :
 1) *SUPAIR_FINDER.py*
@@ -25,6 +31,9 @@ Deux idées possibles pour la réciprocité :
 
 ## Troisième étape : Identification du core génome (cliqueSearch.py)
 Objectif : identifier le core génome
+
 Méthode : recherche de clique
+
 Entrée : liste bets hits réciproques pour tous les 110 binômes de génome
+
 Sortie : liste des génome.gène dans chaque clique
