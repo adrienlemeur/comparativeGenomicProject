@@ -105,7 +105,7 @@ for A in prot/*.fa;do
 		
 		#détermination des réciproques et l'enregistrement du fichier de sortie se fait tout seul
 		grep "^[^#;]" Blast_output/file1 Blast_output/file2 > metagenomic_table.txt ############# changer nom sortie
-		python3 supairFinder.py -i metagenomic_table.txt ############# changer nom sortie
+		python3 supairFinder.py -i metagenomic_table.txt -o output.txt ############# changer nom sortie
 		
 		#ressort un fichier texte où chaque ligne correspond à une paire d'orthologue séparés par une tabulation
 		#note : supprime les autres infos mais ça peut s'arranger facilement
