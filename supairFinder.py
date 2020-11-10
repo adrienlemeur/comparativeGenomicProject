@@ -34,7 +34,6 @@ os.system("rm "+outputname)
 with open(outputname, 'a') as po:
 	for i in lines:
 		i = i.strip().split("\t")
-		#s/o Audrey
 		#i[0] = nom du gène query / i[1] = nom du meilleur hit
 		#Dictionnaire = table de hash
 		#Deux éléments : une clef (unique) et une valeur associée (peut être n'importe quoi, même un dictionnaire)
