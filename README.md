@@ -10,18 +10,18 @@ Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_A
 - confrontation des best hits pour déterminer les best hists réciproques (BHR)
 - idenfication du core génome parmi les BHR
 
-## Première étape : parsing (supairFinder.py)
+## Première étape : parsing (......py)
 **Objectif** : récupérer les best hits et seuiller pour éliminer ceux qui sont insuffisants
 
 **Entrée** : alignement du génome A sur le génome B et de B sur A
 
-**Sortie** (intermédiaire) : première ligne de chaque résultat (meilleur e-value)
+**Sortie** : première ligne de chaque résultat (meilleur e-value) + conservation selon les critères
 
 
 ## Deuxième étape : réciprocité (supairFinder.py)
-**Objectif** : liste des orthologues
+**Objectif** : liste des best hits réciproques
 
-**Entrée (intermédiaire)** : paires de best hits
+**Entrée** : paires de best hits
 
 **Sortie** : liste des best hits réciproques
 
