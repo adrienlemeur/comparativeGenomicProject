@@ -82,7 +82,7 @@ fi
 #------------------------------------------
 # Deuxième étape : Détermination des best hits réciproques
 #------------------------------------------
-## 
+
 #supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
 # Entrée : sortie du précédent
 # Sortie : liste des best hits réciproques
@@ -108,6 +108,7 @@ mkdir -p cliques # Répertoire de sortie de cliqueSearch
 #cliqueSearch pour la recherche de cliques max pour ainsi trouver le nombre d'éléments du core génome
 # Entrée : sortie du précédent
 # Sortie : liste des cliques contenant les gènes de la clique. Chaque clique est un élément du core génome et elle contient 21 gènes (pour 21 génomes).
+# python et pas python3 car networkx n'est pas dans python3
 python cliqueSearch.py -i "reciprocity/reciprocity_list.txt" -o cliques/cliques_max.txt cliques/cliques_pas_max.txt
 
 nbligne= sudo cat cliques/cliques_max.txt | wc -l
