@@ -63,6 +63,8 @@ if [ $starting = 'TRUE' ];then
 	done
 fi
 
+<<COMMENT
+
 echo -e "\n \t -------------------------------------------------------"
 echo -e "\t Première étape : Parsing des données et concaténation"
 echo -e "\t ------------------------------------------------------- \n"
@@ -70,7 +72,6 @@ b=0 # on en aura besoin pour la comparaison des tailles de fichier avec 0
 
 # Entrée : résultats d'alignement de tous les génomes deux à deux : 21 génomes donc 441 fichiers
 # Sortie : table d'orthologue, chaque ligne correspond à une paire de gènes orthologues
-<<COMMENT
 mkdir -p reciprocity # Répertoire avec tous les résultats
 cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
 
@@ -97,10 +98,12 @@ python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
 
 test -s reciprocity/reciprocity_list.txt || echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
 
+COMMENT
+
 echo -e "\n \t -----------------------------------------------------------"
 echo -e "\t Troisième étape : Recherche de cliques"
 echo -e "\t ----------------------------------------------------------- \n"
-COMMENT 
+
 mkdir -p cliques # Répertoire de sortie de cliqueSearch
 
 #cliqueSearch pour la recherche de cliques max pour ainsi trouver le nombre d'éléments du core génome
