@@ -72,11 +72,8 @@ b=0 # on en aura besoin pour la comparaison des tailles de fichier avec 0
 mkdir -p reciprocity # Répertoire avec tous les résultats
 cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
 
-if [ test -s reciprocity/best_hits_list.txt ];then
-    echo "cat done"
-else
-    echo "Il y a eu un problème lors de la concaténation. Le fichier ortholog_results.txt est vide ou n'existe pas."
-fi
+test -s reciprocity/reciprocity_list.txt || echo "Il y a eu un problème lors de la concaténation. Le fichier ortholog_results.txt est vide ou n'existe pas."
+
 # Sortie : table d'orthologue, chaque ligne correspond à une paire de gènes orthologues
 
 echo -e "\n \t ------------------------------------------"
@@ -92,12 +89,7 @@ python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
 			--seuil_coverage 70 \
 			--seuil_evalue 10^-10
 
-
-if [ test -s reciprocity/reciprocity_list.txt ];then
-    echo "ortholog search done"
-else
-    echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
-fi
+test -s reciprocity/reciprocity_list.txt || echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
 
 echo -e "\n \t -----------------------------------------------------------"
 echo -e "\t Troisième étape : Détermination des best hits réciproques"
