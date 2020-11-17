@@ -5,35 +5,23 @@ Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_A
 
 ## Boucle principale (main.sh)
 - récupération des génomes et construction des 21 bases et 441 alignements OU récupération des 441 alignements déjà faits
-- sauvegarde des best hits sous critères
- → (**A FAIRE**) définir les critères parmi "qseqid sseqid pident length mismatch gapopen qstart qen sstart send evalue bitscore qlen slen gaps" pour savoir quels candidats d'orthologues on conserve
-- confrontation des best hits pour déterminer les best hists réciproques (BHR)
+- sauvegarde des best hits sous critères de couverture, identité et e-value
+- confrontation des best hits pour déterminer les best hists réciproques
 - idenfication du core génome parmi les BHR
 
-## Première étape : parsing (......py)
-**Objectif** : récupérer les best hits et seuiller pour éliminer ceux qui sont insuffisants :
-- gène avec la meilleur e-value
-- e-value > Xe
-- coverage > Xc
-- autre-param > Xp
-- => Phase de paramétrage qui doit être ajustée à la fin, en regardant l'impact du changement des paramètres sur la taille du core génome
+## Première étape : suppressionn des commentaires (dans main.sh)
+**Objectif** : supprimer les commentaires
 
 **Entrée** : alignement du génome A sur le génome B et de B sur A
 
-**Sortie** : première ligne de chaque résultat (meilleur e-value) + conservation selon les critères
-
+**Sortie** : suppression des lignes avec des commentaires et fusion des deux fichiers en une sortie A-against-B.bl.list
 
 ## Deuxième étape : réciprocité (supairFinder.py)
-**Objectif** : liste des best hits réciproques
+**Objectif** : déterminer les best hits
 
-**Entrée** : paires de best hits
+**Entrée** : liste A-against-B.bl.list
 
 **Sortie** : liste des best hits réciproques
-
-
-Deux idées possibles pour la réciprocité :
-1) *SUPAIR_FINDER.py*
-2) Alternative : *reciprocity.R* : Utilisation de dplyr dans R pour faire une jointure, puis comparaison des valeurs pour chaque ligne
 
 ## Troisième étape : Identification du core génome (cliqueSearch.py)
 **Objectif** : identifier le core génome
