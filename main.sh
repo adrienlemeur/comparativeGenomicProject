@@ -63,6 +63,8 @@ if [ $starting = 'TRUE' ];then
 	done
 fi
 
+<<COMMENT
+
 echo -e "\n \t -------------------------------------------------------"
 echo -e "\t Première étape : Parsing des données et concaténation"
 echo -e "\t ------------------------------------------------------- \n"
@@ -95,6 +97,8 @@ python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
 			--seuil_evalue ${evalue}
 
 test -s reciprocity/reciprocity_list.txt || echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
+
+COMMENT
 
 echo -e "\n \t -----------------------------------------------------------"
 echo -e "\t Troisième étape : Recherche de cliques"
