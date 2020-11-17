@@ -83,6 +83,7 @@ fi
 #------------------------------------------
 
 ## Première étape : Parsing des données et concaténation
+# Entrée : résultats d'alignement de tous les génomes deux à deux : 21 génomes donc 441 fichiers
 mkdir -p reciprocity # Répertoire avec tous les résultats
 cat blast_outputs/*.bl | grep "^[^#;]" > "reciprocity/best_hits_list.txt"
 
@@ -91,11 +92,12 @@ if [ -e reciprocity/best_hits_list.txt ];then
 else
     echo "Il y a eu un problème lors de la concaténation. Le fichier ortholog_results.txt n'existe pas."
 fi
-
-# Fichier de sortie : Table d'orthologue, chaque ligne correspond à une paire de gènes orthologues
+# Sortie : table d'orthologue, chaque ligne correspond à une paire de gènes orthologues
 
 ## Deuxième étape : Détermination des best hits réciproques
 #supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
+# Entrée : sortie du précédent
+# Sortie : liste des best hits réciproques
 python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
 			-o reciprocity/reciprocity_list.txt \
 			--seuil_identite 60 \
@@ -109,10 +111,11 @@ else
 fi
 
 ## Troisième étape : Détermination des best hits réciproques
-
 mkdir -p cliques # Répertoire de sortie de cliqueSearch
 
 #cliqueSearch pour la recherche de cliques max pour ainsi trouver le nombre d'éléments du core génome
+# Entrée : sortie du précédent
+# Sortie : liste des cliques contenant les gènes de la clique. Chaque clique est un élément du core génome et elle contient 21 gènes (pour 21 génomes).
 python cliqueSearch.py -i "reciprocity/reciprocity_list.txt" -o cliques/cliques_max.txt
 
 if [ -e cliques/cliques_max.txt ];then
