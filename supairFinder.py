@@ -33,11 +33,11 @@ with open(genomic_table) as gt:
 	lines = gt.readlines()
 
 dict = {}
-
+print(outputname)
 #Fichier de sortie
 os.system("rm -f "+outputname)
 
-print(outputname)
+
 
 with open(outputname, 'a') as po:
 	for i in lines:
