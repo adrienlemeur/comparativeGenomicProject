@@ -71,7 +71,7 @@ fi
 mkdir -p reciprocity # Répertoire avec tous les résultats
 cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
 
-nbligne=cat reciprocity/best_hits_list.txt | wc -l
+nbligne= cat reciprocity/best_hits_list.txt | wc -l
 if [ $nbligne > 0 ];then
     echo "cat done"
 else
