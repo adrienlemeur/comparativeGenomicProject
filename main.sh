@@ -82,30 +82,44 @@ fi
 # Traitement des données
 #------------------------------------------
 
-# Première étape : détermination des best hits pour chaque fichier dans blast_outputs
-# Deuxième étape : détermination des best hits réciproques
-# => Les deux étapes sont faites par supairFinder.py
+## Première étape : Parsing des données et concaténation
+mkdir -p reciprocity # Répertoire avec tous les résultats
+cat blast_outputs/*.bl | grep "^[^#;]" > "reciprocity/best_hits_list.txt"
 
-# Répertoire de sortie de réciprocité
-mkdir -p reciprocity
+if [ -e reciprocity/best_hits_list.txt ];then
+    echo "cat done"
+else
+    echo "Il y a eu un problème lors de la concaténation. Le fichier ortholog_results.txt n'existe pas."
+fi
 
-cat blast_outputs/*.bl | grep "^[^#;]" > "blast_outputs/ortholog_results.txt"
-echo "cat done"
-#Fichier de sortie : Table d'orthologue, chaque ligne correspond à une paire de gènes orthologues
+# Fichier de sortie : Table d'orthologue, chaque ligne correspond à une paire de gènes orthologues
 
+## Deuxième étape : Détermination des best hits réciproques
 #supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
-python3 supairFinder.py -i "blast_outputs/ortholog_results.txt" \
-			-o reciprocity/the_big_ortholog_list.txt \
+python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
+			-o reciprocity/reciprocity_list.txt \
 			--seuil_identite 60 \
 			--seuil_coverage 70 \
 			--seuil_evalue 10^-10
 
-echo "ortholog search done"
+if [ -e reciprocity/reciprocity_list.txt ];then
+    echo "ortholog search done"
+else
+    echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt n'existe pas."
+fi
 
-# Répertoire de sortie de cliqueSearch
-mkdir -p cliques
+## Troisième étape : Détermination des best hits réciproques
+
+mkdir -p cliques # Répertoire de sortie de cliqueSearch
 
 #cliqueSearch pour la recherche de cliques max pour ainsi trouver le nombre d'éléments du core génome
-python cliqueSearch.py -i "reciprocity/the_big_ortholog_list.txt" -o cliques/cliques_max.txt
+python cliqueSearch.py -i "reciprocity/reciprocity_list.txt" -o cliques/cliques_max.txt
 
-echo "clique search done"
+if [ -e cliques/cliques_max.txt ];then
+    echo "clique search done"
+else
+    echo "Il y a eu un problème lors de la détermination des cliques. Le fichier cliques_max.txt n'existe pas."
+fi
+
+
+
