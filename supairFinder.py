@@ -37,6 +37,8 @@ dict = {}
 #Fichier de sortie
 os.system("rm -f "+outputname)
 
+print(outputname)
+
 with open(outputname, 'a') as po:
 	for i in lines:
 		i = i.split("	")
