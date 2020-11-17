@@ -39,7 +39,7 @@ for clq in nx.clique.find_cliques(G): #la fonction find_cliques permet de renvoy
 			#f.write(clq_item.decode("utf-8"))
 		f.write(str(clq))
 		f.write("\t")
-	f.write("\n")
+		f.write("\n")
 
 f.close()
 f2.close()
