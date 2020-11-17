@@ -9,6 +9,8 @@
 
 #__________INPUT__________INPUT__________INPUT__________INPUT__________INPUT__________INPUT
 import sys, os
+from statistics import mean
+# Use: mean(liste)
 
 try:
 	genomic_table = sys.argv[sys.argv.index("-i")+1]
