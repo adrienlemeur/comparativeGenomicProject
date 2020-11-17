@@ -64,15 +64,14 @@ if [ $starting = 'TRUE' ];then
 fi
 
 #------------------------------------------
-# Traitement des données
+# Première étape : Parsing des données et concaténation
 #------------------------------------------
 
-## Première étape : Parsing des données et concaténation
 # Entrée : résultats d'alignement de tous les génomes deux à deux : 21 génomes donc 441 fichiers
 mkdir -p reciprocity # Répertoire avec tous les résultats
 cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
 
-nbligne = cat reciprocity/best_hits_list.txt | wc -l
+nbligne=cat reciprocity/best_hits_list.txt | wc -l
 if [ $nbligne > 0 ];then
     echo "cat done"
 else
@@ -80,7 +79,10 @@ else
 fi
 # Sortie : table d'orthologue, chaque ligne correspond à une paire de gènes orthologues
 
-## Deuxième étape : Détermination des best hits réciproques
+#------------------------------------------
+# Deuxième étape : Détermination des best hits réciproques
+#------------------------------------------
+## 
 #supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
 # Entrée : sortie du précédent
 # Sortie : liste des best hits réciproques
@@ -90,14 +92,17 @@ python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
 			--seuil_coverage 70 \
 			--seuil_evalue 10^-10
 
-nbligne = cat reciprocity/reciprocity_list.txt | wc -l
+nbligne= cat reciprocity/reciprocity_list.txt | wc -l
 if [ $nbligne > 0 ];then
     echo "ortholog search done"
 else
     echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
 fi
 
-## Troisième étape : Détermination des best hits réciproques
+#------------------------------------------
+# Troisième étape : Détermination des best hits réciproques
+#------------------------------------------
+
 mkdir -p cliques # Répertoire de sortie de cliqueSearch
 
 #cliqueSearch pour la recherche de cliques max pour ainsi trouver le nombre d'éléments du core génome
@@ -105,7 +110,7 @@ mkdir -p cliques # Répertoire de sortie de cliqueSearch
 # Sortie : liste des cliques contenant les gènes de la clique. Chaque clique est un élément du core génome et elle contient 21 gènes (pour 21 génomes).
 python cliqueSearch.py -i "reciprocity/reciprocity_list.txt" -o cliques/cliques_max.txt cliques/cliques_pas_max.txt
 
-nbligne = cat cliques/cliques_max.txt | wc -l
+nbligne= cat cliques/cliques_max.txt | wc -l
 if [ $nbligne > 0 ];then
     echo "clique search done"
 else
