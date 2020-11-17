@@ -39,6 +39,7 @@ os.system("rm -f "+outputname)
 
 with open(outputname, 'a') as po:
 	for i in lines:
+		i = i.split("	")
 		if i[0] not in dict : #permet de sélectionner la première ligne de chaque query (best hit)
 			#Chaque clef correspond à une query, chaque valeur correspond à un best-hit
 			#Chaque ligne correspond à un tuple [query, best hit, identity, coverage, e-value]
