@@ -88,7 +88,7 @@ coverage= "50"
 evalue= "10"
 echo -e "Critère de sélection (seuils) : identité = ${identity}, couverture = ${coverage} et evalue = ${evalue}"
 
-python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
+python supairFinder.py -i "reciprocity/best_hits_list.txt" \
 			-o "reciprocity/reciprocity_list.txt" \
 			--seuil_identite ${identity} \
 			--seuil_coverage ${coverage} \
