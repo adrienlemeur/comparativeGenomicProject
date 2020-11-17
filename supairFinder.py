@@ -40,15 +40,22 @@ os.system("rm -f "+outputname)
 with open(outputname, 'a') as po:
 	for i in lines:
 		i = i.split("	")
-		if i[0] not in dict : #permet de sélectionner la première ligne de chaque query (best hit)
-			#Chaque clef correspond à une query, chaque valeur correspond à un best-hit
-			#Chaque ligne correspond à un tuple [query, best hit, identity, coverage, e-value]
-			#Création d'une nouvelle entré dans le dictionnaire, avec la query comme clef et les quatre autres données comme value
+		
+		# dict[i[0]][0].split("_")[0]       genome du best it de i[0]
+		# i[1].split("_")                   genome de i[1]
+		# Soit on ajoute i[0] dans le dictionnaire parce qu'il n'y est pas
+		# Soit i[0] est dans le dictionnaire mais le genome sur lequel il est aligné n'a pas été déjà comparé à lui, on ajoute la ligne
+		
+		if i[0] not in dict or ((i[0] in dict) and (dict[i[0]][0].split("_")[0] != i[1].split("_")[0])):
+			# permet de sélectionner la première ligne de chaque query (best hit)
+			# Chaque clef correspond à une query, chaque valeur correspond à un best-hit
+			# Chaque ligne correspond à un tuple [query, best hit, identity, coverage, e-value]
+			# Création d'une nouvelle entrée dans le dictionnaire, avec la query comme clef et les quatre autres données comme value
 			dict[i[0]] = [i[1], float(i[2]), float(i[3]), -float(i[11])]
 
-			#Si i[1] est une clef du dictionnaire (c'est à dire qu'on a déjà rencontré notre best-hit avant)
+			# Si i[1] est une clef du dictionnaire (c'est à dire qu'on a déjà rencontré notre best-hit avant)
 			if i[1] in dict:
-				#Si la valeur du best-hit de notre best hit est égal à celle de notre query, les deux gènes sont réciproques
+				# Si la valeur du best-hit de notre best hit est égal à celle de notre query, les deux gènes sont réciproques
 				if i[0] == dict[i[1]][0] : # and (i[0] != i[1]):
 					# vérification des seuils du couple
 					membre1 = dict[i[1]][1:3] # liste avec le % d'identite, la couverture et - la e-value
