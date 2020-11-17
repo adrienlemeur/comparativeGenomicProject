@@ -106,6 +106,6 @@ echo "ortholog search done"
 mkdir -p cliques
 
 #cliqueSearch pour la recherche de cliques max pour ainsi trouver le nombre d'éléments du core génome
-python cliqueSearch.py -i "reciprocity/the_big_ortholog_list.txt" -o cliques/
+python cliqueSearch.py -i "reciprocity/the_big_ortholog_list.txt" -o cliques/cliques_max.txt
 
 echo "clique search done"
