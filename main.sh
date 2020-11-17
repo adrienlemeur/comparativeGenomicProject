@@ -101,3 +101,8 @@ python3 supairFinder.py -i "blast_outputs/ortholog_results.txt" \
 			--seuil_evalue 10^-10
 
 echo "ortholog search done"
+
+#cliqueSearch pour la recherche de cliques max pour ainsi trouver le nombre d'éléments du core génome
+python3 cliqueSearch.py -i "reciprocity/the_big_ortholog_list.txt"
+
+echo "clique search done"
