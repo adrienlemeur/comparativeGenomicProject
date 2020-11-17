@@ -9,7 +9,7 @@ Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_A
 - confrontation des best hits pour déterminer les best hists réciproques
 - idenfication du core génome parmi les BHR
 
-## Première étape : suppressionn des commentaires (dans main.sh)
+## Première étape : suppression des commentaires (dans main.sh)
 **Objectif** : supprimer les commentaires
 
 **Entrée** : alignement du génome A sur le génome B et de B sur A
