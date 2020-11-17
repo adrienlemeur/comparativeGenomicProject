@@ -84,7 +84,7 @@ echo -e "\t ------------------------------------------ \n"
 # Entrée : sortie du précédent
 # Sortie : liste des best hits réciproques
 python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
-			-o reciprocity/reciprocity_list.txt \
+			-o "reciprocity/reciprocity_list.txt" \
 			--seuil_identite 60 \
 			--seuil_coverage 70 \
 			--seuil_evalue 10^-10
