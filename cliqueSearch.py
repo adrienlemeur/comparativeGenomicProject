@@ -29,15 +29,17 @@ G = nx.read_edgelist(filename,delimiter='	') # les genes stockes dans le fichier
 
 for clq in nx.clique.find_cliques(G): #la fonction find_cliques permet de renvoyer toutes les cliques maximales dans un graphe non oriente G
 	if (len(clq) > 1 and len(clq) < 21) : #si la clique ne fait pas intervenir tous les genomes, on les stocke dans un fichier a part (cliques_pas_max)
-		for clq_item in clq:
-			f2.write(clq_item.decode("utf-8"))#pour encoder en utf8
-			f2.write("\t")
-		f2.write("\n")
+		#for clq_item in clq:
+			#f2.write(clq_item.decode("utf-8"))#pour encoder en utf8
+		fe.write(str(clq))
+		f2.write("\t")
+	f2.write("\n")
 	elif len(clq) == 21: #cliques faisant intervenir tous les genomes
-		for clq_item in clq:
-			f.write(clq_item.decode("utf-8"))
-			f.write("\t")
-		f.write("\n")
+		#for clq_item in clq:
+			#f.write(clq_item.decode("utf-8"))
+		f.write(str(clq))
+		f.write("\t")
+	f.write("\n")
 
 f.close()
 f2.close()
