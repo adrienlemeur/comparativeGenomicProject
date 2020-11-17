@@ -3,7 +3,7 @@ import sys
 
 #Input
 try :
-	filename = sys.argv[1] #permet de recuperer le fichier de sortie generer apres l'application de la fonction de reciprocite
+	filename = sys.argv[sys.argv.index("-i")+1] #permet de recuperer le fichier de sortie generer apres l'application de la fonction de reciprocite
 	#Il y aura dans les fichiers uniquement les genes des genomes dont l'homolgie est reciproque
 except :
 	sys.exit()
