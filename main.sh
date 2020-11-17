@@ -72,7 +72,7 @@ b=0 # on en aura besoin pour la comparaison des tailles de fichier avec 0
 mkdir -p reciprocity # Répertoire avec tous les résultats
 cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
 
-nbligne= sudo cat reciprocity/best_hits_list.txt | wc -l
+nbligne= cat reciprocity/best_hits_list.txt | wc -l
 if [ "$nbligne" > "$b" ];then
     echo "cat done"
 else
@@ -93,7 +93,7 @@ python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
 			--seuil_coverage 70 \
 			--seuil_evalue 10^-10
 
-nbligne= sudo cat reciprocity/reciprocity_list.txt | wc -l
+nbligne= cat reciprocity/reciprocity_list.txt | wc -l
 if [ "$nbligne" > "$b" ];then
     echo "ortholog search done"
 else
@@ -112,7 +112,7 @@ mkdir -p cliques # Répertoire de sortie de cliqueSearch
 # python et pas python3 car networkx n'est pas dans python3
 python cliqueSearch.py -i "reciprocity/reciprocity_list.txt" -o "cliques/cliques_max.txt" "cliques/cliques_pas_max.txt"
 
-nbligne= sudo cat cliques/cliques_max.txt | wc -l
+nbligne= cat cliques/cliques_max.txt | wc -l
 if [ "$nbligne" > "$b" ];then
     echo "clique search done"
 else
