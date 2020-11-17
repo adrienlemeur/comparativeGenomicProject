@@ -94,6 +94,6 @@ echo "cat done"
 #Fichier de sortie : Table d'orthologue, chaque ligne correspond à une paire de gènes orthologues
 
 #supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
-python3 supairFinder_old.py -i "blast_outputs/ortholog_results.txt" -o reciprocity/the_big_ortholog_list.txt
+python3 supairFinder.py -i "blast_outputs/ortholog_results.txt" -o reciprocity/the_big_ortholog_list.txt
 
 echo "ortholog search done"
