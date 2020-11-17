@@ -85,7 +85,7 @@ fi
 ## Première étape : Parsing des données et concaténation
 # Entrée : résultats d'alignement de tous les génomes deux à deux : 21 génomes donc 441 fichiers
 mkdir -p reciprocity # Répertoire avec tous les résultats
-cat blast_outputs/*.bl | grep "^[^#;]" > "reciprocity/best_hits_list.txt"
+cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
 
 if [ -e reciprocity/best_hits_list.txt ];then
     echo "cat done"
