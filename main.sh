@@ -117,7 +117,7 @@ mkdir -p cliques # Répertoire de sortie de cliqueSearch
 # Entrée : sortie du précédent
 # Sortie : liste des cliques contenant les gènes de la clique. Chaque clique est un élément du core génome et elle contient 21 gènes (pour 21 génomes).
 python cliqueSearch.py -i "reciprocity/reciprocity_list.txt" -o cliques/cliques_max.txt
-nbligne=$(wc -l $1 cliques/cliques_max.txt) 
+nbligne= cat cliques/cliques_max.txt | wc -l
 if [ nbligne > 0 ];then
     echo "clique search done"
 else
