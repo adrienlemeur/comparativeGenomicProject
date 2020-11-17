@@ -63,9 +63,9 @@ if [ $starting = 'TRUE' ];then
 	done
 fi
 
-echo -e "\n \t ------------------------------------------"
+echo -e "\n \t -------------------------------------------------------"
 echo -e "\t Première étape : Parsing des données et concaténation"
-echo -e "\t ------------------------------------------ \n"
+echo -e "\t ------------------------------------------------------- \n"
 b=0 # on en aura besoin pour la comparaison des tailles de fichier avec 0
 
 # Entrée : résultats d'alignement de tous les génomes deux à deux : 21 génomes donc 441 fichiers
@@ -100,9 +100,9 @@ else
     echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
 fi
 
-echo -e "\n \t ------------------------------------------"
+echo -e "\n \t -----------------------------------------------------------"
 echo -e "\t Troisième étape : Détermination des best hits réciproques"
-echo -e "\t ------------------------------------------ \n"
+echo -e "\t ----------------------------------------------------------- \n"
 
 mkdir -p cliques # Répertoire de sortie de cliqueSearch
 
