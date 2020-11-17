@@ -41,6 +41,8 @@ with open(outputname, 'a') as po:
 		if i[0] not in dict : #permet de sélectionner la première ligne de chaque query (best hit)
 			#Chaque clef correspond à une query, chaque valeur correspond à un best-hit
 			#Chaque ligne correspond à un tuple [query, best hit]
+			#Création d'une nouvelle entré dans le dictionnaire, avec la query comme clef et le best-hit comme value
+			dict[i[0]] = [i[1], i[2], i[3], -i[9]]
 
 			#Si i[1] est une clef du dictionnaire (c'est à dire qu'on a déjà rencontré notre best-hit avant)
 			if i[1] in dict:
@@ -54,6 +56,4 @@ with open(outputname, 'a') as po:
 					if (mean(membre1 > seuils)) && (mean(membre2 > seuils)) :
 						#on écrit le couple de gènes query / best-hit à la suite de notre doc résultat
 						po.write(i[0]+"\t"+i[1]+"\n")
-			
-			#Création d'une nouvelle entré dans le dictionnaire, avec la query comme clef et le best-hit comme value
-				dict[i[0]] = [i[1], i[2], i[3], -i[9]]
+						
