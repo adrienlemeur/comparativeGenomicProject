@@ -49,7 +49,7 @@ with open(outputname, 'a') as po:
 			#Si i[1] est une clef du dictionnaire (c'est à dire qu'on a déjà rencontré notre best-hit avant)
 			if i[1] in dict:
 				#Si la valeur du best-hit de notre best hit est égal à celle de notre query, les deux gènes sont réciproques
-				if i[0] == dict[i[1]][0]:
+				if (i[0] == dict[i[1]][0]) and (i[0] != dict[i[1]][1]):
 					# vérification des seuils du couple
 					membre1 = dict[i[1]][1:3] # liste avec le % d'identite, la couverture et - la e-value
 					membre2 = dict[i[0]][1:3]
