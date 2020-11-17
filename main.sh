@@ -83,11 +83,16 @@ echo -e "\t ------------------------------------------ \n"
 #supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
 # Entrée : sortie du précédent
 # Sortie : liste des best hits réciproques
+identity= 50
+coverage= 50
+evalue= 10
+echo -e "Critère de sélection (seuils) : identité = ${identity}, couverture = ${coverage} et evalue = ${evalue}"
+
 python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
 			-o "reciprocity/reciprocity_list.txt" \
-			--seuil_identite 60 \
-			--seuil_coverage 70 \
-			--seuil_evalue 10^-10
+			--seuil_identite ${identity} \
+			--seuil_coverage ${coverage} \
+			--seuil_evalue ${evalue}
 
 test -s reciprocity/reciprocity_list.txt || echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
 
