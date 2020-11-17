@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 '''
     File name: supairFinder.py
-    Author: Adrien Le Meur
+    Author: Adrien Le Meur et éventuellement les autres membres :D
     Date created: 06/10/2020
     Date last modified: 08/10/2020
     Python Version: 3.6
