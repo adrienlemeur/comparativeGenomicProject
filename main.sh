@@ -85,6 +85,7 @@ echo -e "\t ------------------------------------------ \n"
 #supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
 # Entrée : sortie du précédent
 # Sortie : liste des best hits réciproques
+
 identity=50
 coverage=50
 evalue=10
@@ -110,9 +111,8 @@ mkdir -p cliques # Répertoire de sortie de cliqueSearch
 # Entrée : sortie du précédent
 # Sortie : liste des cliques contenant les gènes de la clique. Chaque clique est un élément du core génome et elle contient 21 gènes (pour 21 génomes).
 # Il faut installer networkx sur Python3 : python3 -m pip install networkx
+
 python3 cliqueSearch.py -i "reciprocity/reciprocity_list.txt" -o "cliques/cliques_max.txt" "cliques/cliques_pas_max.txt"
 
 test -s cliques/cliques_pas_max.txt || echo "Il y a eu un problème lors de la détermination des cliques. Le fichier cliques_pas_max.txt est vide ou n'existe pas."
-
-
 echo "Le nombre de cliques maximales et donc d'éléments dans le core génome est de : " wc -l cliques/cliques_max.txt
