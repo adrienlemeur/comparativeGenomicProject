@@ -55,7 +55,7 @@ with open(outputname, 'a') as po:
 					membre2 = dict[i[0]][1:3]
 					# on teste tous les seuils : membrex > seuils est une liste de trois booléens
 					# pour que les trois seuils soient validés, il faut 3 TRUE, donc la moyenne des TRUE (1) vaut 1
-					if (mean(membre1 > seuils)) && (mean(membre2 > seuils)) :
+					if (mean(membre1 > seuils)) and (mean(membre2 > seuils)) :
 						#on écrit le couple de gènes query / best-hit à la suite de notre doc résultat
 						po.write(i[0]+"\t"+i[1]+"\n")
 						
