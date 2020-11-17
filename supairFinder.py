@@ -9,8 +9,6 @@
 
 #__________INPUT__________INPUT__________INPUT__________INPUT__________INPUT__________INPUT
 import sys, os
-from statistics import mean
-# Use: mean(liste)
 
 try:
 	genomic_table = sys.argv[sys.argv.index("-i")+1]
@@ -46,8 +44,8 @@ with open(outputname, 'a') as po:
 			#Chaque clef correspond à une query, chaque valeur correspond à un best-hit
 			#Chaque ligne correspond à un tuple [query, best hit, identity, coverage, e-value]
 			#Création d'une nouvelle entré dans le dictionnaire, avec la query comme clef et les quatre autres données comme value
-			print(i[2], i[3], i[9])
-			dict[i[0]] = [i[1], float(i[2]), float(i[3]), -float(i[9])]
+			print(i[2], i[3], i[11])
+			dict[i[0]] = [i[1], float(i[2]), float(i[3]), -float(i[11])]
 
 			#Si i[1] est une clef du dictionnaire (c'est à dire qu'on a déjà rencontré notre best-hit avant)
 			if i[1] in dict:
@@ -57,8 +55,8 @@ with open(outputname, 'a') as po:
 					membre1 = dict[i[1]][1:3] # liste avec le % d'identite, la couverture et - la e-value
 					membre2 = dict[i[0]][1:3]
 					# on teste tous les seuils : membrex > seuils est une liste de trois booléens
-					# pour que les trois seuils soient validés, il faut 3 TRUE, donc la moyenne des TRUE (1) vaut 1
-					if (mean(membre1 > seuils)) and (mean(membre2 > seuils)) :
+					# pour que les trois seuils soient validés, il faut que la comparaison donne TRUE
+					if (membre1 > seuils) and (membre2 > seuils) :
 						#on écrit le couple de gènes query / best-hit à la suite de notre doc résultat
 						po.write(i[0]+"\t"+i[1]+"\n")
 						
