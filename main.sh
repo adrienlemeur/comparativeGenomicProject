@@ -103,12 +103,4 @@ mkdir -p cliques # Répertoire de sortie de cliqueSearch
 # python et pas python3 car networkx n'est pas dans python3
 python cliqueSearch.py -i "reciprocity/reciprocity_list.txt" -o "cliques/cliques_max.txt" "cliques/cliques_pas_max.txt"
 
-
-if [ test -s cliques/cliques_max.txt ];then
-    echo "clique search done"
-else
-    echo "Il y a eu un problème lors de la détermination des cliques. Le fichier cliques_max.txt est vide ou n'existe pas."
-fi
-
-
-
+test -s cliques/cliques_max.txt || echo "Il y a eu un problème lors de la détermination des cliques. Le fichier cliques_max.txt est vide ou n'existe pas."
