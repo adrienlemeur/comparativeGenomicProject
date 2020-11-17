@@ -23,7 +23,9 @@ try:
 except :
 	outputname = "putative_orthologues.txt"
 
+print(seuil_id, seuil_cov, seuil_eval)
 seuils = [seuil_id, seuil_cov, -seuil_eval] # on met un - pour que toutes les comparaisons soient des >
+
 
 #__________MAIN__________MAIN__________MAIN__________MAIN__________MAIN__________MAIN
 
