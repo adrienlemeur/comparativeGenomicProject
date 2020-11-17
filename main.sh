@@ -77,7 +77,7 @@ cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_h
 test -s reciprocity/best_hits_list.txt || echo "Il y a eu un problème lors de la concaténation. Le fichier best_hits_list.txt est vide ou n'existe pas."
 
 echo -e "\n \t ------------------------------------------"
-echo -e "\t Détermination des best hits réciproques"
+echo -e "\t Deuxième étape : Détermination des best hits réciproques"
 echo -e "\t ------------------------------------------ \n"
 
 #supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
@@ -92,7 +92,7 @@ python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
 test -s reciprocity/reciprocity_list.txt || echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
 
 echo -e "\n \t -----------------------------------------------------------"
-echo -e "\t Troisième étape : Détermination des best hits réciproques"
+echo -e "\t Troisième étape : Recherche de cliques"
 echo -e "\t ----------------------------------------------------------- \n"
 
 mkdir -p cliques # Répertoire de sortie de cliqueSearch
