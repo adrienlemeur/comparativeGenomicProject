@@ -40,8 +40,8 @@ with open(outputname, 'a') as po:
 	for i in lines:
 		if i[0] not in dict : #permet de sélectionner la première ligne de chaque query (best hit)
 			#Chaque clef correspond à une query, chaque valeur correspond à un best-hit
-			#Chaque ligne correspond à un tuple [query, best hit]
-			#Création d'une nouvelle entré dans le dictionnaire, avec la query comme clef et le best-hit comme value
+			#Chaque ligne correspond à un tuple [query, best hit, identity, coverage, e-value]
+			#Création d'une nouvelle entré dans le dictionnaire, avec la query comme clef et les quatre autres données comme value
 			dict[i[0]] = [i[1], i[2], i[3], -i[9]]
 
 			#Si i[1] est une clef du dictionnaire (c'est à dire qu'on a déjà rencontré notre best-hit avant)
