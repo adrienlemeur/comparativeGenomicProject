@@ -6,8 +6,7 @@
 #------------------------------------------
 
 starting='TRUE'
-
-#le flag -- nostart : permet de passer outre l'étape de téléchargement des documents / créations des bases de données / blast locaux
+#le flag --nostart : permet de passer outre l'étape de téléchargement des documents / créations des bases de données / blast locaux
 
 #si le premier argument est --nostart, n'importe pas les documents
 while [ ! $# -eq 0 ];do
@@ -19,13 +18,12 @@ while [ ! $# -eq 0 ];do
 	shift
 done
 
-#########
-#
-#	Pour l'identification des orthologues & des gènes du core génome, nous avons utilisé les fichiers de sortie de blast fournis
-#	Nous avons néanmoins réalisé l'étape de téléchargement et d'alignement
-#	Ces étapes prennent beaucoup de temps, elles peuvent être évitées avec le flag --nostart pour démarrer l'analyse directement
-#
-#########
+echo -e "Pour l'identification des orthologues & des gènes du core génome, nous avons utilisé les fichiers de sortie de blast fournis"
+echo -e "Les fichiers sont téléchargeables à l'adresse suivante : blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8"
+echo -e "Il faut les décompresser à la main."
+echo -e "Nous avons néanmoins réalisé l'étape de téléchargement et d'alignement"
+echo -e "Ces étapes prennent beaucoup de temps, elles peuvent être évitées avec le flag --nostart pour démarrer l'analyse directement"
+
 if [ $starting = 'TRUE' ];then
 
 	#fichier contenant les multifastas de chaque gène
@@ -42,13 +40,12 @@ if [ $starting = 'TRUE' ];then
 	for A in prot/*.fa;do
 		./ncbi-blast-2.11.0+/bin/makeblastdb -in $A -dbtype prot -out $A
 	done
-
-
+	
 	#------------------------------------------
 	# Réalisation des 21*21 blasts
 	#------------------------------------------
 
-	mkdir -p blast_outputs
+	mkdir -p blast_outputs # repertoire de sauvegarde des alignements
 
 	clear
 	echo RUNNING NOW THE ALIGNEMENT'\n\n'
@@ -65,18 +62,6 @@ if [ $starting = 'TRUE' ];then
 		done
 	done
 fi
-
-
-
-#------------------------------------------
-# OU BIEN : Récupération des alignements déjà faits
-#------------------------------------------
-
-#Sorties de blasts fournies
-# wget -O blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8
-# à extraire à la main.....
-#	tar -xzvf blast_outputs.tar.gz
-
 
 #------------------------------------------
 # Traitement des données
