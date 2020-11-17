@@ -35,7 +35,7 @@ with open(genomic_table) as gt:
 dict = {}
 
 #Fichier de sortie
-os.system("rm "+outputname)
+os.system("rm -f"+outputname)
 
 with open(outputname, 'a') as po:
 	for i in lines:
