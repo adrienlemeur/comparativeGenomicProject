@@ -46,12 +46,27 @@ with open(outputname, 'a') as po:
 		# Soit on ajoute i[0] dans le dictionnaire parce qu'il n'y est pas
 		# Soit i[0] est dans le dictionnaire mais le genome sur lequel il est aligné n'a pas été déjà comparé à lui, on ajoute la ligne
 		
-		if i[0] not in dict or ((i[0] in dict) and (dict[i[0]][0].split("_")[0] != i[1].split("_")[0])):
+		# On veut le best hits de Eco1_1 dans les 21 génomes
+		# Eco1_2 Eco4_yyy
+		# Eco1_1 Eco1_1
+		# Eco1_1 Eco1_2
+		# Eco1_1 Eco1_3
+		# Eco1_1 Eco2_xxx
+		# Eco1_1 Eco3_xxx
+		# Eco1_1 Eco4_xxx
+				
+		genomeB = i[1].split("_")[0]
+		genomeA_gene_genomeB = i[0] + genomeB		
+		
+		if genomeA_gene_genomeB not in dict :
+		#if i[0] not in dict or ((i[0] in dict) and (dict[i[0]][0].split("_")[0] != i[1].split("_")[0])):
 			# permet de sélectionner la première ligne de chaque query (best hit)
 			# Chaque clef correspond à une query, chaque valeur correspond à un best-hit
 			# Chaque ligne correspond à un tuple [query, best hit, identity, coverage, e-value]
 			# Création d'une nouvelle entrée dans le dictionnaire, avec la query comme clef et les quatre autres données comme value
-			dict[i[0]] = [i[1], float(i[2]), float(i[3]), -float(i[11])]
+			genomeB = i[1].split("_")[0]
+			genomeA_gene_genomeB = i[0] + genomeB
+			dict[genomeA_gene_genomeB] = [i[0], i[1], float(i[2]), float(i[3]), -float(i[11])]
 
 			# Si i[1] est une clef du dictionnaire (c'est à dire qu'on a déjà rencontré notre best-hit avant)
 			if i[1] in dict:
