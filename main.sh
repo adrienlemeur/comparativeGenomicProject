@@ -86,7 +86,7 @@ echo -e "\t ------------------------------------------ \n"
 identity= "50"
 coverage= "50"
 evalue= "10"
-echo -e "Critère de sélection (seuils) : identité = ${identity}, couverture = ${coverage} et evalue = ${evalue}"
+echo -e "Critère de sélection (seuils) : identité = "${identity}", couverture = "${coverage}" et evalue = "${evalue}
 
 python supairFinder.py -i "reciprocity/best_hits_list.txt" \
 			-o "reciprocity/reciprocity_list.txt" \
