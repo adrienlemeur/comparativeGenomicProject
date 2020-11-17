@@ -89,7 +89,7 @@ fi
 # Répertoire de sortie de réciprocité
 mkdir -p reciprocity
 
-cat blast_outputs/*.bl.list | grep "^[^#;]" > "blast_outputs/ortholog_results.txt"
+cat blast_outputs/*.bl | grep "^[^#;]" > "blast_outputs/ortholog_results.txt"
 echo "cat done"
 #Fichier de sortie : Table d'orthologue, chaque ligne correspond à une paire de gènes orthologues
 
