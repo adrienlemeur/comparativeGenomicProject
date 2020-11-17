@@ -38,8 +38,7 @@ os.system("rm "+outputname)
 
 with open(outputname, 'a') as po:
 	for i in lines:
-		if(line[0] != "#"):
-
+		if i[0] not in dict : #permet de sélectionner la première ligne de chaque query (best hit)
 			#Chaque clef correspond à une query, chaque valeur correspond à un best-hit
 			#Chaque ligne correspond à un tuple [query, best hit]
 
@@ -57,5 +56,4 @@ with open(outputname, 'a') as po:
 						po.write(i[0]+"\t"+i[1]+"\n")
 			
 			#Création d'une nouvelle entré dans le dictionnaire, avec la query comme clef et le best-hit comme value
-			if i[0] not in dict : #permet de sélectionner la première ligne de chaque query (best hit)
 				dict[i[0]] = [i[1], i[2], i[3], -i[9]]
