@@ -8,7 +8,6 @@
 starting='TRUE'
 
 #le flag -- nostart : permet de passer outre l'étape de téléchargement des documents / créations des bases de données / blast locaux
-
 #si le premier argument est --nostart, n'importe pas les documents
 while [ ! $# -eq 0 ];do
 	case "$1" in
@@ -26,6 +25,7 @@ done
 #	Ces étapes prennent beaucoup de temps, elles peuvent être évitées avec le flag --nostart pour démarrer l'analyse directement
 #
 #########
+
 if [ $starting = 'TRUE' ];then
 
 	#fichier contenant les multifastas de chaque gène
@@ -66,8 +66,6 @@ if [ $starting = 'TRUE' ];then
 	done
 fi
 
-
-
 #------------------------------------------
 # OU BIEN : Récupération des alignements déjà faits
 #------------------------------------------
@@ -75,8 +73,7 @@ fi
 #Sorties de blasts fournies
 wget -O blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8
 # à extraire à la main.....
-#	tar -xzvf blast_outputs.tar.gz
-
+# tar -xzvf blast_outputs.tar.gz
 
 #------------------------------------------
 # Traitement des données
