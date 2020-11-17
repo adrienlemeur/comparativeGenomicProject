@@ -72,8 +72,7 @@ b=0 # on en aura besoin pour la comparaison des tailles de fichier avec 0
 mkdir -p reciprocity # Répertoire avec tous les résultats
 cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
 
-nbligne= cat reciprocity/best_hits_list.txt | wc -l
-if [ "$nbligne" > "$b" ];then
+if [ test -s reciprocity/best_hits_list.txt ];then
     echo "cat done"
 else
     echo "Il y a eu un problème lors de la concaténation. Le fichier ortholog_results.txt est vide ou n'existe pas."
@@ -93,8 +92,8 @@ python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
 			--seuil_coverage 70 \
 			--seuil_evalue 10^-10
 
-nbligne= cat reciprocity/reciprocity_list.txt | wc -l
-if [ "$nbligne" > "$b" ];then
+
+if [ test -s reciprocity/reciprocity_list.txt];then
     echo "ortholog search done"
 else
     echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
@@ -112,8 +111,8 @@ mkdir -p cliques # Répertoire de sortie de cliqueSearch
 # python et pas python3 car networkx n'est pas dans python3
 python cliqueSearch.py -i "reciprocity/reciprocity_list.txt" -o "cliques/cliques_max.txt" "cliques/cliques_pas_max.txt"
 
-nbligne= cat cliques/cliques_max.txt | wc -l
-if [ "$nbligne" > "$b" ];then
+
+if [ test -s cliques/cliques_max.txt ];then
     echo "clique search done"
 else
     echo "Il y a eu un problème lors de la détermination des cliques. Le fichier cliques_max.txt est vide ou n'existe pas."
