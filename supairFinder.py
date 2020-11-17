@@ -34,6 +34,7 @@ with open(genomic_table) as gt:
 
 dict = {}
 print(outputname)
+print("hello")
 #Fichier de sortie
 os.system("rm -f "+outputname)
 
