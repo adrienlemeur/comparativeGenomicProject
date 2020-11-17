@@ -63,9 +63,9 @@ if [ $starting = 'TRUE' ];then
 	done
 fi
 
-#------------------------------------------
-# Première étape : Parsing des données et concaténation
-#------------------------------------------
+echo -e "------------------------------------------"
+echo -e "Première étape : Parsing des données et concaténation"
+echo -e "------------------------------------------"
 
 # Entrée : résultats d'alignement de tous les génomes deux à deux : 21 génomes donc 441 fichiers
 mkdir -p reciprocity # Répertoire avec tous les résultats
@@ -79,9 +79,9 @@ else
 fi
 # Sortie : table d'orthologue, chaque ligne correspond à une paire de gènes orthologues
 
-#------------------------------------------
-# Deuxième étape : Détermination des best hits réciproques
-#------------------------------------------
+echo -e "------------------------------------------"
+echo -e "Détermination des best hits réciproques"
+echo -e "------------------------------------------"
 
 #supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
 # Entrée : sortie du précédent
@@ -99,9 +99,9 @@ else
     echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
 fi
 
-#------------------------------------------
-# Troisième étape : Détermination des best hits réciproques
-#------------------------------------------
+echo -e "------------------------------------------"
+echo -e "Troisième étape : Détermination des best hits réciproques"
+echo -e "------------------------------------------"
 
 mkdir -p cliques # Répertoire de sortie de cliqueSearch
 
