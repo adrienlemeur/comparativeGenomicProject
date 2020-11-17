@@ -89,25 +89,11 @@ wget -O blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8
 # Répertoire de sortie de réciprocité
 mkdir -p reciprocity
 
-while read A; do
-	while read B; do
+cat blast_outputs/*.bl.list | grep "^[^#;]" > "blast_outputs/ortholog_results.txt"
+echo "cat done"
+#Fichier de sortie : Table d'orthologue, chaque ligne correspond à une paire de gènes orthologues
 
-		#reconstruction des noms de fichiers contenant les alignements (dans Blast_output)
-		file1=$A"-vs-"$B".bl" # Blast des gènes de A sur B
-		file2=$B"-vs-"$A".bl" # Blast des gènes de B sur A
+#supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
+python3 supairFinder_old.py -i "blast_outputs/ortholog_results.txt" -o reciprocity/the_big_ortholog_list.txt
 
-		####### OPTIMISABLE #######
-
-		#grep : concatène les deux fichiers et ne garde que les lignes qui ne commencent pas par #
-		cat blast_outputs/$file1 blast_outputs/$file2 | grep "^[^#;]" > "blast_outputs/"$A"_against_"$B".bl.list"
-
-		#Fichier de sortie : Table d'orthologue, chaque ligne correspond à une paire de gènes orthologues
-
-		#supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
-		python3 supairFinder_old.py -i "blast_outputs/"$A"_against_"$B".bl.list" -o reciprocity/$file1
-
-	done < strain_names.txt
-done < strain_names.txt
-
-#Recherche de clique 
-#python cliqueSearch.py  
+echo "ortholog search done"
