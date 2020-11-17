@@ -104,7 +104,7 @@ while read A; do
 		#Fichier de sortie : Table d'orthologue, chaque ligne correspond à une paire de gènes orthologues
 
 		#supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
-		python3 supairFinder_old.py -i "blast_outputs/"$A"_against_"$B".bl.list" -o reciprocity/$file1
+		python3 supairFinder.py -i "blast_outputs/"$A"_against_"$B".bl.list" -o reciprocity/$file1 --seuil_identite 70 --seuil_coverage 80 --seuil_evalue 5
 
 	done < strain_names.txt
 done < strain_names.txt
