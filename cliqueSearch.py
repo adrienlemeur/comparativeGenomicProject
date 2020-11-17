@@ -1,5 +1,5 @@
 import networkx as nx #import de la librairie networkx pour l'utilisation de la fonction find_cliques()
-import sys
+import sys,os
 
 #Input
 try :
