@@ -73,7 +73,7 @@ fi
 #------------------------------------------
 
 #Sorties de blasts fournies
-wget -O blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8
+# wget -O blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8
 # à extraire à la main.....
 #	tar -xzvf blast_outputs.tar.gz
 
