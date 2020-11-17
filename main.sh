@@ -66,13 +66,14 @@ fi
 echo -e "\n \t ------------------------------------------"
 echo -e "\t Première étape : Parsing des données et concaténation"
 echo -e "\t ------------------------------------------ \n"
+b=0 # on en aura besoin pour la comparaison des tailles de fichier avec 0
 
 # Entrée : résultats d'alignement de tous les génomes deux à deux : 21 génomes donc 441 fichiers
 mkdir -p reciprocity # Répertoire avec tous les résultats
 cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
 
 nbligne= sudo cat reciprocity/best_hits_list.txt | wc -l
-if [ $nbligne > "0" ];then
+if [ "$nbligne" > "$b" ];then
     echo "cat done"
 else
     echo "Il y a eu un problème lors de la concaténation. Le fichier ortholog_results.txt est vide ou n'existe pas."
@@ -93,7 +94,7 @@ python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
 			--seuil_evalue 10^-10
 
 nbligne= sudo cat reciprocity/reciprocity_list.txt | wc -l
-if [ $nbligne > "0" ];then
+if [ "$nbligne" > "$b" ];then
     echo "ortholog search done"
 else
     echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
@@ -112,7 +113,7 @@ mkdir -p cliques # Répertoire de sortie de cliqueSearch
 python cliqueSearch.py -i "reciprocity/reciprocity_list.txt" -o "cliques/cliques_max.txt" "cliques/cliques_pas_max.txt"
 
 nbligne= sudo cat cliques/cliques_max.txt | wc -l
-if [ $nbligne > "0" ];then
+if [ "$nbligne" > "$b" ];then
     echo "clique search done"
 else
     echo "Il y a eu un problème lors de la détermination des cliques. Le fichier cliques_max.txt est vide ou n'existe pas."
