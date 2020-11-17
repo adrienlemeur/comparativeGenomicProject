@@ -97,7 +97,7 @@ echo "cat done"
 python3 supairFinder.py -i "blast_outputs/ortholog_results.txt" \
 			-o reciprocity/the_big_ortholog_list.txt \
 			--seuil_identite 80 \
-			--seuil_identite 70 \
+			--seuil_coverage 70 \
 			--seuil_evalue 3
 
 echo "ortholog search done"
