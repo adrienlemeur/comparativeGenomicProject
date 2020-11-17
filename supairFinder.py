@@ -43,6 +43,7 @@ with open(outputname, 'a') as po:
 			#Chaque clef correspond à une query, chaque valeur correspond à un best-hit
 			#Chaque ligne correspond à un tuple [query, best hit, identity, coverage, e-value]
 			#Création d'une nouvelle entré dans le dictionnaire, avec la query comme clef et les quatre autres données comme value
+			print(i[2], i[3], i[9])
 			dict[i[0]] = [i[1], float(i[2]), float(i[3]), -float(i[9])]
 
 			#Si i[1] est une clef du dictionnaire (c'est à dire qu'on a déjà rencontré notre best-hit avant)
