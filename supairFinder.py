@@ -12,9 +12,9 @@ import sys, os
 
 try:
 	genomic_table = sys.argv[sys.argv.index("-i")+1]
-	seuil_id = sys.argv[sys.argv.index("--seuil_identite")+1]
-	seuil_cov = sys.argv[sys.argv.index("--seuil_coverage")+1]
-	seuil_eval = sys.argv[sys.argv.index("--seuil_evalue")+1]
+	seuil_id = int(sys.argv[sys.argv.index("--seuil_identite")+1])
+	seuil_cov = int(sys.argv[sys.argv.index("--seuil_coverage")+1])
+	seuil_eval = int(sys.argv[sys.argv.index("--seuil_evalue")+1])
 except :
 	sys.exit()
 
