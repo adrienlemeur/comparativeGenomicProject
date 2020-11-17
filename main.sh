@@ -72,7 +72,7 @@ fi
 mkdir -p reciprocity # Répertoire avec tous les résultats
 cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
 
-nbligne = cat cliques/best_hits_list.txt | wc -l
+nbligne = cat reciprocity/best_hits_list.txt | wc -l
 if [ $nbligne > 0 ];then
     echo "cat done"
 else
@@ -90,7 +90,7 @@ python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
 			--seuil_coverage 70 \
 			--seuil_evalue 10^-10
 
-nbligne = cat cliques/reciprocity_list.txt | wc -l
+nbligne = cat reciprocity/reciprocity_list.txt | wc -l
 if [ $nbligne > 0 ];then
     echo "ortholog search done"
 else
