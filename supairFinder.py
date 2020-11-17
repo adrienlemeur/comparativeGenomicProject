@@ -55,8 +55,12 @@ with open(outputname, 'a') as po:
 		# Eco1_1 Eco3_xxx
 		# Eco1_1 Eco4_xxx
 				
-		genomeB = i[1].split("_")[0]
-		genomeA_gene_genomeB = i[0] + genomeB		
+		genomeB = i[1].split("_")[0] # Eco4
+		genomeA_gene_genomeB = i[0] + "_" + genomeB # Eco1_2_Eco4
+		# On veut que tous les gènes de chaque génome aient au plus un best hit dans chaque autre génome
+		# Donc genomeA_genedansA_genomeB doit apparaître une seule fois dans le dictionnaire (clé)
+		# La valeur associée à la clé est : genomeA_genedansA   genomeB_genedansB    identite    couverture    evalue
+		# Eco1_2_Eco4 -> Eco1_2 Eco4_yyy ident cov evalue
 		
 		if genomeA_gene_genomeB not in dict :
 		#if i[0] not in dict or ((i[0] in dict) and (dict[i[0]][0].split("_")[0] != i[1].split("_")[0])):
@@ -64,17 +68,20 @@ with open(outputname, 'a') as po:
 			# Chaque clef correspond à une query, chaque valeur correspond à un best-hit
 			# Chaque ligne correspond à un tuple [query, best hit, identity, coverage, e-value]
 			# Création d'une nouvelle entrée dans le dictionnaire, avec la query comme clef et les quatre autres données comme value
-			genomeB = i[1].split("_")[0]
-			genomeA_gene_genomeB = i[0] + genomeB
 			dict[genomeA_gene_genomeB] = [i[0], i[1], float(i[2]), float(i[3]), -float(i[11])]
 
 			# Si i[1] est une clef du dictionnaire (c'est à dire qu'on a déjà rencontré notre best-hit avant)
-			if i[1] in dict:
+			# genomeA_gene_genomeB est une clé du dictionnaire
+			# est-ce que genomeB_genedansB_genomeA a deja ete ajoute dans le dictionnaire ?
+			genomeA = i[0].split("_")[0] # Eco1
+			genomeB_gene_genomeA = i[1] + "_" + genomeA # Eco4_yyy_Eco1
+			
+			if genomeB_gene_genomeA in dict:
 				# Si la valeur du best-hit de notre best hit est égal à celle de notre query, les deux gènes sont réciproques
-				if i[0] == dict[i[1]][0] : # and (i[0] != i[1]):
+				if dict[genomeB_gene_genomeA][0] = dict[genomeA_gene_genomeB][1] :
 					# vérification des seuils du couple
-					membre1 = dict[i[1]][1:3] # liste avec le % d'identite, la couverture et - la e-value
-					membre2 = dict[i[0]][1:3]
+					membre1 = dict[genomeA_gene_genomeB][2:4] # liste avec le % d'identite, la couverture et - la e-value
+					membre2 = dict[genomeB_gene_genomeA][2:4]
 					# on teste tous les seuils : membrex > seuils est une liste de trois booléens
 					# pour que les trois seuils soient validés, il faut que la comparaison donne TRUE
 					if (membre1 > seuils) and (membre2 > seuils) :
