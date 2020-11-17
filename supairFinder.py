@@ -68,7 +68,7 @@ with open(outputname, 'a') as po:
 			# Chaque clef correspond à une query, chaque valeur correspond à un best-hit
 			# Chaque ligne correspond à un tuple [query, best hit, identity, coverage, e-value]
 			# Création d'une nouvelle entrée dans le dictionnaire, avec la query comme clef et les quatre autres données comme value
-			dict[genomeA_gene_genomeB] = [i[0], i[1], float(i[2]), float(i[3]), -float(i[11])]
+			dict[genomeA_gene_genomeB] = [i[0], i[1], float(i[2]), float(i[3]), -float(i[4])]
 
 			# Si i[1] est une clef du dictionnaire (c'est à dire qu'on a déjà rencontré notre best-hit avant)
 			# genomeA_gene_genomeB est une clé du dictionnaire
