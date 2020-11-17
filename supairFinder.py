@@ -33,8 +33,7 @@ with open(genomic_table) as gt:
 	lines = gt.readlines()
 
 dict = {}
-print(outputname)
-print("hello")
+
 #Fichier de sortie
 os.system("rm -f "+outputname)
 
