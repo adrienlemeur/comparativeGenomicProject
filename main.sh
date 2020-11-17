@@ -96,8 +96,8 @@ echo "cat done"
 #supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
 python3 supairFinder.py -i "blast_outputs/ortholog_results.txt" \
 			-o reciprocity/the_big_ortholog_list.txt \
-			--seuil_identite 20 \
-			--seuil_coverage 20 \
-			--seuil_evalue 200
+			--seuil_identite 60 \
+			--seuil_coverage 70 \
+			--seuil_evalue 10^-10
 
 echo "ortholog search done"
