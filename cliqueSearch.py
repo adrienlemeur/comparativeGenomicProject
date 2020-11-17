@@ -28,8 +28,7 @@ G = nx.read_edgelist(filename,delimiter='	') # les genes stockes dans le fichier
 #La fonction read_edgelist va donc permettre de lire la liste des aretes pour permettre a la fonction qui suit de trouver les cliques maximales
 
 for clq in nx.clique.find_cliques(G): #la fonction find_cliques permet de renvoyer toutes les cliques maximales dans un graphe non oriente G
-	print(len(clq))
-	if len(clq) < 21: #si la clique ne fait pas intervenir tous les genomes, on les stocke dans un fichier a part (cliques_pas_max)
+	if (len(clq) > 1 and len(clq) < 21) : #si la clique ne fait pas intervenir tous les genomes, on les stocke dans un fichier a part (cliques_pas_max)
 		for clq_item in clq:
 			f2.write(clq_item.decode("utf-8"))#pour encoder en utf8
 			f2.write("\t")
