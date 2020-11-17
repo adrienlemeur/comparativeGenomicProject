@@ -8,6 +8,7 @@
 starting='TRUE'
 
 #le flag -- nostart : permet de passer outre l'étape de téléchargement des documents / créations des bases de données / blast locaux
+
 #si le premier argument est --nostart, n'importe pas les documents
 while [ ! $# -eq 0 ];do
 	case "$1" in
@@ -25,7 +26,6 @@ done
 #	Ces étapes prennent beaucoup de temps, elles peuvent être évitées avec le flag --nostart pour démarrer l'analyse directement
 #
 #########
-
 if [ $starting = 'TRUE' ];then
 
 	#fichier contenant les multifastas de chaque gène
@@ -66,6 +66,8 @@ if [ $starting = 'TRUE' ];then
 	done
 fi
 
+
+
 #------------------------------------------
 # OU BIEN : Récupération des alignements déjà faits
 #------------------------------------------
@@ -73,7 +75,8 @@ fi
 #Sorties de blasts fournies
 wget -O blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8
 # à extraire à la main.....
-# tar -xzvf blast_outputs.tar.gz
+#	tar -xzvf blast_outputs.tar.gz
+
 
 #------------------------------------------
 # Traitement des données
@@ -101,7 +104,10 @@ while read A; do
 		#Fichier de sortie : Table d'orthologue, chaque ligne correspond à une paire de gènes orthologues
 
 		#supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
-		python3 supairFinder.py -i "blast_outputs/"$A"_against_"$B".bl.list" -o reciprocity/$file1 --seuil_identite 70 --seuil_coverage 80 --seuil_evalue 5
+		python3 supairFinder_old.py -i "blast_outputs/"$A"_against_"$B".bl.list" -o reciprocity/$file1
 
 	done < strain_names.txt
 done < strain_names.txt
+
+#Recherche de clique 
+#python cliqueSearch.py  
