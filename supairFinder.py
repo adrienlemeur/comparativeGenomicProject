@@ -71,8 +71,7 @@ with open(outputname, 'a') as po:
 			# Chaque ligne correspond à un tuple [query, best hit, identity, coverage, e-value]
 			# Création d'une nouvelle entrée dans le dictionnaire, avec la query comme clef et les quatre autres données comme value
 			dict[genomeA_gene_genomeB] = [i[0], i[1], float(i[2]), float(i[3]), -float(i[4])]
-			print([i[0], i[1], float(i[2]), float(i[3]), -float(i[4])])
-
+			
 			# Si i[1] est une clef du dictionnaire (c'est à dire qu'on a déjà rencontré notre best-hit avant)
 			# genomeA_gene_genomeB est une clé du dictionnaire
 			# est-ce que genomeB_genedansB_genomeA a deja ete ajoute dans le dictionnaire ?
@@ -87,6 +86,10 @@ with open(outputname, 'a') as po:
 					membre2 = dict[genomeB_gene_genomeA][2:4+1]
 					# on teste tous les seuils : membrex > seuils est une liste de trois booléens
 					# pour que les trois seuils soient validés, il faut que la comparaison donne TRUE
+					print('suivant')
+					print(membre1)
+					print(membre2)
+					print(seuils)
 					if (membre1 > seuils) and (membre2 > seuils) :
 						#on écrit le couple de gènes query / best-hit à la suite de notre doc résultat
 						po.write(i[0]+"\t"+i[1]+"\n")
