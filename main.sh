@@ -31,11 +31,8 @@ while [ ! $# -eq 0 ];do
 			evalue=$7
 			;;
 	esac
-	shift
-				
+	shift			
 done
-
-echo $coverage $identity $evalue
 
 echo -e "Pour l'identification des orthologues & des gènes du core génome, nous avons utilisé les fichiers de sortie de blast fournis"
 echo -e "Les fichiers sont téléchargeables à l'adresse suivante : blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8"
@@ -130,3 +127,4 @@ python3 cliqueSearch.py -i "reciprocity/reciprocity_list.txt" -o "cliques/clique
 core_genome_size=$(cat cliques/cliques_max.txt | wc -l)
 test -s cliques/cliques_pas_max.txt || echo "Il y a eu un problème lors de la détermination des cliques. Le fichier cliques_pas_max.txt est vide ou n'existe pas."
 echo "Le nombre de cliques maximales et donc d'éléments dans le core génome est de : "${core_genome_size}"."
+echo "Paramètres (identity, coverage, evalue) :"$identity $coverage $evalue
