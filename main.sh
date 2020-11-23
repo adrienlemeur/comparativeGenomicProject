@@ -34,6 +34,8 @@ while [ ! $# -eq 0 ];do
 				
 done
 
+echo $coverage $identity $evalue
+
 echo -e "Pour l'identification des orthologues & des gènes du core génome, nous avons utilisé les fichiers de sortie de blast fournis"
 echo -e "Les fichiers sont téléchargeables à l'adresse suivante : blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8"
 echo -e "Il faut les décompresser à la main."
