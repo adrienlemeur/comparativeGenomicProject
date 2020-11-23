@@ -38,8 +38,7 @@ done
 
 echo -e "Pour l'identification des orthologues & des gènes du core génome, nous avons utilisé les fichiers de sortie de blast fournis"
 echo -e "Les fichiers sont téléchargeables à l'adresse suivante : blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8"
-echo -e "Il faut les décompresser à la main."
-echo -e "Nous avons néanmoins réalisé l'étape de téléchargement et d'alignement"
+echo -e "Il faut les décompresser à la main. Nous avons néanmoins réalisé l'étape de téléchargement et d'alignement"
 echo -e "Ces étapes prennent beaucoup de temps, elles peuvent être évitées avec le flag --nostart pour démarrer l'analyse directement"
 
 if [ $starting = 'TRUE' ];then
