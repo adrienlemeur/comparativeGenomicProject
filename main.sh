@@ -84,7 +84,6 @@ echo -e "\t ------------------------------------------ \n"
 #supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
 # Entrée : sortie du précédent
 # Sortie : liste des best hits réciproques
-
 identity=50
 coverage=50
 evalue=10
@@ -115,4 +114,4 @@ python3 cliqueSearch.py -i "reciprocity/reciprocity_list.txt" -o "cliques/clique
 
 nb=$(cat cliques/cliques_max.txt | wc -l)
 test -s cliques/cliques_pas_max.txt || echo "Il y a eu un problème lors de la détermination des cliques. Le fichier cliques_pas_max.txt est vide ou n'existe pas."
-echo "Le nombre de cliques maximales et donc d'éléments dans le core génome est de : " ${a}
+echo "Le nombre de cliques maximales et donc d'éléments dans le core génome est de : "${a}
