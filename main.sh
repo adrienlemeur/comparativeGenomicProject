@@ -17,8 +17,21 @@ while [ ! $# -eq 0 ];do
 	esac
 	shift
 	case "$2" in
-		--identity)	
-			
+		--identity)
+			identity = $3
+			;;
+	esac
+	case "$4" in
+		--coverage 
+			coverage = $5
+			;;
+	esac
+	case "$6" in
+		--e-value
+			e-value = $7
+			;;
+	esac
+				
 done
 
 echo -e "Pour l'identification des orthologues & des gènes du core génome, nous avons utilisé les fichiers de sortie de blast fournis"
