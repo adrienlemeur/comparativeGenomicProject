@@ -18,17 +18,17 @@ while [ ! $# -eq 0 ];do
 	shift
 	case "$2" in
 		--identity)
-			identity = $3
+			identity=$3
 			;;
 	esac
 	case "$4" in
-		--coverage 
-			coverage = $5
+		--coverage)
+			coverage=$5
 			;;
 	esac
 	case "$6" in
-		--e-value
-			e-value = $7
+		--e-value)
+			evalue=$7
 			;;
 	esac
 				
