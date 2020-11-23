@@ -113,6 +113,6 @@ mkdir -p cliques # Répertoire de sortie de cliqueSearch
 
 python3 cliqueSearch.py -i "reciprocity/reciprocity_list.txt" -o "cliques/cliques_max.txt" "cliques/cliques_pas_max.txt"
 
+nb=$(cat cliques/cliques_max.txt | wc -l)
 test -s cliques/cliques_pas_max.txt || echo "Il y a eu un problème lors de la détermination des cliques. Le fichier cliques_pas_max.txt est vide ou n'existe pas."
-echo "Le nombre de cliques maximales et donc d'éléments dans le core génome est de : "
-wc -l cliques/cliques_max.txt
+echo "Le nombre de cliques maximales et donc d'éléments dans le core génome est de : " ${a}
