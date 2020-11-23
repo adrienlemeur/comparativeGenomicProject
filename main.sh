@@ -16,6 +16,9 @@ while [ ! $# -eq 0 ];do
 			;;
 	esac
 	shift
+	case "$2" in
+		--identity)	
+			
 done
 
 echo -e "Pour l'identification des orthologues & des gènes du core génome, nous avons utilisé les fichiers de sortie de blast fournis"
