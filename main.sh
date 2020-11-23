@@ -31,6 +31,7 @@ while [ ! $# -eq 0 ];do
 			evalue=$7
 			;;
 	esac
+	shift
 				
 done
 
