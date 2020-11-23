@@ -82,8 +82,8 @@ with open(outputname, 'a') as po:
 				# Si la valeur du best-hit de notre best hit est égal à celle de notre query, les deux gènes sont réciproques
 				if dict[genomeB_gene_genomeA][0] == dict[genomeA_gene_genomeB][1] :
 					# vérification des seuils du couple
-					membre1 = dict[genomeA_gene_genomeB][2:4] # liste avec le % d'identite, la couverture et - la e-value
-					membre2 = dict[genomeB_gene_genomeA][2:4]
+					membre1 = dict[genomeA_gene_genomeB][2:4+1] # liste avec le % d'identite, la couverture et - la e-value
+					membre2 = dict[genomeB_gene_genomeA][2:4+1]
 					# on teste tous les seuils : membrex > seuils est une liste de trois booléens
 					# pour que les trois seuils soient validés, il faut que la comparaison donne TRUE
 					if (membre1 > seuils) and (membre2 > seuils) :
