@@ -88,6 +88,7 @@ with open(outputname, 'a') as po:
 					print(genomeA_gene_genomeB, genomeB_gene_genomeA)
 					print(membre1, membre2)
 					if (membre1 > seuils) and (membre2 > seuils) :
+						print('enregistrement')
 						#on écrit le couple de gènes query / best-hit à la suite de notre doc résultat
 						po.write(i[0]+"\t"+i[1]+"\n")
 						
