@@ -34,6 +34,8 @@ while [ ! $# -eq 0 ];do
 	shift			
 done
 
+#################### Ajouter les messages d'erreur si on n'a pas mis bash main.sh --nostart --identity 80 --coverage 50 --evalue 10
+
 echo -e "Pour l'identification des orthologues & des gènes du core génome, nous avons utilisé les fichiers de sortie de blast fournis"
 echo -e "Les fichiers sont téléchargeables à l'adresse suivante : blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8"
 echo -e "Il faut les décompresser à la main."
@@ -93,6 +95,8 @@ cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_h
 
 test -s reciprocity/best_hits_list.txt || echo "Il y a eu un problème lors de la concaténation. Le fichier best_hits_list.txt est vide ou n'existe pas."
 
+################## Ajouter qu'on ne fait pas la première étape si la sortie existe déjà : plus besoin de la commenter
+
 COMMENT
 
 echo -e "\n \t ------------------------------------------"
@@ -102,8 +106,8 @@ echo -e "\t ------------------------------------------ \n"
 #supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
 # Entrée : sortie du précédent
 # Sortie : liste des best hits réciproques
-echo -e "Critère de sélection (seuils) : identité = "${identity}", couverture = "${coverage}" et evalue = "${evalue}
 
+echo -e "En cours..."
 python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
 			-o "reciprocity/reciprocity_list.txt" \
 			--seuil_identite ${identity} \
@@ -111,6 +115,7 @@ python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
 			--seuil_evalue ${evalue}
 
 test -s reciprocity/reciprocity_list.txt || echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
+echo -e "Fini !" ############################# Dire que c'est fini quand le fichier existe
 
 echo -e "\n \t -----------------------------------------------------------"
 echo -e "\t Troisième étape : Recherche de cliques"
