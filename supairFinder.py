@@ -80,7 +80,7 @@ with open(outputname, 'a') as po:
 			
 			if genomeB_gene_genomeA in dict:
 				# Si la valeur du best-hit de notre best hit est égal à celle de notre query, les deux gènes sont réciproques
-				print(genomeB_gene_genomeA) ; print(genomeA_gene_genomeB)
+				print(genomeB_gene_genomeA,genomeA_gene_genomeB)
 				if dict[genomeB_gene_genomeA][0] == dict[genomeA_gene_genomeB][1] :
 					# vérification des seuils du couple
 					membre1 = dict[genomeA_gene_genomeB][2:4+1] # liste avec le % d'identite, la couverture et - la e-value
