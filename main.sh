@@ -15,7 +15,7 @@ while [ ! $# -eq 0 ];do
 			starting='FALSE'
 			;;
 	esac
-	shift
+	#shift
 	case "$2" in
 		--identity)
 			identity=$3
