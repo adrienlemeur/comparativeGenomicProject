@@ -27,7 +27,7 @@ while [ ! $# -eq 0 ];do
 			;;
 	esac
 	case "$6" in
-		--e-value)
+		--evalue)
 			evalue=$7
 			;;
 	esac
