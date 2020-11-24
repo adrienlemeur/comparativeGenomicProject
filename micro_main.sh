@@ -4,6 +4,7 @@
 # Avec cette méthode, il faut écrire, par exemple : sh micro_main.sh -d -i 60 -c 70 -e 10e-250
 
 starting='TRUE'
+flag_seuil=0;
 while getopts "dc:e:i:" option;do # id cov eval
   case $option in
     d)
@@ -11,15 +12,26 @@ while getopts "dc:e:i:" option;do # id cov eval
       ;;
     c)
       coverage=$OPTARG
+      flag_seuil=$(($flag_seuil+1))
       ;;
     e)
       evalue=$OPTARG
+      flag_seuil=$(($flag_seuil+1))
       ;;
     i)
       identity=$OPTARG
+      flag_seuil=$(($flag_seuil+1))
       ;;
   esac
 done
+
+#---------------------------------------------- Bon renseignement des valeurs
+
+if [ $flag_seuil -ne 0 ];then
+  echo "Il manque des paramètres : veuillez renseigner la couverture avec -c, la evalue avec -e et l'identité avec -i."
+  exit  # on sort du fichier : on ne fait rien
+fi
+
 
 #---------------------------------------------- Fonction pour faire l'alignement
 
