@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#---------------------------------------------- Récupération des valeurs d'option
+
 while test $# -gt 0; do
 	case "$1" in
 		-id)
@@ -31,6 +33,31 @@ while test $# -gt 0; do
 		;;
 	esac
 done
+
+#---------------------------------------------- Fonction pour faire l'alignement
+
+make_blast() {
+
+}
+
+if [ $starting = 'TRUE' ];then
+  make_blast()
+fi 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
