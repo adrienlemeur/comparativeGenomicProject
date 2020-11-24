@@ -32,9 +32,10 @@ G = nx.read_edgelist(filename,delimiter='	') # les genes stockes dans le fichier
 for clq in nx.clique.find_cliques(G): #la fonction find_cliques permet de renvoyer toutes les cliques maximales dans un graphe non oriente G
 	fclique.write(str(len(clq)))#stocker la longueur des cliques
 	fclique.write("\t")	
-	for clq_item in clq:
-		fclique.write(clq_item.decode("utf-8"))
-		fclique.write("\t")
+	#for clq_item in clq:
+		#fclique.write(clq_item.decode("utf-8"))
+	fclique.write(clq)
+	fclique.write("\t")
 	fclique.write("\n")	
 fclique.close()
 
