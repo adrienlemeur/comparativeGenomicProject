@@ -9,29 +9,38 @@ starting='TRUE'
 #le flag --nostart : permet de passer outre l'étape de téléchargement des documents / créations des bases de données / blast locaux
 
 #si le premier argument est --nostart, n'importe pas les documents
-while [ ! $# -eq 0 ];do
+while test $# -gt 0; do
 	case "$1" in
-		--nostart)
-			starting='FALSE'
-			;;
-	esac
-	#shift
-	case "$2" in
 		-id)
-			identity=$3
-			;;
-	esac
-	case "$4" in
+			shift
+			identity=$1
+			shift
+		;;
+
 		-cov)
-			coverage=$5
-			;;
-	esac
-	case "$6" in
+			shift
+			coverage=$1
+			shift
+		;;
+		
 		-eval)
-			evalue=$7
-			;;
+			shift
+			evalue=$1
+			shift
+		;;
+
+		--nostart)
+			shift
+			starting='FALSE'
+			shift
+		;;
+
+
+		*)
+			echo "$1 is not a recognized flag!"
+			return 1;
+		;;
 	esac
-	shift			
 done
 
 #################### Ajouter les messages d'erreur si on n'a pas mis bash main.sh --nostart --identity 80 --coverage 50 --evalue 10
@@ -42,7 +51,6 @@ if [ $starting = 'TRUE' ];then
 	echo -e "Les fichiers sont téléchargeables à l'adresse suivante : blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8"
 	echo -e "Il faut les décompresser à la main. Nous avons néanmoins réalisé l'étape de téléchargement et d'alignement"
 	echo -e "Ces étapes prennent beaucoup de temps, elles peuvent être évitées avec le flag --nostart pour démarrer l'analyse directement"
-
 
 	#fichier contenant les multifastas de chaque gène
 	tar -xzvf prot/prot.tar.gz
@@ -99,6 +107,10 @@ test -s reciprocity/best_hits_list.txt || echo "Il y a eu un problème lors de l
 
 COMMENT
 
+mkdir -p reciprocity
+cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
+
+
 echo -e "\n \t ------------------------------------------"
 echo -e "\t Deuxième étape : Détermination des best hits réciproques"
 echo -e "\t ------------------------------------------ \n"
@@ -119,7 +131,7 @@ echo -e "Fini !" ############################# Dire que c'est fini quand le fich
 
 echo -e "\n \t -----------------------------------------------------------"
 echo -e "\t Troisième étape : Recherche de cliques"
-echo -e "\t ----------------------------------------------------------- \n"
+echo -e "\t -----------------------------------------------------------\n"
 
 mkdir -p cliques # Répertoire de sortie de cliqueSearch
 
