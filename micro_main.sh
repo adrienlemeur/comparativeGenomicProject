@@ -76,9 +76,11 @@ make_blast() {
   done
 }
 
+#---------------------------------------------- Alignement
+
 if [ $starting = 'TRUE' ];then
   make_blast()
-fi 
+fi
 
 #---------------------------------------------- Analyse des données en 3 étapes
 
