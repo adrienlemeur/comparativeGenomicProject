@@ -9,6 +9,16 @@ Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_A
 - confrontation des best hits pour déterminer les best hists réciproques
 - idenfication du core génome parmi les BHR
 
+## Exécution rapide
+Il faut renseigner les paramètres :
+- --nostart permet de ne pas réaliser l'alignement. Il faut avoir 441 alignements dans un répertoire **blast_outputs/** /!\
+- -id : pourcentage d'identité (ex : 70)
+- -cov : pourcentage de couverture (ex : 60)
+- -eval : seuil de e-value (ex : 10e-200)
+```
+$ sh main.sh --nostart -id 70 -cov 60 -eval 10e-200
+```
+
 ## Première étape : suppression des commentaires (dans main.sh)
 **Objectif** : supprimer les commentaires
 
