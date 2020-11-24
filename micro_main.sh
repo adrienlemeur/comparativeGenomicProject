@@ -3,8 +3,8 @@
 #---------------------------------------------- Récupération des valeurs d'option
 # Avec cette méthode, il faut écrire, par exemple : sh micro_main.sh -d -i 60 -c 70 -e 10e-250
 
-starting='TRUE'
-flag_seuil=0
+starting='TRUE' # pour savoir si on fait le téléchargement et l'alignement des génomes
+flag_seuil=0    # nobmre de paramètres déjà renseignés (seuils d'identité, de couverture et de evalue)
 while getopts "dc:e:i:" option;do # id cov eval
   case $option in
     d)
@@ -31,7 +31,6 @@ if [ $flag_seuil -ne 3 ];then # il faut trois paramètres
   echo "ERROR : Il manque des paramètres : veuillez renseigner la couverture avec -c, la evalue avec -e et l'identité avec -i."
   exit  # on sort du fichier : on ne fait rien
 fi
-
 
 #---------------------------------------------- Fonction pour faire l'alignement
 
@@ -141,7 +140,8 @@ echo "\t -----------------------------------------------------------\n"
 # Sortie : liste des cliques contenant les gènes de la clique. Chaque clique est un élément du core génome et elle contient 21 gènes (pour 21 génomes).
 # Si besoin, installer networkx sur Python3 : python3 -m pip install networkx
 
-python3 cliqueSearch.py -i "reciprocity/reciprocity_list.txt" 21 -o "cliques/cliques.txt" "cliques/cliques_max.txt"
+nombre_genome=21
+python3 cliqueSearch.py -i "reciprocity/reciprocity_list.txt" ${nombre_genome} -o "cliques/cliques.txt" "cliques/cliques_max.txt"
 
 # Message de fin de troisième étape : succès ou échec ?
 
