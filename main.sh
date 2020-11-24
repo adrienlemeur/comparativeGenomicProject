@@ -41,8 +41,6 @@ while test $# -gt 0; do
 	esac
 done
 
-echo ${identity} ${coverage} ${evalue}
-
 #################### Ajouter les messages d'erreur si on n'a pas mis bash main.sh --nostart --identity 80 --coverage 50 --evalue 10
 
 if [ $starting = 'TRUE' ];then
@@ -120,7 +118,11 @@ echo "\t ------------------------------------------ \n"
 # Sortie : liste des best hits réciproques
 
 echo "En cours..."
-python3 supairFinder.py -i "reciprocity/best_hits_list.txt" -o "reciprocity/reciprocity_list.txt" --seuil_identite ${identity} --seuil_coverage ${coverage} --seuil_evalue ${evalue}
+python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
+			-o "reciprocity/reciprocity_list.txt" \
+			--seuil_identite ${identity} \
+			--seuil_coverage ${coverage} \
+			--seuil_evalue ${evalue}
 
 test -s reciprocity/reciprocity_list.txt || echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
 echo "Fini !" ############################# Dire que c'est fini quand le fichier existe
