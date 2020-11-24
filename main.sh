@@ -115,10 +115,11 @@ python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
 			--seuil_coverage ${coverage} \
 			--seuil_evalue ${evalue}
 
-test -s reciprocity/reciprocity_list.txt || echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
-
-
-echo "Fini !" ############################# Dire que c'est fini quand le fichier existe
+if [ -s reciprocity/reciprocity_list.txt ];then
+  echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
+else
+  echo "Fini !"
+fi
 
 echo "\n \t -----------------------------------------------------------"
 echo "\t Troisième étape : Recherche de cliques"
