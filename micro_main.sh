@@ -4,7 +4,7 @@
 # Avec cette méthode, il faut écrire, par exemple : sh micro_main.sh -d -i 60 -c 70 -e 10e-250
 
 starting='TRUE'
-flag_seuil=0;
+flag_seuil=0
 while getopts "dc:e:i:" option;do # id cov eval
   case $option in
     d)
