@@ -89,39 +89,44 @@ echo "\n \t -------------------------------------------------------"
 echo "\t Première étape : Parsing des données et concaténation"
 echo "\t ------------------------------------------------------- \n"
 
+# Fonction de parsing
 # Entrée : résultats d'alignement de tous les génomes deux à deux : 21 génomes donc 441 fichiers
 # Sortie : table d'orthologues, chaque ligne correspond à une paire de gènes orthologues
 
-cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
+parsing() {
+  cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
+}
 
+# Réalisation de la première étape
 
+mkdir -p reciprocity # Répertoire avec tous les résultats s'il n'existe pas déjà
+test -s reciprocity/best_hits_list.txt || parsing() # si la sortie n'existe pas, on fait le parsing
 
-
-
-
-
-
+# Message de fin de première étape : succès ou échec ?
+if [ -s reciprocity/best_hits_list.txt ];then # si la sortie est vide : problème !
+  echo "Il y a eu un problème lors de la concaténation. Le fichier best_hits_list.txt est vide ou n'existe pas."
+else # sinon, tout va bien
+  echo "La liste des best hits (best_hits_list.txt) a été créée !"
+fi
 
 echo "\n \t -------------------------------------------------------"
 echo "\t Deuxième étape : Détermination des best hits réciproques"
 echo "\t ------------------------------------------------------- \n"
 
+echo "En cours..." # Début
+
 # supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
 # Entrée : sortie du précédent
 # Sortie : liste des best hits réciproques
 
-
-
 python3 supairFinder.py -i "reciprocity/best_hits_list.txt" -o "reciprocity/reciprocity_list.txt" --seuil_identite ${identity} --seuil_coverage ${coverage} --seuil_evalue ${evalue}
 
-
-
-
-
-
-
-
-
+# Message de fin de deuxième étape : succès ou échec ?
+if [ -s reciprocity/reciprocity_list.txt ];then
+  echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
+else
+  echo "Fini !"
+fi
 
 echo "\n \t -----------------------------------------------------------"
 echo "\t Troisième étape : Recherche de cliques"
@@ -130,12 +135,13 @@ echo "\t -----------------------------------------------------------\n"
 # cliqueSearch pour la recherche de cliques max pour ainsi trouver le nombre d'éléments du core génome
 # Entrée : sortie du précédent
 # Sortie : liste des cliques contenant les gènes de la clique. Chaque clique est un élément du core génome et elle contient 21 gènes (pour 21 génomes).
-# Il faut installer networkx sur Python3 : python3 -m pip install networkx
-
-
+# Si besoin, installer networkx sur Python3 : python3 -m pip install networkx
 
 python3 cliqueSearch.py -i "reciprocity/reciprocity_list.txt" 21 -o "cliques/cliques.txt" "cliques/cliques_max.txt"
 
+# Message de fin de troisième étape : succès ou échec ?
 
 core_genome_size=$(cat cliques/cliques_max.txt | wc -l)
+test -s cliques/cliques_pas_max.txt || echo "Il y a eu un problème lors de la détermination des cliques. Le fichier cliques_pas_max.txt est vide ou n'existe pas."
 echo "Le nombre de cliques maximales et donc d'éléments dans le core génome est de : "${core_genome_size}"."
+echo "Paramètres (identity, coverage, evalue) : "${identity} ${coverage} ${evalue}
