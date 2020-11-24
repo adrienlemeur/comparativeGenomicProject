@@ -100,9 +100,6 @@ cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_h
 test -s reciprocity/best_hits_list.txt || echo "Il y a eu un problème lors de la concaténation. Le fichier best_hits_list.txt est vide ou n'existe pas."
 ################## Ajouter qu'on ne fait pas la première étape si la sortie existe déjà : plus besoin de la commenter
 
-mkdir -p reciprocity
-cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
-
 echo "\n \t ------------------------------------------"
 echo "\t Deuxième étape : Détermination des best hits réciproques"
 echo "\t ------------------------------------------ \n"
