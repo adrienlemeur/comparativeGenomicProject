@@ -90,12 +90,11 @@ fi
 echo "\n \t -------------------------------------------------------"
 echo "\t Première étape : Parsing des données et concaténation"
 echo "\t ------------------------------------------------------- \n"
-b=0 # on en aura besoin pour la comparaison des tailles de fichier avec 0
 
-#Entrée : résultats d'alignement de tous les génomes deux à deux : 21 génomes donc 441 fichiers
-#Sortie : table d'orthologue, chaque ligne correspond à une paire de gènes orthologues
+# Entrée : résultats d'alignement de tous les génomes deux à deux : 21 génomes donc 441 fichiers
+# Sortie : table d'orthologues, chaque ligne correspond à une paire de gènes orthologues
+
 mkdir -p reciprocity # Répertoire avec tous les résultats
-
 test -s reciprocity/best_hits_list.txt || parsing()
 
 parsing() {
@@ -108,7 +107,7 @@ echo "\n \t -------------------------------------------------------"
 echo "\t Deuxième étape : Détermination des best hits réciproques"
 echo "\t ------------------------------------------------------- \n"
 
-#supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
+# supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
 # Entrée : sortie du précédent
 # Sortie : liste des best hits réciproques
 
