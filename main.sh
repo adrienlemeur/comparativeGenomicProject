@@ -101,7 +101,11 @@ parsing() {
   cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
 }
 
-test -s reciprocity/best_hits_list.txt || echo "Il y a eu un problème lors de la concaténation. Le fichier best_hits_list.txt est vide ou n'existe pas."
+if [ -s reciprocity/best_hits_list.txt ];then
+  echo "Il y a eu un problème lors de la concaténation. Le fichier best_hits_list.txt est vide ou n'existe pas."
+else
+  echo "La liste des best hits (best_hits_list.txt) a été créée !"
+fi
 
 echo "\n \t -------------------------------------------------------"
 echo "\t Deuxième étape : Détermination des best hits réciproques"
@@ -112,11 +116,7 @@ echo "\t ------------------------------------------------------- \n"
 # Sortie : liste des best hits réciproques
 
 echo "En cours..."
-python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
-			-o "reciprocity/reciprocity_list.txt" \
-			--seuil_identite ${identity} \
-			--seuil_coverage ${coverage} \
-			--seuil_evalue ${evalue}
+python3 supairFinder.py -i "reciprocity/best_hits_list.txt" -o "reciprocity/reciprocity_list.txt" --seuil_identite ${identity} --seuil_coverage ${coverage} --seuil_evalue ${evalue}
 
 if [ -s reciprocity/reciprocity_list.txt ];then
   echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
