@@ -17,17 +17,17 @@ while [ ! $# -eq 0 ];do
 	esac
 	#shift
 	case "$2" in
-		--identity)
+		-id)
 			identity=$3
 			;;
 	esac
 	case "$4" in
-		--coverage)
+		-cov)
 			coverage=$5
 			;;
 	esac
 	case "$6" in
-		--evalue)
+		-eval)
 			evalue=$7
 			;;
 	esac
@@ -36,12 +36,13 @@ done
 
 #################### Ajouter les messages d'erreur si on n'a pas mis bash main.sh --nostart --identity 80 --coverage 50 --evalue 10
 
-echo -e "Pour l'identification des orthologues & des gènes du core génome, nous avons utilisé les fichiers de sortie de blast fournis"
-echo -e "Les fichiers sont téléchargeables à l'adresse suivante : blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8"
-echo -e "Il faut les décompresser à la main. Nous avons néanmoins réalisé l'étape de téléchargement et d'alignement"
-echo -e "Ces étapes prennent beaucoup de temps, elles peuvent être évitées avec le flag --nostart pour démarrer l'analyse directement"
-
 if [ $starting = 'TRUE' ];then
+
+	echo -e "Pour l'identification des orthologues & des gènes du core génome, nous avons utilisé les fichiers de sortie de blast fournis"
+	echo -e "Les fichiers sont téléchargeables à l'adresse suivante : blast_outputs.tar.gz https://transfert.u-psud.fr/d5upkb8"
+	echo -e "Il faut les décompresser à la main. Nous avons néanmoins réalisé l'étape de téléchargement et d'alignement"
+	echo -e "Ces étapes prennent beaucoup de temps, elles peuvent être évitées avec le flag --nostart pour démarrer l'analyse directement"
+
 
 	#fichier contenant les multifastas de chaque gène
 	tar -xzvf prot/prot.tar.gz
@@ -109,7 +110,7 @@ echo -e "\t ------------------------------------------ \n"
 echo -e "En cours..."
 python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
 			-o "reciprocity/reciprocity_list.txt" \
-			--seuil_identite ${identity} \
+			--seuil_identite ${identity} \Lug qui reposte des 
 			--seuil_coverage ${coverage} \
 			--seuil_evalue ${evalue}
 
