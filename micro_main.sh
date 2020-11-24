@@ -3,7 +3,7 @@
 #---------------------------------------------- Récupération des valeurs d'option
 # Avec cette méthode, il faut écrire, par exemple : sh micro_main.sh -d -i 60 -c 70 -e 10e-250
 
-starting = 'TRUE'
+starting='TRUE'
 while getopts "dc:e:i:" option ; do# id cov eval
   case $option in
     d)
