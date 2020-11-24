@@ -30,15 +30,13 @@ while test $# -gt 0; do
 		;;
 
 		--nostart)
-			shift
 			starting='FALSE'
-			shift
+			break
 		;;
-
 
 		*)
 			echo "$1 is not a recognized flag!"
-			return 1;
+			break
 		;;
 	esac
 done
@@ -107,31 +105,27 @@ test -s reciprocity/best_hits_list.txt || echo "Il y a eu un problème lors de l
 
 COMMENT
 
-mkdir -p reciprocity
-cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
+#mkdir -p reciprocity
+#cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
 
 
-echo -e "\n \t ------------------------------------------"
-echo -e "\t Deuxième étape : Détermination des best hits réciproques"
-echo -e "\t ------------------------------------------ \n"
+echo "\n \t ------------------------------------------"
+echo "\t Deuxième étape : Détermination des best hits réciproques"
+echo "\t ------------------------------------------ \n"
 
 #supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
 # Entrée : sortie du précédent
 # Sortie : liste des best hits réciproques
 
-echo -e "En cours..."
-python3 supairFinder.py -i "reciprocity/best_hits_list.txt" \
-			-o "reciprocity/reciprocity_list.txt" \
-			--seuil_identite ${identity} \Lug qui reposte des 
-			--seuil_coverage ${coverage} \
-			--seuil_evalue ${evalue}
+echo "En cours..."
+python3 supairFinder.py -i "reciprocity/best_hits_list.txt" -o "reciprocity/reciprocity_list.txt" --seuil_identite ${identity} --seuil_coverage ${coverage} --seuil_evalue ${evalue}
 
 test -s reciprocity/reciprocity_list.txt || echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
-echo -e "Fini !" ############################# Dire que c'est fini quand le fichier existe
+echo "Fini !" ############################# Dire que c'est fini quand le fichier existe
 
-echo -e "\n \t -----------------------------------------------------------"
-echo -e "\t Troisième étape : Recherche de cliques"
-echo -e "\t -----------------------------------------------------------\n"
+echo "\n \t -----------------------------------------------------------"
+echo "\t Troisième étape : Recherche de cliques"
+echo "\t -----------------------------------------------------------\n"
 
 mkdir -p cliques # Répertoire de sortie de cliqueSearch
 
