@@ -100,13 +100,13 @@ parsing() {
 # Réalisation de la première étape
 
 mkdir -p reciprocity # Répertoire avec tous les résultats s'il n'existe pas déjà
-test -s reciprocity/best_hits_list.txt || parsing() # si la sortie n'existe pas, on fait le parsing
+test -s reciprocity/best_hits_list.txt || parsing # si la sortie n'existe pas, on fait le parsing
 
 # Message de fin de première étape : succès ou échec ?
-if [ -s reciprocity/best_hits_list.txt ];then # si la sortie est vide : problème !
-  echo "Il y a eu un problème lors de la concaténation. Le fichier best_hits_list.txt est vide ou n'existe pas."
-else # sinon, tout va bien
+if [ -s reciprocity/best_hits_list.txt ];then # si le fichier a une taille supérieure à 0
   echo "La liste des best hits (best_hits_list.txt) a été créée !"
+else
+  echo "Il y a eu un problème lors de la concaténation. Le fichier best_hits_list.txt est vide ou n'existe pas."
 fi
 
 echo "\n \t -------------------------------------------------------"
