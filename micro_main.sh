@@ -80,7 +80,7 @@ make_blast() {
 
 if [ $starting = 'TRUE' ]
 then
-  make_blast()
+  make_blast # si --nostart, alors on ne fait pas l'alignement
 fi
 
 #---------------------------------------------- Analyse des données en 3 étapes
