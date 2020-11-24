@@ -2,7 +2,8 @@
 
 #---------------------------------------------- Récupération des valeurs d'option
 
-while [ $# -gt 0 ] && [ $# -lt 8 ] ; do # il y a maximum 7 paramètres : --nostart -id valeur -cov valeur -eval valeur
+while [ $# -gt 0 ] ; do
+    if [ $# -lt 8 ] ; then # il y a maximum 7 paramètres : --nostart -id valeur -cov valeur -eval valeur, pour éviter break
 	case "$1" in
 		-id)
 			shift
@@ -31,6 +32,9 @@ while [ $# -gt 0 ] && [ $# -lt 8 ] ; do # il y a maximum 7 paramètres : --nosta
 			break
 		;;
 	esac
+    else
+        break
+    fi
 done
 
 #---------------------------------------------- Fonction pour faire l'alignement
