@@ -85,10 +85,7 @@ with open(outputname, 'a') as po:
 					membre2 = dict[genomeB_gene_genomeA][2:4+1]
 					# on teste tous les seuils : membrex > seuils est une liste de trois booléens
 					# pour que les trois seuils soient validés, il faut que la comparaison donne TRUE
-					print(genomeA_gene_genomeB, genomeB_gene_genomeA)
-					print(membre1, membre2)
 					if (membre1 > seuils) and (membre2 > seuils) :
-						print('enregistrement')
 						#on écrit le couple de gènes query / best-hit à la suite de notre doc résultat
 						po.write(i[0]+"\t"+i[1]+"\n")
 						
