@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #---------------------------------------------- Récupération des valeurs d'option
-# Avec cette méthode, il faut écrire, par exemple : sh micro_main.sh -d -i 60 -c 70 -e 10e-250
+# Avec cette méthode, il faut écrire, par exemple : sh main.sh -d -i 60 -c 70 -e 10e-250
 
 starting='TRUE' # pour savoir si on fait le téléchargement et l'alignement des génomes
 flag_seuil=0    # nobmre de paramètres déjà renseignés (seuils d'identité, de couverture et de evalue)
