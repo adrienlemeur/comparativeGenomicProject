@@ -99,7 +99,13 @@ parsing() {
 
 mkdir -p reciprocity # Répertoire avec tous les résultats s'il n'existe pas déjà
 deja='TRUE' # on n'a pas fait tourner la fonction parsing
-test -s reciprocity/best_hits_list.txt || (parsing && deja='FALSE') # si la sortie n'existe pas, on fait le parsing
+
+if ! [ -s reciprocity/best_hits_list.txt ];then # si la sortie n'existe pas, on fait le parsing
+  parsing
+  deja='FALSE'
+fi
+
+#test -s reciprocity/best_hits_list.txt || (parsing && deja='FALSE')
 
 # Message de fin de première étape : succès ou échec ?
 if [ -s reciprocity/best_hits_list.txt ];then # si le fichier a une taille supérieure à 0
