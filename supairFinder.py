@@ -24,7 +24,6 @@ except :
 	outputname = "putative_orthologues.txt"
 
 seuils = [seuil_id, seuil_cov, -seuil_eval] # on met un - pour que toutes les comparaisons soient des >
-print(seuils)
 
 #__________MAIN__________MAIN__________MAIN__________MAIN__________MAIN__________MAIN
 
@@ -37,11 +36,9 @@ dict = {}
 #Fichier de sortie
 os.system("rm -f "+outputname)
 
-
-
 with open(outputname, 'a') as po:
 	for i in lines:
-		i = i.split("	")
+		i = i.split("\t")
 		
 		# dict[i[0]][0].split("_")[0]       genome du best it de i[0]
 		# i[1].split("_")                   genome de i[1]
@@ -80,13 +77,13 @@ with open(outputname, 'a') as po:
 			
 			if genomeB_gene_genomeA in dict:
 				# Si la valeur du best-hit de notre best hit est égal à celle de notre query, les deux gènes sont réciproques
-				if dict[genomeB_gene_genomeA][0] == dict[genomeA_gene_genomeB][1] :
+				if dict[genomeB_gene_genomeA][0] == dict[genomeA_gene_genomeB][1]:
 					# vérification des seuils du couple
 					membre1 = dict[genomeA_gene_genomeB][2:4+1] # liste avec le % d'identite, la couverture et - la e-value
 					membre2 = dict[genomeB_gene_genomeA][2:4+1]
 					# on teste tous les seuils : membrex > seuils est une liste de trois booléens
 					# pour que les trois seuils soient validés, il faut que la comparaison donne TRUE
-					if (membre1 > seuils) and (membre2 > seuils) :
+
+					if(sum([(membre1[i] > seuils[i]) & (membre2[i] > seuils[i]) for i in range(0,3)]) == 3):
 						#on écrit le couple de gènes query / best-hit à la suite de notre doc résultat
 						po.write(i[0]+"\t"+i[1]+"\n")
-						
