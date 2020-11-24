@@ -11,12 +11,12 @@ Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_A
 
 ## Exécution rapide
 Il faut renseigner les paramètres :
-- --nostart permet de ne pas réaliser l'alignement. /!\ Avoir 441 alignements dans un répertoire **blast_outputs/**
-- -id : pourcentage d'identité (ex : 70)
-- -cov : pourcentage de couverture (ex : 60)
-- -eval : seuil de e-value (ex : 10e-200)
+- -d permet de ne pas réaliser l'alignement. /!\ Avoir 441 alignements dans un répertoire **blast_outputs/**
+- -i : pourcentage d'identité (ex : 70)
+- -c : pourcentage de couverture (ex : 60)
+- -e : seuil de e-value (ex : 10e-200)
 ```
-$ sh main.sh --nostart -id 70 -cov 60 -eval 10e-200
+$ sh main.sh -d -i 70 -c 60 -e 10e-200
 ```
 
 ## Import des données
