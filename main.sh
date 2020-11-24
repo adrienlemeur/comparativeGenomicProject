@@ -103,7 +103,7 @@ test -s reciprocity/best_hits_list.txt || (parsing && deja='FALSE') # si la sort
 
 # Message de fin de première étape : succès ou échec ?
 if [ -s reciprocity/best_hits_list.txt ];then # si le fichier a une taille supérieure à 0
-  if [ $deja -eq 'TRUE' ];then
+  if [ $deja = 'TRUE' ];then
     echo "La liste des best hits (best_hits_list.txt) existait déjà. On ne refait pas le parsing."
   else
     echo "La liste des best hits (best_hits_list.txt) a été créée !"
