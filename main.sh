@@ -41,6 +41,8 @@ while test $# -gt 0; do
 	esac
 done
 
+echo ${identity} ${coverage} ${evalue}
+
 #################### Ajouter les messages d'erreur si on n'a pas mis bash main.sh --nostart --identity 80 --coverage 50 --evalue 10
 
 if [ $starting = 'TRUE' ];then
