@@ -55,10 +55,7 @@ fi
 
 
 
-
-
-
-
+#---------------------------------------------- Analyse des données en 3 étapes
 
 cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
 python3 supairFinder.py -i "reciprocity/best_hits_list.txt" -o "reciprocity/reciprocity_list.txt" --seuil_identite ${identity} --seuil_coverage ${coverage} --seuil_evalue ${evalue}
