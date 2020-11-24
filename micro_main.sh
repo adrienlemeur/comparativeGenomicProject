@@ -122,10 +122,10 @@ echo "En cours..." # Début
 python3 supairFinder.py -i "reciprocity/best_hits_list.txt" -o "reciprocity/reciprocity_list.txt" --seuil_identite ${identity} --seuil_coverage ${coverage} --seuil_evalue ${evalue}
 
 # Message de fin de deuxième étape : succès ou échec ?
-if [ -s reciprocity/reciprocity_list.txt ];then
-  echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
-else
+if [ -s reciprocity/reciprocity_list.txt ];then 
   echo "Fini !"
+else
+  echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
 fi
 
 echo "\n \t -----------------------------------------------------------"
