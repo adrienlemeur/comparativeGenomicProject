@@ -27,8 +27,8 @@ done
 
 #---------------------------------------------- Bon renseignement des valeurs
 
-if [ $flag_seuil -ne 0 ];then
-  echo "Il manque des paramètres : veuillez renseigner la couverture avec -c, la evalue avec -e et l'identité avec -i."
+if [ $flag_seuil -ne 3 ];then # il faut trois paramètres
+  echo "ERROR : Il manque des paramètres : veuillez renseigner la couverture avec -c, la evalue avec -e et l'identité avec -i."
   exit  # on sort du fichier : on ne fait rien
 fi
 
