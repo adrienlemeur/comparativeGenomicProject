@@ -120,8 +120,10 @@ python3 supairFinder.py -i "reciprocity/best_hits_list.txt" -o "reciprocity/reci
 
 if [ -s reciprocity/reciprocity_list.txt ];then
   echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
+  sudo chmod 777 -R *
 else
   echo "Fini !"
+  
 fi
 
 echo "\n \t -----------------------------------------------------------"
