@@ -33,7 +33,7 @@ with open(genomic_table) as gt:
 
 dict = {}
 
-#Fichier de sortie
+# Fichier de sortie
 os.system("rm -f "+outputname)
 
 with open(outputname, 'a') as po:
