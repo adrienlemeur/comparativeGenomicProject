@@ -122,7 +122,7 @@ if [ -s reciprocity/reciprocity_list.txt ];then
   echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
 else
   echo "Fini !"
-  chmod 777 -R reciprocity/* # droit de tout faire sur les fichiers dans reciprocity
+  chmod 777 -R ./reciprocity/* # droit de tout faire sur les fichiers dans reciprocity
 fi
 
 echo "\n \t -----------------------------------------------------------"
