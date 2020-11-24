@@ -1,5 +1,3 @@
-
-
 import networkx as nx #import de la librairie networkx pour l'utilisation de la fonction find_cliques()
 import sys,os
 
@@ -8,6 +6,7 @@ import sys,os
 try :
 	filename = sys.argv[1] #permet de recuperer le fichier de sortie generes par la fonction precedente
 	#Il y aura dans les fichiers uniquement les genes des genomes dont l'homolgie est reciproque
+	nb_genomes = sys.argv[2]
 except :
 	sys.exit()
 
@@ -43,7 +42,7 @@ fclique = open(outputname, 'r')
 lines = fclique.readlines()
 for line in lines :
 	values = line.split("\t")
-	if (values[0] == str(3)) :
+	if (values[0] == str(nb_genomes)) :
 		fcliquemax.write(str(line))
 fcliquemax.close()
 
