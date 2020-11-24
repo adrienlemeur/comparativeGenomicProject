@@ -19,6 +19,17 @@ Il faut renseigner les paramètres :
 $ sh main.sh --nostart -id 70 -cov 60 -eval 10e-200
 ```
 
+## Import des données
+Si le code est exécuté sur machine virtuelle et que les alignements sont disponibles en local, voici la commande à exécuter :
+- terminal de la VM :
+```
+$ mkdir ./path/to/comparativeGenomicProject/blast_outputs/ # création du répertoire blast_outputs
+```
+- terminal local :
+```
+$ scp blast_outputs/* ubuntu@134.158.247.104:/path/to/comparativeGenomicProject/blast_outputs/
+```
+
 ## Première étape : suppression des commentaires (dans main.sh)
 **Objectif** : supprimer les commentaires
 
