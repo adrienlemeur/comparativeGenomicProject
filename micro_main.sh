@@ -24,7 +24,7 @@ while test $# -gt 0; do
 
 		--nostart)
 			starting='FALSE'
-			break
+			break ###################################" si --nostart n'est pas mis en dernier, on break et on n'a pas les paramètres...
 		;;
 
 		*)
