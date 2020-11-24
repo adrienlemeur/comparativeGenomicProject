@@ -6,7 +6,7 @@ import sys,os
 try :
 	filename = sys.argv[1] #permet de recuperer le fichier de sortie generes par la fonction precedente
 	#Il y aura dans les fichiers uniquement les genes des genomes dont l'homolgie est reciproque
-	nb_genomes = sys.argv[2]
+	nb_genomes = sys.argv[2] 
 except :
 	sys.exit()
 
