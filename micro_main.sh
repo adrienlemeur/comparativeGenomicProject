@@ -1,40 +1,24 @@
 #!/bin/bash
 
 #---------------------------------------------- Récupération des valeurs d'option
+# Avec cette méthode, il faut écrire, par exemple : sh micro_main.sh -d -i 60 -c 70 -e 10e-250
 
-while [ $# -gt 0 ] ; do
-    if [ $# -lt 8 ] ; then # il y a maximum 7 paramètres : --nostart -id valeur -cov valeur -eval valeur, pour éviter break
-	case "$1" in
-		-id)
-			shift
-			identity=$1
-			shift
-		;;
-
-		-cov)
-			shift
-			coverage=$1
-			shift
-		;;
-		
-		-eval)
-			shift
-			evalue=$1
-			shift
-		;;
-
-		--nostart)
-			starting='FALSE'
-		;;
-
-		*)
-			echo "$1 is not a recognized flag!"
-			break
-		;;
-	esac
-    else
-        break
-    fi
+starting = 'TRUE'
+while getopts "dc:e:i:" option ; do# id cov eval
+  case $option in
+    d)
+      starting='FALSE'
+      ;;
+    c)
+      coverage=$OPTARG
+      ;;
+    e)
+      evalue=$OPTARG
+      ;;
+    i)
+      identity=$OPTARG
+      ;;
+  esac
 done
 
 #---------------------------------------------- Fonction pour faire l'alignement
