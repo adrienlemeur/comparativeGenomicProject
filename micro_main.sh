@@ -2,7 +2,7 @@
 
 #---------------------------------------------- Récupération des valeurs d'option
 
-while test $# -gt 0 && $# -lt 8 ; do # il y a maximum 7 paramètres : --nostart -id valeur -cov valeur -eval valeur
+while [ $# -gt 0 ] && [ $# -lt 8 ] ; do # il y a maximum 7 paramètres : --nostart -id valeur -cov valeur -eval valeur
 	case "$1" in
 		-id)
 			shift
