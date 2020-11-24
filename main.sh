@@ -103,7 +103,7 @@ test -s reciprocity/best_hits_list.txt || (parsing && deja='FALSE') # si la sort
 
 # Message de fin de première étape : succès ou échec ?
 if [ -s reciprocity/best_hits_list.txt ];then # si le fichier a une taille supérieure à 0
-  if [ $deja = 'TRUE' ];then
+  if [ $deja -eq 'TRUE' ];then
     echo "La liste des best hits (best_hits_list.txt) existait déjà. On ne refait pas le parsing."
   else
     echo "La liste des best hits (best_hits_list.txt) a été créée !"
@@ -134,6 +134,8 @@ fi
 echo "\n \t -----------------------------------------------------------"
 echo "\t Troisième étape : Recherche de cliques"
 echo "\t -----------------------------------------------------------\n"
+
+mkdir -p cliques # Répertoire avec tous les résultats s'il n'existe pas déjà
 
 # cliqueSearch pour la recherche de cliques max pour ainsi trouver le nombre d'éléments du core génome
 # Entrée : sortie du précédent
