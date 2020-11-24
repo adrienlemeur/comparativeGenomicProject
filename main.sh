@@ -95,14 +95,18 @@ b=0 # on en aura besoin pour la comparaison des tailles de fichier avec 0
 #Entrée : résultats d'alignement de tous les génomes deux à deux : 21 génomes donc 441 fichiers
 #Sortie : table d'orthologue, chaque ligne correspond à une paire de gènes orthologues
 mkdir -p reciprocity # Répertoire avec tous les résultats
-cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
+
+test -s reciprocity/best_hits_list.txt || parsing()
+
+parsing() {
+  cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "reciprocity/best_hits_list.txt"
+}
 
 test -s reciprocity/best_hits_list.txt || echo "Il y a eu un problème lors de la concaténation. Le fichier best_hits_list.txt est vide ou n'existe pas."
-################## Ajouter qu'on ne fait pas la première étape si la sortie existe déjà : plus besoin de la commenter
 
-echo "\n \t ------------------------------------------"
+echo "\n \t -------------------------------------------------------"
 echo "\t Deuxième étape : Détermination des best hits réciproques"
-echo "\t ------------------------------------------ \n"
+echo "\t ------------------------------------------------------- \n"
 
 #supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
 # Entrée : sortie du précédent
