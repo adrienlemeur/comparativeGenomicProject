@@ -24,7 +24,7 @@ while getopts "dc:e:i:" option;do # id cov eval
       ;;
   esac
 done
-<<COMMENT
+
 #---------------------------------------------- Bon renseignement des valeurs
 
 if [ $flag_seuil -ne 3 ];then # il faut trois paramètres
@@ -119,46 +119,51 @@ else
   echo "Il y a eu un problème lors de la concaténation. Le fichier best_hits_list.txt est vide ou n'existe pas."
 fi
 
-echo "\n \t -------------------------------------------------------"
-echo "\t Deuxième étape : Détermination des best hits réciproques"
-echo "\t ------------------------------------------------------- \n"
 
-echo "En cours..." # Début
-
-# supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
-# Entrée : sortie du précédent
-# Sortie : liste des best hits réciproques
-
-python3 supairFinder.py -i "reciprocity/best_hits_list.txt" -o "reciprocity/reciprocity_list.txt" --seuil_identite ${identity} --seuil_coverage ${coverage} --seuil_evalue ${evalue}
-
-# Message de fin de deuxième étape : succès ou échec ?
-if [ -s reciprocity/reciprocity_list.txt ];then 
-  echo "Fini !"
-else
-  echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
-fi
-
-echo "\n \t -----------------------------------------------------------"
-echo "\t Troisième étape : Recherche de cliques"
-echo "\t -----------------------------------------------------------\n"
-
-mkdir -p cliques # Répertoire avec tous les résultats s'il n'existe pas déjà
-
-# cliqueSearch pour la recherche de cliques max pour ainsi trouver le nombre d'éléments du core génome
-# Entrée : sortie du précédent
-# Sortie : liste des cliques contenant les gènes de la clique. Chaque clique est un élément du core génome et elle contient 21 gènes (pour 21 génomes).
-# Si besoin, installer networkx sur Python3 : python3 -m pip install networkx
-COMMENT
-
-echo "genome_number\tclique_number" > cliques/table_cliques_max.txt
-
-for nombre_genome in $(seq 2 21)
+while read eval_from_file
 do
-	#python3 cliqueSearch.py -i "reciprocity/reciprocity_list.txt" ${nombre_genome} -o "cliques/$nombre_genome""_cliques.txt" "cliques/$nombre_genome""_cliques_max.txt"
-	(printf $nombre_genome"\t"; cat cliques/$nombre_genome"_cliques_max.txt" | wc -l ) >> cliques/table_cliques_max.txt
-done
-# Message de fin de troisième étape : succès ou échec ?
+	echo $eval_from_file
 
+	echo "\n \t -------------------------------------------------------"
+	echo "\t Deuxième étape : Détermination des best hits réciproques"
+	echo "\t ------------------------------------------------------- \n"
+
+	echo "En cours..." # Début
+
+	# supairFinder ne conserve que les bests hits et filtre certaines query dont certain attributs sont inférieurs à un certain seuils
+	# Entrée : sortie du précédent
+	# Sortie : liste des best hits réciproques
+
+
+	python3 supairFinder.py -i "reciprocity/best_hits_list.txt" -o "reciprocity/reciprocity_list_$eval_from_file.txt" --seuil_identite ${identity} --seuil_coverage ${coverage} --seuil_evalue ${eval_from_file}
+
+	# Message de fin de deuxième étape : succès ou échec ?
+	if [ -s reciprocity/reciprocity_list_$eval_from_file.txt ];then 
+	  echo "Fini !"
+	else
+	  echo "Il y a eu un problème lors de la détermination des best hits réciproques. Le fichier reciprocity_list.txt est vide ou n'existe pas."
+	fi
+	
+	echo "\n \t -----------------------------------------------------------"
+	echo "\t Troisième étape : Recherche de cliques"
+	echo "\t -----------------------------------------------------------\n"
+
+	mkdir -p cliques # Répertoire avec tous les résultats s'il n'existe pas déjà
+
+	# cliqueSearch pour la recherche de cliques max pour ainsi trouver le nombre d'éléments du core génome
+	# Entrée : sortie du précédent
+	# Sortie : liste des cliques contenant les gènes de la clique. Chaque clique est un élément du core génome et elle contient 21 gènes (pour 21 génomes).
+	# Si besoin, installer networkx sur Python3 : python3 -m pip install networkx
+
+	echo "genome_number\tclique_number" > cliques/table_cliques_max_$eval_from_file.txt
+
+	for nombre_genome in $(seq 2 21)
+	do
+		python3 cliqueSearch.py -i "reciprocity/reciprocity_list_$eval_from_file.txt" ${nombre_genome} -o "cliques/$nombre_genome""_$eval_from_file""_cliques.txt" "cliques/$nombre_genome""_$eval_from_file""_cliques_max.txt"
+		(printf $nombre_genome"\t"; cat "cliques/$nombre_genome""_$eval_from_file""_cliques_max.txt" | wc -l ) >> cliques/table_cliques_max_$eval_from_file.txt
+	done
+	# Message de fin de troisième étape : succès ou échec ?
+done < evalue_thresholds.txt
 
 
 #core_genome_size=$(cat cliques/cliques_max.txt | wc -l)
