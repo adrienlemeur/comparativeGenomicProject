@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 #---------------------------------------------- Récupération des valeurs d'option
 # Avec cette méthode, il faut écrire, par exemple : sh main.sh -d -i 60 -c 70 -e 10e-250
@@ -24,7 +24,7 @@ while getopts "dc:e:i:" option;do # id cov eval
       ;;
   esac
 done
-
+<<COMMENT
 #---------------------------------------------- Bon renseignement des valeurs
 
 if [ $flag_seuil -ne 3 ];then # il faut trois paramètres
@@ -148,13 +148,21 @@ mkdir -p cliques # Répertoire avec tous les résultats s'il n'existe pas déjà
 # Entrée : sortie du précédent
 # Sortie : liste des cliques contenant les gènes de la clique. Chaque clique est un élément du core génome et elle contient 21 gènes (pour 21 génomes).
 # Si besoin, installer networkx sur Python3 : python3 -m pip install networkx
+COMMENT
 
-nombre_genome=21
-python3 cliqueSearch.py -i "reciprocity/reciprocity_list.txt" ${nombre_genome} -o "cliques/cliques.txt" "cliques/cliques_max.txt"
+echo "genome_number\tclique_number" > cliques/table_cliques_max.txt
 
+for nombre_genome in $(seq 2 21)
+do
+	#python3 cliqueSearch.py -i "reciprocity/reciprocity_list.txt" ${nombre_genome} -o "cliques/$nombre_genome""_cliques.txt" "cliques/$nombre_genome""_cliques_max.txt"
+	(printf $nombre_genome"\t"; cat cliques/$nombre_genome"_cliques_max.txt" | wc -l ) >> cliques/table_cliques_max.txt
+done
 # Message de fin de troisième étape : succès ou échec ?
 
-core_genome_size=$(cat cliques/cliques_max.txt | wc -l)
-test -s cliques/cliques.txt || echo "Il y a eu un problème lors de la détermination des cliques. Le fichier cliques.txt est vide ou n'existe pas."
-echo "Le nombre de cliques maximales et donc d'éléments dans le core génome est de : "${core_genome_size}"."
-echo "Paramètres (identity, coverage, evalue) : "${identity} ${coverage} ${evalue}
+
+
+#core_genome_size=$(cat cliques/cliques_max.txt | wc -l)
+
+#test -s cliques/cliques.txt || echo "Il y a eu un problème lors de la détermination des cliques. Le fichier cliques.txt est vide ou n'existe pas."
+#echo "Le nombre de cliques maximales et donc d'éléments dans le core génome est de : "${core_genome_size}"."
+#echo "Paramètres (identity, coverage, evalue) : "${identity} ${coverage} ${evalue}
