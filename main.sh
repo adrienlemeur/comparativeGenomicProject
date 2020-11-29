@@ -155,12 +155,10 @@ do
 	# Sortie : liste des cliques contenant les gènes de la clique. Chaque clique est un élément du core génome et elle contient 21 gènes (pour 21 génomes).
 	# Si besoin, installer networkx sur Python3 : python3 -m pip install networkx
 
-	echo "genome_number\tclique_number" > cliques/table_cliques_max_$eval_from_file.txt
-
 	for nombre_genome in $(seq 2 21)
 	do
 		python3 cliqueSearch.py -i "reciprocity/reciprocity_list_$eval_from_file.txt" ${nombre_genome} -o "cliques/$nombre_genome""_$eval_from_file""_cliques.txt" "cliques/$nombre_genome""_$eval_from_file""_cliques_max.txt"
-		(printf $nombre_genome"\t"; cat "cliques/$nombre_genome""_$eval_from_file""_cliques_max.txt" | wc -l ) >> cliques/table_cliques_max_$eval_from_file.txt
+		(printf $eval_from_file"\t"$nombre_genome"\t"; cat "cliques/$nombre_genome""_$eval_from_file""_cliques_max.txt" | wc -l ) >> cliques/table_cliques_max_$eval_from_file.txt
 	done
 	# Message de fin de troisième étape : succès ou échec ?
 done < evalue_thresholds.txt
