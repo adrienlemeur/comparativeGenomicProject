@@ -18,6 +18,6 @@ if [ $starting = 'TRUE' ];then
   tar -xvf Blast_yeasts.tar.gz -C Blast_outputs/
 fi
 
-
+ 
 
 
