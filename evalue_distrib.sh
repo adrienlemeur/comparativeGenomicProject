@@ -1,4 +1,4 @@
-#!/bin/sh
+/bin/sh
 
 #---------------------------------------------- Récupération des données
 
@@ -15,7 +15,7 @@ if [ $starting = 'TRUE' ];then
   #Creating a directory for the downloaded outputs
   mkdir -p Blast_outputs
   wget -O Blast_yeasts.tar.gz transfert.u-psud.fr/nq01n
-  tar -xzvf Blast_yeasts.tar Blast_outputs/
+  tar -xf Blast_yeasts.tar -C Blast_outputs/
 fi
 
 
