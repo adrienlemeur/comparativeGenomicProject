@@ -8,7 +8,7 @@ import sys, os
 try:
 	alignment = sys.argv[sys.argv.index("-i")+1]
 	output_igorf = sys.argv[sys.argv.index("-o")+1]
-  	output_cds = sys.argv[sys.argv.index("-o")+2]
+	output_cds = sys.argv[sys.argv.index("-o")+2]
   
 except :
 	sys.exit()
