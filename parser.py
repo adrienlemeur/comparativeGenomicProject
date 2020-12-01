@@ -42,11 +42,4 @@ with open(output_igorf, 'a') as igorf :
 					igorf.write(values[0]+"\t"+values[1]+"\t"+evalue+"\n")
 				  elif (len(query_id)== 3 and len(subject_id) == 3) :
 					cds.write(values[0]+"\t"+values[1]+"\t"+evalue+"\n")
-          
-            
-    
-    
-    
-
-    
-              
+         
