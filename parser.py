@@ -37,7 +37,7 @@ with open(output_igorf, 'a') as igorf :
 				values = line_interest.split()#on recupere les valeurs des differents champs
 				query_id = values[0].split("_")
 				subject_id = values[1].split("_")
-				evalue = values[10]
+				evalue = str(values[10])
 				if (len(query_id)== 4 and len(subject_id) == 4) :
 					igorf.write(values[0]+"\t"+values[1]+"\t"+evalue+"\n")
 				elif (len(query_id)== 3 and len(subject_id) == 3) :
