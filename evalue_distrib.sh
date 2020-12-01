@@ -14,8 +14,8 @@ esac
 if [ $starting = 'TRUE' ];then
   #Creating a directory for the downloaded outputs
   mkdir -p Blast_outputs
-  wget -O Blast_yeasts.tar.gz transfert.u-psud.fr/nq01n
-  tar -xf Blast_yeasts.tar -C Blast_outputs/
+  wget -O Blast_yeasts.tar.gz transfert.u-psud.fr/nq01n/download
+  tar -xvf Blast_yeasts.tar -C Blast_outputs/
 fi
 
 
