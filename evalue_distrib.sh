@@ -27,7 +27,7 @@ for file in `ls Blast_outputs/`;do
 	
 	output_igorf=$genomeA_genomeB"_orf.txt"
 	output_cds=$genomeA_genomeB"_cds.txt"
-	python3 parser.py -i ${file} -o ./output_igorf/${output_igorf} ./output_cds/${output_cds}
+	python3 parser.py -i ./Blast_outputs/${file} -o ./output_igorf/${output_igorf} ./output_cds/${output_cds}
 done
 
 
