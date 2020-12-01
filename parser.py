@@ -33,13 +33,13 @@ with open(output_igorf, 'a') as igorf :
 		regex = re.compile("^# \d.")
 		for line in lines :
 			if regex.match(line) : #pour trouver la derniere ligne avec un commentaire #
-				  line_interest = lines[line+1] #on recupere la ligne qui nous interesse, celle qui suit la derniere ligne en commentaire
-				  values = line_interest.split()#on recupere les valeurs des differents champs
-				  query_id = values[0].split("_")
-				  subject_id = values[1].split("_")
-				  evalue = values[10]
-				  if (len(query_id)== 4 and len(subject_id) == 4) :
+				line_interest = lines[line+1] #on recupere la ligne qui nous interesse, celle qui suit la derniere ligne en commentaire
+				values = line_interest.split()#on recupere les valeurs des differents champs
+				query_id = values[0].split("_")
+				subject_id = values[1].split("_")
+				evalue = values[10]
+				if (len(query_id)== 4 and len(subject_id) == 4) :
 					igorf.write(values[0]+"\t"+values[1]+"\t"+evalue+"\n")
-				  elif (len(query_id)== 3 and len(subject_id) == 3) :
+				elif (len(query_id)== 3 and len(subject_id) == 3) :
 					cds.write(values[0]+"\t"+values[1]+"\t"+evalue+"\n")
          
