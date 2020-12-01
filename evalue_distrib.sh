@@ -23,10 +23,7 @@ mkdir -p output_igorf
 mkdir -p output_cds
 
 for file in `ls Blast_outputs/`;do
-	echo $file
-	echo $(basename $file .bl)
 	genomeA_genomeB=$(basename $file .bl)
-	echo $genomeA_genomeB
 	
 	output_igorf=$genomeA_genomeB"_orf.txt"
 	output_cds=$genomeA_genomeB"_cds.txt"
