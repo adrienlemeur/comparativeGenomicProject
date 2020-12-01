@@ -31,7 +31,7 @@ os.system("rm -f "+output_cds)
 with open(output_igorf, 'a') as igorf : 
 	with open (output_cds, 'a') as cds :
 		regex = re.compile("^# \d.")
-		for i in range(len(lines)) :
+		for i in range(len(lines)-1) :
 			line = lines[i]
 			if regex.match(line) : #pour trouver la derniere ligne avec un commentaire #
 				line_interest = lines[i+1] #on recupere la ligne qui nous interesse, celle qui suit la derniere ligne en commentaire
