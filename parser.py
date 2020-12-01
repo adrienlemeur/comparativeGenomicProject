@@ -37,11 +37,12 @@ with open(output_igorf, 'a') as igorf :
 				line_interest = lines[i+1] #on recupere la ligne qui nous interesse, celle qui suit la derniere ligne en commentaire
 				values = line_interest.split()#on recupere les valeurs des differents champs
 				
+				print(line_interest.split())
 				print(values[0], values[1], values[10])
+				
 				query_id = str(values[0])
 				subject_id = str(values[1])
 				evalue = str(values[10])
-				
 				
 				line_to_write = query_id+"\t"+subject_id+"\t"+evalue+"\n"
 				if (len(query_id.split("_")) == 4 and len(subject_id.split("_")) == 4) :
