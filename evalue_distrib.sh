@@ -18,6 +18,15 @@ if [ $starting = 'TRUE' ];then
   tar -xvf Blast_yeasts.tar.gz -C Blast_outputs/
 fi
 
- 
+#---------------------------------------------- Parser
+
+for file in `ls Blast_outputs/`;do
+	genomeA_genomeB=${basename $file .bl}
+	
+	output_orf=$genomeA_genomeB"_orf.txt"
+	output_cds=$genomeA_genomeB"_cds.txt"
+	
+	python3 parser.py -i ${file} -o ${output_orf} ${output_cds}
+done
 
 
