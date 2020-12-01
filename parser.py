@@ -3,7 +3,7 @@
 
 
 #__________INPUT__________INPUT__________INPUT__________INPUT__________INPUT__________INPUT
-import sys, os
+import sys, os, re
 
 try:
 	alignment = sys.argv[sys.argv.index("-i")+1]
