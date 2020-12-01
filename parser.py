@@ -39,6 +39,7 @@ with open(output_igorf, 'a') as igorf :
 				query_id = values[0].split("_")
 				subject_id = values[1].split("_")
 				evalue = str(values[10])
+				printf(evalue)
 				if (len(query_id)== 4 and len(subject_id) == 4) :
 					igorf.write(values[0]+"\t"+values[1]+"\t"+evalue+"\n")
 				elif (len(query_id)== 3 and len(subject_id) == 3) :
