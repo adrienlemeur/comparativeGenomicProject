@@ -37,7 +37,9 @@ with open(output_igorf, 'a') as igorf :
 				line_interest = lines[i+1] #on recupere la ligne qui nous interesse, celle qui suit la derniere ligne en commentaire
 				values = line_interest.split()#on recupere les valeurs des differents champs
 				
-				print(line_interest.split())
+				print("___")
+				print(line_interest)
+				print(values)
 				print(values[0], values[1], values[10])
 				
 				query_id = str(values[0])
