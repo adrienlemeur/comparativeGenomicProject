@@ -1,5 +1,0 @@
-gene_1
-gene_2
-gene_3
-gene_4
-gene_5
