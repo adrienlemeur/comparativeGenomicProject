@@ -31,9 +31,9 @@ os.system("rm -f "+output_cds)
 with open(output_igorf, 'a') as igorf : 
 	with open (output_cds, 'a') as cds :
 		regex = re.compile("^# \d.")
-		for line in lines :
+		for i in range len(lines) :
 			if regex.match(line) : #pour trouver la derniere ligne avec un commentaire #
-				line_interest = lines[line+1] #on recupere la ligne qui nous interesse, celle qui suit la derniere ligne en commentaire
+				line_interest = lines[i+1] #on recupere la ligne qui nous interesse, celle qui suit la derniere ligne en commentaire
 				values = line_interest.split()#on recupere les valeurs des differents champs
 				query_id = values[0].split("_")
 				subject_id = values[1].split("_")
