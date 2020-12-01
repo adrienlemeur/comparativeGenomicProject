@@ -23,10 +23,10 @@ fi
 for file in `ls Blast_outputs/`;do
 	genomeA_genomeB=${basename $file .bl}
 	
-	output_orf=$genomeA_genomeB"_orf.txt"
+	output_igorf=$genomeA_genomeB"_orf.txt"
 	output_cds=$genomeA_genomeB"_cds.txt"
 	
-	python3 parser.py -i ${file} -o ${output_orf} ${output_cds}
+	python3 parser.py -i ${file} -o ${output_igorf} ${output_cds}
 done
 
 
