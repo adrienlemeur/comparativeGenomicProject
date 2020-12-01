@@ -36,6 +36,7 @@ with open(output_igorf, 'a') as igorf :
 			if regex.match(line) : #pour trouver la derniere ligne avec un commentaire #
 				line_interest = lines[i+1] #on recupere la ligne qui nous interesse, celle qui suit la derniere ligne en commentaire
 				values = line_interest.split("\t")#on recupere les valeurs des differents champs
+				print(values)
 				query_id = values[0].split("_")
 				subject_id = values[1].split("_")
 				evalue = str(values[10])
