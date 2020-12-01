@@ -15,7 +15,7 @@ if [ $starting = 'TRUE' ];then
   #Creating a directory for the downloaded outputs
   mkdir -p Blast_outputs
   wget -O Blast_yeasts.tar.gz transfert.u-psud.fr/nq01n
-  tar -xzvf Blast_yeasts.tar -O Blast_outputs/
+  tar -xvf Blast_yeasts.tar -O Blast_outputs/
 fi
 
 
