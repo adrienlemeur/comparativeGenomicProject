@@ -32,6 +32,7 @@ with open(output_igorf, 'a') as igorf :
 	with open (output_cds, 'a') as cds :
 		regex = re.compile("^# \d.")
 		for i in range len(lines) :
+			line = lines[i]
 			if regex.match(line) : #pour trouver la derniere ligne avec un commentaire #
 				line_interest = lines[i+1] #on recupere la ligne qui nous interesse, celle qui suit la derniere ligne en commentaire
 				values = line_interest.split()#on recupere les valeurs des differents champs
