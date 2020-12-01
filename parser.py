@@ -39,9 +39,9 @@ with open(output_igorf, 'a') as igorf :
 				  subject_id = values[1].split("_")
 				  evalue = values[10]
 				  if (len(query_id)== 4 and len(subject_id) == 4) :
-				    igorf.write(values[0]+"\t"+values[1]+"\t"+evalue+"\n")
+					igorf.write(values[0]+"\t"+values[1]+"\t"+evalue+"\n")
 				  elif (len(query_id)== 3 and len(subject_id) == 3) :
-				    cds.write(values[0]+"\t"+values[1]+"\t"+evalue+"\n")
+					cds.write(values[0]+"\t"+values[1]+"\t"+evalue+"\n")
           
             
     
