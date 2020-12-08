@@ -26,6 +26,8 @@ $ sh main_TP1.sh -d -i 70 -c 60 -e 10e-200
 - graphiques avec R (manuel)
 
 #### Exécution rapide
+Il faut renseigner les paramètres :
+- --nostart permet de ne pas réaliser télécharger les fichiers. /!\ Avoir 36 alignements dans un répertoire **blast_outputs/**
 ```
 $ sh main_TP2.sh (--nostart)
 ```
