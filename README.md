@@ -5,6 +5,7 @@ Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_A
 
 - prot : contient les génomes de Escherichia et Shigella pour faire les alignements (script dans TP1/main_TP1.sh)
 - levure : idem pour les 6 levures, mais il n'y a pas le script pour faire l'alignement dans TP2...
+- archives : anciens tests
 
 ## TP1 : Détection du core génome chez Escherichia et Shigella (bactéries)
 - récupération des génomes et construction des 21 bases et 441 alignements **OU** récupération des 441 alignements déjà faits
