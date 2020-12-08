@@ -23,6 +23,18 @@ fi
 mkdir -p output_igorf
 mkdir -p output_cds
 
+parsing() {
+  cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "best_hits_list.txt"
+}
+
+deja='TRUE' # on n'a pas fait tourner la fonction parsing
+if ! [ -s best_hits_list.txt ];then # si la sortie n'existe pas, on fait le parsing
+  parsing
+  deja='FALSE'
+fi
+
+#---------------------------------------------- Récupération des premières lignes
+
 for file in `ls Blast_outputs/`;do
 	# Output names with file basename
 	genomeA_genomeB=$(basename $file .bl)
