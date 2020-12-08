@@ -36,7 +36,7 @@ fi
 
 
 
-python3 parser_evalue.py -i best_hits_list.txt -o output_igorf/$output_igorf output_cds/$output_cds
+python3 parseur_evalue.py -i best_hits_list.txt -o output_igorf/$output_igorf output_cds/$output_cds
 
 
 echo "C'est re bon"
