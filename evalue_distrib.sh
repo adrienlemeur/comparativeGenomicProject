@@ -33,6 +33,11 @@ if ! [ -s best_hits_list.txt ];then # si la sortie n'existe pas, on fait le pars
   deja='FALSE'
 fi
 
+python3 parser_evalue.py -i best_hits_list.txt -o output_igorf/$output_igorf output_cds/$output_cds
+
+
+
+
 #---------------------------------------------- Récupération des premières lignes
 
 for file in `ls Blast_outputs/`;do
