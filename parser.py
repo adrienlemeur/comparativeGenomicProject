@@ -23,6 +23,8 @@ except :
 with open(alignment) as ag:
 	lines = ag.readlines()
 
+print(alignement)
+
 
 # Fichier de sortie
 os.system("rm -f "+output_igorf)
