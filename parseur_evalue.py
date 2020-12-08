@@ -22,6 +22,10 @@ with open(alignment) as ag:
 os.system("rm -f "+output_igorf)
 os.system("rm -f "+output_cds)
 
+print(alignment)
+print(output_igorf)
+print(output_cds)
+
 with open(outputname, 'a') as po:
 	for line_interest in lines:
 		values = line_interest.split("\t")
