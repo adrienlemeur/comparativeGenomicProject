@@ -3,54 +3,30 @@ Groupe 10 : Leila OUTEMZABET, Adrien LE MEUR, Audrey ONFROY
 
 Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_AMI2B/tree/main/core_genome_Ecoli
 
-## Boucle principale (main.sh)
-- récupération des génomes et construction des 21 bases et 441 alignements OU récupération des 441 alignements déjà faits
+## TP1
+- récupération des génomes et construction des 21 bases et 441 alignements **OU** récupération des 441 alignements déjà faits
 - sauvegarde des best hits sous critères de couverture, identité et e-value
 - confrontation des best hits pour déterminer les best hists réciproques
 - idenfication du core génome parmi les BHR
 
-## Exécution rapide
+# Exécution rapide
 Il faut renseigner les paramètres :
 - -d permet de ne pas réaliser l'alignement. /!\ Avoir 441 alignements dans un répertoire **blast_outputs/**
 - -i : pourcentage d'identité (ex : 70)
 - -c : pourcentage de couverture (ex : 60)
 - -e : seuil de e-value (ex : 10e-200)
 ```
-$ sh main.sh -d -i 70 -c 60 -e 10e-200
+$ sh main_TP1.sh -d -i 70 -c 60 -e 10e-200
 ```
 
-## Import des données
-Si le code est exécuté sur machine virtuelle et que les alignements sont disponibles en local, voici la commande à exécuter :
-- terminal de la VM :
+## TP2
+- récupération des 6x6 = 36 alignements des génomes de levures
+- sauvegarde des bests hits sans critère
+- répartition des bests hits IGORF ou CDS dans deux dossiers de sortie
+- graphiques avec R (manuel)
+
+# Exécution rapide
 ```
-$ mkdir ./path/to/comparativeGenomicProject/blast_outputs/ # création du répertoire blast_outputs
-```
-- terminal local :
-```
-$ scp blast_outputs/* ubuntu@134.158.247.104:/path/to/comparativeGenomicProject/blast_outputs/
+$ sh main_TP2.sh (--nostart)
 ```
 
-## Première étape : suppression des commentaires (dans main.sh)
-**Objectif** : supprimer les commentaires
-
-**Entrée** : alignement du génome A sur le génome B et de B sur A
-
-**Sortie** : suppression des lignes avec des commentaires et fusion des deux fichiers en une sortie A-against-B.bl.list
-
-## Deuxième étape : réciprocité (supairFinder.py)
-**Objectif** : déterminer les best hits
-
-**Entrée** : liste A-against-B.bl.list
-
-**Sortie** : liste des best hits réciproques
-
-## Troisième étape : Identification du core génome (cliqueSearch.py)
-**Objectif** : identifier le core génome
-
-**Méthode** : recherche de clique
-
-**Entrée** : liste bets hits réciproques pour tous les 110 binômes de génome
-
-**Sortie** : liste des gènes dans chaque clique
-
-**Post-traitement** : récupérer uniquement les cliques de taille 21, pour qu'elles représentent le core génome et pas le pan
