@@ -24,7 +24,8 @@ with open(alignment) as ag:
 	lines = ag.readlines()
 
 print(alignement)
-
+print(output_igorf)
+print(output_cds)
 
 # Fichier de sortie
 os.system("rm -f "+output_igorf)
