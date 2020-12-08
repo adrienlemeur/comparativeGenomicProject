@@ -3,6 +3,7 @@ Groupe 10 : Leila OUTEMZABET, Adrien LE MEUR, Audrey ONFROY
 
 Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_AMI2B/tree/main/core_genome_Ecoli
 
+### Répertoires secondaires
 - prot : contient les génomes de Escherichia et Shigella pour faire les alignements (script dans TP1/main_TP1.sh)
 - levure : idem pour les 6 levures, mais il n'y a pas le script pour faire l'alignement dans TP2...
 - archives : anciens tests
