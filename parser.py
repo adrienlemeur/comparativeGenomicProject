@@ -23,7 +23,7 @@ except :
 with open(alignment) as ag:
 	lines = ag.readlines()
 
-print(alignement)
+print(alignment)
 print(output_igorf)
 print(output_cds)
 
