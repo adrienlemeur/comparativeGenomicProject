@@ -22,16 +22,10 @@ with open(alignment) as ag:
 os.system("rm -f "+output_igorf)
 os.system("rm -f "+output_cds)
 
-print(alignment)
-print(output_igorf)
-print(output_cds)
-
 with open(output_igorf, 'a') as igorf:
 	with open(output_cds, 'a') as cds:
 		for line_interest in lines:
 			values = line_interest.split("\t")
-
-			print(line_interest)
 
 			query_id = str(values[0])
 			subject_id = str(values[1])
