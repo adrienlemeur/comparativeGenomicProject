@@ -23,22 +23,17 @@ os.system("rm -f "+output_igorf)
 os.system("rm -f "+output_cds)
 
 with open(outputname, 'a') as po:
-	for i in lines:
-		i = i.split("\t")
+	for line_interest in lines:
+		values = line_interest.split("\t")
 				
-		genomeB = i[1].split("_")[0] # Eco4
-		genomeA_gene_genomeB = i[0] + "_" + genomeB 
-		
-		if genomeA_gene_genomeB not in dict :
-			dict[genomeA_gene_genomeB] = [i[0], i[1], float(i[2]), float(i[3]), -float(i[4])]
-			
-			genomeA = i[0].split("_")[0] # Eco1
-			genomeB_gene_genomeA = i[1] + "_" + genomeA # Eco4_yyy_Eco1
-			
-			if genomeB_gene_genomeA in dict:
-				if dict[genomeB_gene_genomeA][0] == dict[genomeA_gene_genomeB][1]:
-					membre1 = dict[genomeA_gene_genomeB][2:4+1]
-					membre2 = dict[genomeB_gene_genomeA][2:4+1]
-
-					if(sum([(membre1[i] > seuils[i]) & (membre2[i] > seuils[i]) for i in range(0,3)]) == 3):
-						po.write(i[0]+"\t"+i[1]+"\n")
+		print(line_interest)
+				
+		query_id = str(values[0])
+		subject_id = str(values[1])
+		evalue = str(values[10])
+				
+		line_to_write = query_id+"\t"+subject_id+"\t"+evalue+"\n"
+		if (len(query_id.split("_")) == 4 and len(subject_id.split("_")) == 4) :
+			igorf.write(line_to_write)
+		elif (len(query_id.split("_")) == 3 and len(subject_id.split("_")) == 3) :
+			cds.write(line_to_write)
