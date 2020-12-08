@@ -24,7 +24,7 @@ mkdir -p output_igorf
 mkdir -p output_cds
 
 for file in `ls Blast_outputs/`;do
-	cat Blast_outputs/$file | grep "^[^#;]" | cut -f 1,2,3,4,12 > temp
+	cat Blast_outputs/$file | grep "^[^#;]" | cut -f 1,2,3,4,10 > temp
 	
 	# Output names with file basename
 	genomeA_genomeB=$(basename $file .bl)
