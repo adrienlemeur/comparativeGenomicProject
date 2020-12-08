@@ -35,9 +35,11 @@ with open(output_igorf, 'a') as igorf:
 
 			query_id = str(values[0])
 			subject_id = str(values[1])
-			evalue = str(values[10])
+			A = str(values[2])
+			B = str(values[3])
+			evalue = str(values[4])
 
-			line_to_write = query_id+"\t"+subject_id+"\t"+evalue+"\n"
+			line_to_write = query_id+"\t"+subject_id+"\t"+A+"\t"+B+"\t"+evalue+"\n"
 			if (len(query_id.split("_")) == 4 and len(subject_id.split("_")) == 4) :
 				igorf.write(line_to_write)
 			elif (len(query_id.split("_")) == 3 and len(subject_id.split("_")) == 3) :
