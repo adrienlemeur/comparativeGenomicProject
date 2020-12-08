@@ -35,10 +35,6 @@ for file in `ls Blast_outputs/`;do
 	python3 parseur_evalue.py -i temp -o output_igorf/$output_igorf output_cds/$output_cds
 done
 
-echo "C'est re bon"
-
-
-
 
 #---------------------------------------------- Récupération des premières lignes
 
