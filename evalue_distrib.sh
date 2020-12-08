@@ -44,6 +44,7 @@ echo "C'est re bon"
 
 #---------------------------------------------- Récupération des premières lignes
 
+<<COMMENT
 for file in `ls Blast_outputs/`;do
 	# Output names with file basename
 	genomeA_genomeB=$(basename $file .bl)
@@ -53,5 +54,5 @@ for file in `ls Blast_outputs/`;do
 	# Picking best hits and sorting them in igorf-igorf or cds-cds files
 	python3 parser.py -i Blast_outputs/$file -o output_igorf/$output_igorf output_cds/$output_cds
 done
-
+>>
 
