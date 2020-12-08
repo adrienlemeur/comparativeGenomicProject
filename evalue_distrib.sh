@@ -31,11 +31,15 @@ deja='TRUE' # on n'a pas fait tourner la fonction parsing
 if ! [ -s best_hits_list.txt ];then # si la sortie n'existe pas, on fait le parsing
   parsing
   deja='FALSE'
+  echo "C'est bon"
 fi
+
+
 
 python3 parser_evalue.py -i best_hits_list.txt -o output_igorf/$output_igorf output_cds/$output_cds
 
 
+echo "C'est re bon"
 
 
 #---------------------------------------------- Récupération des premières lignes
