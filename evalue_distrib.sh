@@ -24,7 +24,7 @@ mkdir -p output_igorf
 mkdir -p output_cds
 
 parsing() {
-  cat blast_outputs/*.bl | grep "^[^#;]" | cut -f 1,2,3,4,12 > "best_hits_list.txt"
+  
 }
 
 if ! [ -s best_hits_list.txt ];then # si la sortie n'existe pas, on fait le parsing
@@ -32,12 +32,21 @@ if ! [ -s best_hits_list.txt ];then # si la sortie n'existe pas, on fait le pars
   echo "C'est bon"
 fi
 
-
-
-python3 parseur_evalue.py -i best_hits_list.txt -o output_igorf/$output_igorf output_cds/$output_cds
-
+for file in `ls Blast_outputs/`;do
+	cat blast_outputs/$file | grep "^[^#;]" | cut -f 1,2,3,4,12 > "temp.txt"
+	
+	# Output names with file basename
+	genomeA_genomeB=$(basename $file .bl)
+	output_igorf=$genomeA_genomeB"_orf.txt"
+	output_cds=$genomeA_genomeB"_cds.txt"
+	
+	# Picking best hits and sorting them in igorf-igorf or cds-cds files
+	python3 parseur_evalue.py -i $temp.txt -o output_igorf/$output_igorf output_cds/$output_cds
+done
 
 echo "C'est re bon"
+
+
 
 
 #---------------------------------------------- Récupération des premières lignes
