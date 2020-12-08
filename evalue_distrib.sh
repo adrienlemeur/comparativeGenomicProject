@@ -24,8 +24,7 @@ mkdir -p output_igorf
 mkdir -p output_cds
 
 for file in `ls Blast_outputs/`;do
-	cat blast_outputs/$file | grep "^[^#;]" | cut -f 1,2,3,4,12 > "temp.txt"
-	head cat $temp
+	cat blast_outputs/$file | grep "^[^#;]" | cut -f 1,2,3,4,12 > temp
 	
 	# Output names with file basename
 	genomeA_genomeB=$(basename $file .bl)
@@ -33,7 +32,7 @@ for file in `ls Blast_outputs/`;do
 	output_cds=$genomeA_genomeB"_cds.txt"
 	
 	# Picking best hits and sorting them in igorf-igorf or cds-cds files
-	python3 parseur_evalue.py -i $temp.txt -o output_igorf/$output_igorf output_cds/$output_cds
+	python3 parseur_evalue.py -i temp -o output_igorf/$output_igorf output_cds/$output_cds
 done
 
 echo "C'est re bon"
