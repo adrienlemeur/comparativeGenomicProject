@@ -23,17 +23,9 @@ fi
 mkdir -p output_igorf
 mkdir -p output_cds
 
-parsing() {
-  
-}
-
-if ! [ -s best_hits_list.txt ];then # si la sortie n'existe pas, on fait le parsing
-  parsing
-  echo "C'est bon"
-fi
-
 for file in `ls Blast_outputs/`;do
 	cat blast_outputs/$file | grep "^[^#;]" | cut -f 1,2,3,4,12 > "temp.txt"
+	head cat $temp
 	
 	# Output names with file basename
 	genomeA_genomeB=$(basename $file .bl)
