@@ -1,39 +1,91 @@
-# Projet de Génomique Comparée
-Groupe 10 : Leila OUTEMZABET, Adrien LE MEUR, Audrey ONFROY
 
-Lien vers le Git principal : https://github.com/annelopes/Comparative_Genomics_AMI2B/tree/main/core_genome_Ecoli
 
-### Répertoires secondaires
-- prot : contient les génomes de Escherichia et Shigella pour faire les alignements (script dans TP1/main_TP1.sh)
-- levure : idem pour les 6 levures, mais il n'y a pas le script pour faire l'alignement dans TP2...
-- archives : anciens tests
+## 1 Organize your working directory (wd)
 
-## TP1 : Détection du core génome chez Escherichia et Shigella (bactéries)
-- récupération des génomes et construction des 21 bases et 441 alignements **OU** récupération des 441 alignements déjà faits
-- sauvegarde des best hits sous critères de couverture, identité et e-value
-- confrontation des best hits pour déterminer les best hists réciproques
-- idenfication du core génome parmi les BHR
+BLAST
+* download the BLAST programs here: https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
+* untar your file with
 
-#### Exécution rapide
-Il faut renseigner les paramètres :
-- -d permet de ne pas réaliser l'alignement. /!\ Avoir 441 alignements dans un répertoire **blast_outputs/**
-- -i : pourcentage d'identité (ex : 70)
-- -c : pourcentage de couverture (ex : 60)
-- -e : seuil de e-value (ex : 10e-200)
+```tar -zxvf ncbi-blast-2.10.1+-x64-macosx.tar.gz ```
+* if necessary, modify the permissions of BLAST programs stored in wd/ncbi-blast-2.10.1+/bin/ with
+
+```chmod +x  wd/ncbi-blast-2.10.1+/bin/*```
+
+DATA
+
+* download the prot.tar file which contains all fasta files (CDS - aminoacids)
+* untar your file with
+
+```tar -xvf prot.tar ```
+
+* create the dir for BLAST db with
+
+``` mkdir Blast_db```
+
+## 2 Example with two species: 
+
+* create a BLAST db for the genome of Shigella_sonnei_ss046.fa (i.e. the target or subject) 
+
+```./ncbi-blast-2.10.1+/bin/makeblastdb -in prot/Shigella_sonnei_ss046.fa -dbtype "prot" -out Blast_db/Shigella_sonnei_ss046 ```
+
+BLAST has produced a small database for the input genome which is stored in wd/Blast_db (see *.phr, *.psq...)
+
+
+* run the all VS all BLAST (all genes from G1 VS all genes from G2) with the following command line and wait a bit... Maybe, take a coffee :) Hum, maybe 2 or 3...
+
 ```
-$ sh main_TP1.sh -d -i 70 -c 60 -e 10e-200
+./ncbi-blast-2.10.1+/bin/blastp -query prot/Escherichia_coli_536.fa -db Blast_db/Shigella_sonnei_ss046 -out coli536_VS_iai1  -num_threads 2 -outfmt '7 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qlen slen gaps' 
 ```
 
-## TP2 : Densité des e-values des bests hits selon qu'ils soient IGORF-IGORF ou CDS-CDS dans Saccharomyces (levures)
-- récupération des 6x6 = 36 alignements des génomes de levures
-- sauvegarde des bests hits sans critère
-- répartition des bests hits IGORF ou CDS dans deux dossiers de sortie
-- graphiques avec R (manuel)
+  * caution!!! The query corresponds to the sequence we want to scan (i.e. the sequence for which we are looking for homologs in the target genome or DB (i.e. nr, pdb, swissprot...)
+   The query always consists of a fasta file containing one ore more sequences (i.e. a complete genome) - please indicate the complete path of the file including the file extension (i.e. .fa, .fasta. .txt...).
+   The target corresponds to the db we want to screen (i.e. a genome or any DB built with makeblastdb). Indicate the complete path but do not write the file extensions! 
+   
 
-#### Exécution rapide
-Il faut renseigner les paramètres :
-- --nostart permet de ne pas réaliser télécharger les fichiers. /!\ Avoir 36 alignements dans un répertoire **blast_outputs/**
+## 3 Applying on all genomes
+
+* first, create the BLAST db for every genome. Therefore, run the script blast_db_creation.sh (modify the permission if necessary)
+
 ```
-$ sh main_TP2.sh (--nostart)
+./blast_db_creation.sh
+
 ```
 
+  * all the DB will be stored in Blast_db
+  
+  * run all the blast (all VS all) with the following command line. Do not hesitate to modify the output format or nb of threads depending on your computer facilities
+  
+  ```
+  ./launch_blast.sh 
+  
+  ```
+  
+  
+  * you can either run your blast or download the blast outputs here:
+  
+  ```
+  https://transfert.u-psud.fr/d5upkb8
+  ```
+  
+  
+   In this case, please note that the output format is slightly different from the one presented during the course and produced by launch_blast.sh. Don't worry, the format is still tabular but the order of columns has changed, so please check the consistency of your columns between the output (either downloaded or produced with launch_blast.sh) and your parser. The format in the blast_outputs.tar is:
+   
+   
+    query id, subject id, % identity, alignment length, mismatches, gap opens, gaps, q. start, q. end, s. start, s. end, evalue, bit score, query length, subject length
+  
+ * move your archive to a new directory (Blast_outputs for example) and extract the files as follows:
+ 
+ ```  
+ mkdir Blast_outputs      # create your new dir, of course, it implies that you are in your working dir
+ mv path_were_the_archive_is_stored/blast_outputs.tar.gz ./Blast_outputs  # move the archive from your download dir (in this case you must write the complete path ~/Downloads/path_to_wd/Blast_outputs) or do it manually!
+ cd Blast_outputs/ 
+ gunzip blast_outputs.tar.gz  # unzip your file
+ tar -xvf blast_outputs.tar # untar your file
+ 
+ ```
+ 
+ and don't forget to check taht the download went well; particularly check the number of blast outputs (21x21) with 
+ 
+ ``` 
+ ls | wc
+ ```
