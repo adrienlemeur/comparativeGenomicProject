@@ -26,18 +26,19 @@ print(alignment)
 print(output_igorf)
 print(output_cds)
 
-with open(outputname, 'a') as po:
-	for line_interest in lines:
-		values = line_interest.split("\t")
-				
-		print(line_interest)
-				
-		query_id = str(values[0])
-		subject_id = str(values[1])
-		evalue = str(values[10])
-				
-		line_to_write = query_id+"\t"+subject_id+"\t"+evalue+"\n"
-		if (len(query_id.split("_")) == 4 and len(subject_id.split("_")) == 4) :
-			igorf.write(line_to_write)
-		elif (len(query_id.split("_")) == 3 and len(subject_id.split("_")) == 3) :
-			cds.write(line_to_write)
+with open(output_igorf, 'a') as igorf:
+	with open(output_cds, 'a') as cds:
+		for line_interest in lines:
+			values = line_interest.split("\t")
+
+			print(line_interest)
+
+			query_id = str(values[0])
+			subject_id = str(values[1])
+			evalue = str(values[10])
+
+			line_to_write = query_id+"\t"+subject_id+"\t"+evalue+"\n"
+			if (len(query_id.split("_")) == 4 and len(subject_id.split("_")) == 4) :
+				igorf.write(line_to_write)
+			elif (len(query_id.split("_")) == 3 and len(subject_id.split("_")) == 3) :
+				cds.write(line_to_write)
